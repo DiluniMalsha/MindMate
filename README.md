@@ -1,0 +1,2 @@
+# MindMate
+MindMate - Personal assistant
