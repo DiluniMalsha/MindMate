@@ -1,6 +1,5 @@
 import "./Welcome.css";
 import logo from "../../assets/logo/Logo.png";
-<<<<<<< Updated upstream
 import robot from "../../assets/robotPicture/robot.png"
 import CustomButton from "../../components/button/CustomButton";
 
@@ -16,7 +15,6 @@ const Welcome = (props) => {
             </CustomButton>
         </div>
     );
-=======
 import robot from "../../assets/robotPicture/robot.png";
 import CustomButton from "../../components/button/CustomButton";
 import { Link } from "react-router-dom";
@@ -43,7 +41,6 @@ const Welcome = (props) => {
       </Link>
     </div>
   );
->>>>>>> Stashed changes
 };
 
 export default Welcome;
