@@ -13,16 +13,15 @@ const ButtonComponent = styled.button`
   user-select: none;
   font-size: ${(props) => props.fontSize}px;
   border-radius: ${(props) => props.borderRadius}px;
-  width:  ${(props) => props.width}px;
-  padding: 
-    ${(props) =>
-      props.size === "sm"
-        ? "1.5rem"
-        : props.size === "md"
-        ? "1.8rem"
-        : props.size === "lg"
-        ? "2.0rem"
-        : "1.5rem"};
+  width: ${(props) => props.width}px;
+  padding: ${(props) =>
+    props.size === "sm"
+      ? "1.5rem"
+      : props.size === "md"
+      ? "1.8rem"
+      : props.size === "lg"
+      ? "2.0rem"
+      : "1.5rem"};
   height: ${(props) =>
     props.size === "sm"
       ? "34px"
@@ -40,7 +39,7 @@ const ButtonComponent = styled.button`
       : props.variant === "dark"
       ? "#212529"
       : props.variant === "primary"
-      ? "#0d6efd"
+      ? "#171742"
       : props.variant === "secondary"
       ? "#6c757d"
       : props.variant === "success"
