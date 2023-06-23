@@ -2,7 +2,7 @@ import logo from "../../assets/logo/Logo.png";
 import robot from "../../assets/robotPicture/robot.png";
 import CustomButton from "../../components/button/CustomButton";
 import { Link } from "react-router-dom";
-
+import "./Welcome.css"
 const Welcome = (props) => {
   return (
     <div className="welcome-main">
