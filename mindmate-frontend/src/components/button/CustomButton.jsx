@@ -13,16 +13,15 @@ const ButtonComponent = styled.button`
   user-select: none;
   font-size: ${(props) => props.fontSize}px;
   border-radius: ${(props) => props.borderRadius}px;
-  width:  ${(props) => props.width}px;
-  padding: 
-    ${(props) =>
-      props.size === "sm"
-        ? "1.5rem"
-        : props.size === "md"
-        ? "1.8rem"
-        : props.size === "lg"
-        ? "2.0rem"
-        : "1.5rem"};
+  width: ${(props) => props.width}px;
+  padding: ${(props) =>
+    props.size === "sm"
+      ? "1.5rem"
+      : props.size === "md"
+      ? "1.8rem"
+      : props.size === "lg"
+      ? "2.0rem"
+      : "1.5rem"};
   height: ${(props) =>
     props.size === "sm"
       ? "34px"
