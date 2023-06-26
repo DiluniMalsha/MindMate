@@ -81,6 +81,7 @@ function SignInFrom() {
                 </Link>
 
                 <div className="text-center pt-1 mb-5 pb-1">
+                    <Link to="/sideBar">
                     <CustomButton
                         variant="primary"
                         width="410"
@@ -91,6 +92,7 @@ function SignInFrom() {
                     >
                         Sign in
                     </CustomButton>
+                    </Link>
                 </div>
             </div>
         </div>
