@@ -1,6 +1,8 @@
 import { useFonts } from "expo-font";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import LoginScreen from "./app/screens/LoginScreen";
+import EmotionTrackerScreen from "./app/screens/EmotionTrackerScreen";
+import Navigator from "./app/screens/Navigator";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -13,5 +15,8 @@ export default function App() {
   if (!loaded) {
     return null;
   }
-  return <LoginScreen />;
+  return <Navigator />;
 }
+
+//rsf - basic react native
+//rnss - style sheet
