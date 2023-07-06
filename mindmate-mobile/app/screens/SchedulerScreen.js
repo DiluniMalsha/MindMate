@@ -6,7 +6,7 @@ import colors from "../config/colors";
 function SchedulerScreen(props) {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>Scheduler Screen</Text>
     </SafeAreaView>
   );
 }
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     alignItems: "center",
+    justifyContent: "center",
   },
 });
 

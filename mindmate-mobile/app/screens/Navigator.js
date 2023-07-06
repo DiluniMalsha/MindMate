@@ -24,10 +24,11 @@ const Tab = createBottomTabNavigator();
 
 function Navigator(props) {
   return (
-    <NavigationContainer style={styles.navigationContainer}>
+    <NavigationContainer>
       <Tab.Navigator
         initialRouteName={homeName}
         screenOptions={({ route }) => ({
+          headerShown: false,
           tabBarStyle: {
             backgroundColor: colors.primary,
             height: 80,
@@ -71,11 +72,5 @@ function Navigator(props) {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  navigationContainer: {
-    backgroundColor: colors.primary,
-  },
-});
 
 export default Navigator;
