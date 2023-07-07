@@ -44,7 +44,7 @@ const NavigationPanel = (props) => {
         <>
             <div className="side-bar">
                 <div className="logo-name">
-                    <img src={logo} alt="Mindmate" width={160}/>
+                    <img src={logo} alt="Mindmate" width={120}/>
                 </div>
                 <div className="navigation-item-list">
                     {NavigationPanelData.map((item) => (
@@ -72,7 +72,7 @@ const NavigationPanel = (props) => {
                                                     : "navigation-item-link"
                                             }
                                         >
-                                            <span>{item.icon}</span>
+                                            <span>{currentPath.endsWith(item.path) ? item.iconActive : item.icon}</span>
                                         </Link>
                                     </Grid>
                                 </Grid>

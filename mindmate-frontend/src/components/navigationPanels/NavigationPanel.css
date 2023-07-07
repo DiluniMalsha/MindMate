@@ -12,7 +12,7 @@
     top: 0;
     text-align: center;
     padding-top: 30px;
-    width: 200px;
+    width: 150px;
     height: 100vh;
     background-color: #171742;
     z-index: 999;
@@ -47,17 +47,19 @@
 }
 
 .hover-icon:hover {
-    background-color: #7595b4;
+    background-color: rgba(191, 202, 213, 0.10);
     border-radius: 30px;
 }
 
 .sign-out-btn {
-    margin-left: 40px;
+    margin-left: 30px;
     position: absolute;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     bottom: 0;
     color: #ffffff;
-    font-size: 1.7rem;
+    font-size: 1.2rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
     z-index: 1000;
 }
 

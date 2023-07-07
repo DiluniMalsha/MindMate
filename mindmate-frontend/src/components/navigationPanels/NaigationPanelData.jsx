@@ -1,89 +1,190 @@
 import React from "react";
-import home from "../../assets/icon/home.png";
-import child from "../../assets/icon/child.png";
-import schedule from "../../assets/icon/schedule.png";
-import settings from "../../assets/icon/settings.png";
-import dataset from "../../assets/icon/dataset.png";
+import {
+    Albums,
+    AlbumsOutline,
+    Calendar,
+    CalendarOutline,
+    Fitness,
+    FitnessOutline,
+    Home,
+    HomeOutline,
+    Settings,
+    SettingsOutline
+} from "react-ionicons";
 
 export const NavigationPanelData = [
     {
         title: 'Home',
         path: '/',
         iconVisibility: true,
-        icon: <img src={home} alt={home} width={50} className="nav-bar-icon-width" />,
+        icon: <HomeOutline
+            color={'#c0c0c0'}
+            title={"Home"}
+            height="40px"
+            width="40px"
+        />,
+        iconActive:
+            <Home
+                color={'#ffffff'}
+                title={"Home"}
+                height="40px"
+                width="40px"
+            />,
         subItems: []
     },
     {
-        title: 'Child',
-        path: '/child',
+        title: 'EmotionTracker',
+        path: '/emotion-tracker',
         iconVisibility: true,
-        icon: <img src={child} alt={child} width={50} className="nav-bar-icon-width"/>,
+        icon: <FitnessOutline
+            color={'#c0c0c0'}
+            title={"EmotionTracker"}
+            height="40px"
+            width="40px"
+        />,
+        iconActive:
+            <Fitness
+                color={'#ffffff'}
+                title={"Emotion Tracker"}
+                height="40px"
+                width="40px"
+            />,
         subItems: []
     },
     {
-        title: 'Schedule',
-        path: '/schedule',
+        title: 'Scheduler',
+        path: '/scheduler',
         iconVisibility: true,
-        icon: <img src={schedule} alt={schedule} width={50} className="nav-bar-icon-width"/>,
+        icon: <CalendarOutline
+            color={'#c0c0c0'}
+            title={"Scheduler"}
+            height="40px"
+            width="40px"
+        />,
+        iconActive:
+            <Calendar
+                color={'#ffffff'}
+                title={"Scheduler"}
+                height="40px"
+                width="40px"
+            />,
         subItems: []
     },
     {
         title: 'Settings',
         path: '/settings',
         iconVisibility: true,
-        icon: <img src={settings} alt={settings} width={50} className="nav-bar-icon-width"/>,
+        icon: <SettingsOutline
+            color={'#c0c0c0'}
+            title={"Settings"}
+            height="40px"
+            width="40px"
+        />,
+        iconActive:
+            <Settings
+                color={'#ffffff'}
+                title={"Settings"}
+                height="40px"
+                width="40px"
+            />,
         subItems: []
     },
     {
         title: 'Dataset',
         path: '/dataset',
         iconVisibility: false,
-        icon: <img src={dataset} alt={dataset} width={50} className="nav-bar-icon-width"/>,
+        icon: <AlbumsOutline
+            color={'#c0c0c0'}
+            title={"Dataset"}
+            height="40px"
+            width="40px"
+        />,
+        iconActive:
+            <Albums
+                color={'#ffffff'}
+                title={"Dataset"}
+                height="40px"
+                width="40px"
+            />,
         subItems: []
-    },
-    // {
-    //     title: 'Log out',
-    //     path: '/',
-    //     icon: <img src={power} alt={power} width={25}/>,
-    //     subItems: []
-    // },
+    }
 
 ]
-
 export const MNavigationPanelData = [
     {
         title: 'Home',
         path: '/',
         iconVisibility: true,
-        icon: <img src={home} alt={home} width={50} className="nav-bar-icon-width" />,
+        icon: <HomeOutline
+            color={'#c0c0c0'}
+            title={"Home"}
+            height="40px"
+            width="40px"
+        />,
+        ss:
+            <Home
+                color={'#ffffff'}
+                title={"ActiveHome"}
+                height="40px"
+                width="40px"
+            />,
         subItems: []
     },
     {
         title: 'Child',
         path: '/child',
         iconVisibility: true,
-        icon: <img src={child} alt={child} width={50} className="nav-bar-icon-width"/>,
+        icon: <FitnessOutline
+            color={'#c0c0c0'}
+            title={"EmotionTracker"}
+            height="40px"
+            width="40px"
+        />,
+        ss:
+            <Fitness
+                color={'#ffffff'}
+                title={"ActiveEmotionTracker"}
+                height="40px"
+                width="40px"
+            />,
         subItems: []
     },
     {
         title: 'Schedule',
         path: '/schedule',
         iconVisibility: true,
-        icon: <img src={schedule} alt={schedule} width={50} className="nav-bar-icon-width"/>,
+        icon: <CalendarOutline
+            color={'#c0c0c0'}
+            title={"Scheduler"}
+            height="40px"
+            width="40px"
+        />,
+        ss:
+            <Calendar
+                color={'#ffffff'}
+                title={"ActiveScheduler"}
+                height="40px"
+                width="40px"
+            />,
         subItems: []
     },
     {
         title: 'Settings',
         path: '/settings',
         iconVisibility: true,
-        icon: <img src={settings} alt={settings} width={50} className="nav-bar-icon-width"/>,
+        icon: <SettingsOutline
+            color={'#c0c0c0'}
+            title={"Settings"}
+            height="40px"
+            width="40px"
+        />,
+        ss:
+            <Settings
+                color={'#ffffff'}
+                title={"ActiveSettings"}
+                height="40px"
+                width="40px"
+            />,
         subItems: []
-    },
-    // {
-    //     title: 'Log out',
-    //     path: '/',
-    //     icon: <img src={power} alt={power} width={25}/>,
-    //     subItems: []
-    // },
-
+    }
 ]
