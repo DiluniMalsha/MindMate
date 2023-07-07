@@ -67,9 +67,10 @@ const styles = StyleSheet.create({
     top: "20%",
   },
   emotionRespondButton: {
+    position: "relative",
     width: "50%",
     height: "10%",
-    marginTop: "25%",
+    top: "25%",
     marginBottom: "5%",
     borderRadius: 25,
     alignItems: "center",
