@@ -49,17 +49,14 @@ function Navigator(props) {
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-        })}
-        tabBarOptions={{
-          activeTintColor: "white",
-          inactiveTintColor: "grey",
-          labelStyle: {
+          tabBarActiveTintColor: "white",
+          tabBarInactiveTintColor: "grey",
+          tabBarLabelStyle: {
             paddingBottom: 25,
             fontSize: 12,
             fontFamily: "LatoBold",
           },
-          style: { padding: 10, height: 80 },
-        }}
+        })}
       >
         <Tab.Screen name={homeName} component={HomeScreen} />
         <Tab.Screen
