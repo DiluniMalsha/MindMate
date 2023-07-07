@@ -1,0 +1,15 @@
+.mobile-nav-main{
+    width:100vw;
+    background-color: #171742;
+    border-radius: 30px 30px 0 0;
+    position: absolute;
+    bottom: 0vh;
+    z-index:1000;
+}
+
+.mobile-row{
+    margin-right:0 !important;
+}
+.css-1mzmbnx-MuiButtonBase-root-MuiAccordionSummary-root{
+    padding:0 !important;
+}

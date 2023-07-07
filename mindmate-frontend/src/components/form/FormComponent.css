@@ -1,0 +1,13 @@
+@font-face {
+    font-family:latoLight;
+    src: url(../../assets/font/Lato-Italic.ttf);
+}
+.label-align{
+    text-align: left;
+    color: #000;
+    font-family: latoLight;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}

@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "flow-babel-webpack-plugin": "^1.1.1"
   }
 }
