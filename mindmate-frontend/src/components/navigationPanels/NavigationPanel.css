@@ -53,7 +53,7 @@
 
 .sign-out-btn {
     margin-left: 30px;
-    position: absolute;
+    position: fixed;
     margin-bottom: 50px;
     bottom: 0;
     color: #ffffff;
