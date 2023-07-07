@@ -1,7 +1,7 @@
 import * as React from "react";
 import {styled} from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import {MNavigationPanelData, NavigationPanelData} from "./NaigationPanelData";
+import {MNavigationPanelData} from "./NaigationPanelData";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {AccordionSummary} from "@mui/material";
 import {useLocation} from "react-router";

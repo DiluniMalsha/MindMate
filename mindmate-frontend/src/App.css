@@ -8,9 +8,7 @@
 
 .Settings{
     display: flex;
-    height: 90vh;
     margin-top: 47px;
-    /*align-items: center;*/
     justify-content: center;
     font-size: 3rem;
 }
@@ -29,8 +27,8 @@
 .main-section {
     text-align: center;
     position: absolute;
-    top: 50px;
-    left: 270px;
+    top: 20px;
+    left: 20%;
     width: calc(100% - 300px);
     height: calc(100% - 130px)
 }
@@ -43,7 +41,7 @@
 
 .title {
     padding-top: 10px;
-    padding-left: 10px;
+    padding-left: 20px;
     font-size: 20px;
     font-weight: bold;
     color: #00565B;

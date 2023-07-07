@@ -1,3 +1,4 @@
+import React from "react";
 import CustomInput from "../inputField/InputField";
 import "./FormComponent.css";
 import {styled} from '@mui/material/styles';
@@ -13,16 +14,24 @@ const Item = styled(Paper)(({theme}) => ({
     color: theme.palette.text.secondary,
 }));
 
+
 const FormComponent = ({
                            title,
                            firstname,
                            lastname,
                            address,
                            contactNo,
-                           gender,
+                           genders,
                            age,
                            relationship,
                        }) => {
+
+    const [gender, setGender] = React.useState('');
+
+    const handleChange = (event) => {
+        setGender(event.target.value);
+    };
+
     return (
         <>
             <p className="title-align">{title}</p>
@@ -47,7 +56,7 @@ const FormComponent = ({
                         <br/>
                         <CustomInput
                             type="text"
-                            placeholder={firstname}
+                            placeholder={lastname}
                             size="20"
                             radius="10"
                             fontSize="20"
@@ -88,14 +97,11 @@ const FormComponent = ({
                     <Item>
                         <label className="label-align">Gender</label>
                         <br/>
-                        <CustomInput
-                            type="text"
-                            placeholder={gender}
-                            size="20"
-                            radius="10"
-                            width="100%"
-                            fontSize='20'
-                        />
+                        <select id="gender" name="gender"  value={gender}
+                                onChange={handleChange}>
+                            <option value="male" className='g-gender'>Male</option>
+                            <option value="female" className='g-gender'>Female</option>
+                        </select>
                     </Item>
                 </Grid>
                 <Grid item xs={6}>
@@ -103,7 +109,7 @@ const FormComponent = ({
                         <label className="label-align">Age</label>
                         <br/>
                         <CustomInput
-                            type="text"
+                            type="number"
                             placeholder={age}
                             size="20"
                             radius="10"
@@ -119,7 +125,7 @@ const FormComponent = ({
                 variant="primary"
                 radius="20"
                 size="sm"
-                className="mt-5 mb-4"
+                className="mt-3 mb-4"
                 fontSize="20"
                 width="150"
             >

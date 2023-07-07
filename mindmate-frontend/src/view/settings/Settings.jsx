@@ -1,7 +1,5 @@
 import "./Settings.css";
 import React, {useState} from "react";
-// import typing from "../../Assets/Images/Typing-bro.svg"
-// import logo from "../../Assets/logo.png"
 import {
     MDBContainer,
     MDBTabs,
@@ -13,8 +11,8 @@ import {
     MDBInput,
 } from "mdb-react-ui-kit";
 import {Link} from "react-router-dom";
-import CustomInput from "../inputField/InputField";
-import FormComponent from "../form/FormComponent";
+import FormComponent from "../../components/form/FormComponent";
+import Preferences from "../../components/preferences/Preferences";
 function Settings() {
     const [justifyActive, setJustifyActive] = useState("tab1");
     const handleJustifyClick = (value) => {
@@ -79,8 +77,7 @@ function Settings() {
                                             />
                                         </div>
                                         <div className="col child-settings-sections">
-                                            <p className="title-section">Mihasa’s Profile</p>
-                                            <FormComponent lastname="mihasa" />
+                                            <Preferences/>
                                         </div>
                                     </div>
                                 </MDBTabsPane>

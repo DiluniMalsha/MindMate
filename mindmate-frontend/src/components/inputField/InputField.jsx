@@ -1,23 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const InputComponents = styled.label`
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: left;
-  text-decoration: none;
-  vertical-align: middle;
-  cursor: text;
-  user-select: none;
-  font-size: ${(props) => props.fontSize}px;
-  border-radius: ${(props) => props.borderRadius}px;
-  width: ${(props) => props.width}px;
-  padding: ${(props) => props.size}px;
-  height: ${(props) => props.size}px;
-}
-`;
 const InputComponent = styled.input`
   @font-face {
     font-family: "Lato-light";

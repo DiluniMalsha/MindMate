@@ -31,3 +31,41 @@
     box-shadow: none !important;
     text-align: left !important;
 }
+
+#gender{
+    border-radius: 10px;
+    height:20px;
+    padding:20px;
+    width: 100%;
+    font-size: 20px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    border-color: #d8d8d8;
+    font-family: "lato-bold" !important;
+    font-style: normal;
+    font-weight: 200;
+    margin-bottom:60px;
+
+}
+#gender:active {
+     border-color: #d8d8d8;
+     outline: 0;
+ }
+
+#gender:focus {
+     border-color: #d8d8d8;
+     box-shadow: none;
+     outline: 0;
+ }
+
+.g-gender{
+    font-family: "GoldmanBold" !important;
+    font-size:18px;
+
+}
