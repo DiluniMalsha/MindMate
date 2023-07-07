@@ -62,7 +62,11 @@ const SideMenuBar = ({children}) => {
                 </div>
 
             </div>
-            <main>{children}</main>
+
+            <div className="slide-menu-mobile">
+
+            </div>
+            {/*<main>{children}</main>*/}
         </div>
     );
 };
