@@ -1,18 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Nunito+Sans&display=swap');
 
 .child-profile{
     border-radius: 20px;
     border: 1px solid #9B9B9B;
     background: #FFF;
 }
-.title-align{
-    text-align: center;
-    font-family: 'Lato', sans-serif !important;
-    font-style: normal;
-    font-weight: 800;
-    margin-bottom:60px;
 
-}
 /*.nav-pills .nav-link.active, .nav-pills .show>.nav-link {*/
 /*    background-color: #171742;*/
 /*    margin-left:80px;*/

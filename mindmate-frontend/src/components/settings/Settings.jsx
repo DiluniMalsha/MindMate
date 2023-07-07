@@ -66,14 +66,21 @@ function Settings() {
                                     show={justifyActive === "tab1"}
                                     className="center-title"
                                 >
-                                    <div className="row">
+                                    <div className="row w-100">
                                         <div className="col child-settings-sections">
-                                            <p className="title-section">Mihasa’s Profile</p>
-                                            <FormComponent firstname="mihasa">advdsv</FormComponent>
+
+                                            <FormComponent
+                                                title="Mihasa's Profile"
+                                                firstname="mihasa"
+                                                lastname='layuni'
+                                                address='No. 64/5, Kuruduwaththa, Meepawala'
+                                                contactNo='94702312239'
+                                                age='12'
+                                            />
                                         </div>
                                         <div className="col child-settings-sections">
                                             <p className="title-section">Mihasa’s Profile</p>
-                                            <FormComponent lastname="mihasa"/>
+                                            <FormComponent lastname="mihasa" />
                                         </div>
                                     </div>
                                 </MDBTabsPane>
