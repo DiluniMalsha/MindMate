@@ -4,4 +4,5 @@ export default {
   ash: "#414141",
   black: "#000000",
   red: "#CD1818",
+  yellow: "#F8A910",
 };
