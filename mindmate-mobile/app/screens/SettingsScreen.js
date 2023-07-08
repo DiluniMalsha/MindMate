@@ -1,29 +1,23 @@
 import React from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  useWindowDimensions,
-  Dimensions,
-} from "react-native";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { SafeAreaView, Text, StyleSheet, Dimensions } from "react-native";
+import { TabView, TabBar } from "react-native-tab-view";
 
 import colors from "../config/colors";
-import SettingsChildProfileScreen from "./SettingsChildProfileScreen";
-import SettingsUserProfileScreen from "./SettingsUserProfileScreen";
+import ChangePasswordComponent from "../components/ChangePasswordComponent";
+import UserProfileComponent from "../components/UserProfileComponent";
+import ChildProfileComponent from "../components/ChildProfileComponent";
 
-const ChildProfileRoute = () => <SettingsChildProfileScreen />;
+const ChildProfileRoute = () => <ChildProfileComponent />;
 
-const SecondRoute = () => <SettingsUserProfileScreen />;
+const UserProfileRoute = () => <UserProfileComponent />;
+const ChangePasswordRoute = () => <ChangePasswordComponent />;
 
 function SettingsScreen(props) {
-  const layout = useWindowDimensions();
-
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "first", title: "Child Profile" },
     { key: "second", title: "My Profile" },
+    { key: "third", title: "Change Password" },
   ]);
 
   const renderScene = ({ route }) => {
@@ -31,7 +25,9 @@ function SettingsScreen(props) {
       case "first":
         return <ChildProfileRoute />;
       case "second":
-        return <SecondRoute />;
+        return <UserProfileRoute />;
+      case "third":
+        return <ChangePasswordRoute />;
       default:
         return null;
     }

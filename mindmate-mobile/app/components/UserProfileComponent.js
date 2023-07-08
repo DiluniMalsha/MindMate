@@ -11,7 +11,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import colors from "../config/colors";
 
-function SettingsUserProfileScreen(props) {
+function UserProfileComponent(props) {
   const [selectedGender, setSelectedGender] = useState();
 
   return (
@@ -111,10 +111,10 @@ function SettingsUserProfileScreen(props) {
             <Text style={styles.profileButtonText}>Update Details</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            style={styles.profileButton}
-            onPress={() => console.log("Change Password Button Pressed")}
+            style={styles.signOutButton}
+            onPress={() => console.log("Sign Out Button Pressed")}
           >
-            <Text style={styles.profileButtonText}>Change Password</Text>
+            <Text style={styles.profileButtonText}>Sign Out</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -190,5 +190,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "LatoBold",
   },
+  signOutButton: {
+    left: "25%",
+    width: "50%",
+    height: 50,
+    marginTop: "5%",
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.red,
+  },
 });
-export default SettingsUserProfileScreen;
+
+export default UserProfileComponent;

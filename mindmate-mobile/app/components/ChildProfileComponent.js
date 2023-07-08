@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  Pressable,
   ScrollView,
   TouchableHighlight,
   Dimensions,
@@ -20,7 +19,7 @@ import MoodPreferencesComponent from "../components/MoodPreferencesComponent";
 
 import colors from "../config/colors";
 
-function SettingsChildProfileScreen(props) {
+function ChildProfileComponent(props) {
   const [selectedGender, setSelectedGender] = useState();
 
   //for preferences tab view
@@ -289,4 +288,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsChildProfileScreen;
+export default ChildProfileComponent;
