@@ -85,7 +85,7 @@ const CustomButton = ({
 }) => {
   return (
     <ButtonComponent
-      type={type ? type : "button"}
+      type={type ? type : "button, file"}
       variant={variant}
       className={
         className ? `button-components ${className}` : "btn-components"

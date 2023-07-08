@@ -1,4 +1,4 @@
-import "./Preparances.css"
+import "./Preparances.css";
 import React, {useState} from "react";
 import {
     MDBContainer,
@@ -6,12 +6,18 @@ import {
     MDBTabsContent,
     MDBTabsItem,
     MDBTabsLink,
-    MDBTabsPane
+    MDBTabsPane,
 } from "mdb-react-ui-kit";
 import CustomButton from "../button/CustomButton";
+import FileUploader from "../fileUploder/FileUploader";
+import {ImageList, ImageListItem} from "@mui/material";
+import Button from "@mui/material/Button";
 
 const Preferences = (props) => {
     const [justifyActive, setJustifyActive] = useState("tab1");
+    const [pictures, setPictures] = useState([]);
+    const [picturesBase64, setPicturesBase64] = useState([]);
+
     const handleJustifyClick = (value) => {
         if (value === justifyActive) {
             return;
@@ -19,156 +25,187 @@ const Preferences = (props) => {
 
         setJustifyActive(value);
     };
+    const handleImageChange = (event) => {
+        let image = event.target.files[0];
+        let url = URL.createObjectURL(image);
+        let items = [];
+        let itemsBase64 = [];
+        {
+            pictures.map((item) => items.push(item));
+            picturesBase64.map((item) => itemsBase64.push(item));
+        }
+        items.push(url);
+        getBase64(image).then((data) => itemsBase64.push(data));
+        setPictures(items);
+        setPicturesBase64(itemsBase64);
+    };
+
+    function getBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+    }
+
     return (
-      <>
-        <div>
-          <p className="title-align-preferences">Her Preferences</p>
-          <p className="description-para">
-            We need some resources to use for Mihasa when <br />
-            she is in different moods
-          </p>
-        </div>
-        <MDBContainer className="border-refs">
-          <MDBTabs
-            pills
-            justify
-            className="mb-3 d-flex flex-row justify-content-between"
-          >
-            <MDBTabsItem>
-              <div className="student-btn">
-                <MDBTabsLink
-                  onClick={() => handleJustifyClick("tab1")}
-                  active={justifyActive === "tab1"}
-                  className="selector-btn pre-selection-btn student-btn"
+        <>
+            <div>
+                <p className="title-align-preferences">Her Preferences</p>
+                <p className="description-para">
+                    We need some resources to use for Mihasa when <br/>
+                    she is in different moods
+                </p>
+            </div>
+            <MDBContainer className="border-refs">
+                <MDBTabs
+                    pills
+                    justify
+                    className="mb-3 d-flex flex-row justify-content-between"
                 >
-                  Happy
-                </MDBTabsLink>
-              </div>
-            </MDBTabsItem>
-            <MDBTabsItem>
-              <div>
-                <MDBTabsLink
-                  onClick={() => handleJustifyClick("tab2")}
-                  active={justifyActive === "tab2"}
-                  className="selector-btn pre-selection-btn pre-btn-bord"
-                >
-                  Surprised
-                </MDBTabsLink>
-              </div>
-            </MDBTabsItem>
-            <MDBTabsItem>
-              <div>
-                <MDBTabsLink
-                  onClick={() => handleJustifyClick("tab3")}
-                  active={justifyActive === "tab3"}
-                  className="selector-btn pre-selection-btn pre-btn-bord"
-                >
-                  Sad
-                </MDBTabsLink>
-              </div>
-            </MDBTabsItem>
-            <MDBTabsItem>
-              <div>
-                <MDBTabsLink
-                  onClick={() => handleJustifyClick("tab4")}
-                  active={justifyActive === "tab4"}
-                  className="selector-btn pre-selection-btn pre-btn-bord"
-                >
-                  Fear
-                </MDBTabsLink>
-              </div>
-            </MDBTabsItem>
-            <MDBTabsItem>
-              <div>
-                <MDBTabsLink
-                  onClick={() => handleJustifyClick("tab5")}
-                  active={justifyActive === "tab5"}
-                  className="selector-btn pre-selection-btn pre-btn-bord"
-                >
-                  Anger
-                </MDBTabsLink>
-              </div>
-            </MDBTabsItem>
-            <MDBTabsItem>
-              <div>
-                <MDBTabsLink
-                  onClick={() => handleJustifyClick("tab6")}
-                  active={justifyActive === "tab6"}
-                  className="selector-btn pre-selection-btn pre-btn-bord"
-                >
-                  Disgust
-                </MDBTabsLink>
-              </div>
-            </MDBTabsItem>
-            <MDBTabsItem>
-              <div>
-                <MDBTabsLink
-                  onClick={() => handleJustifyClick("tab7")}
-                  active={justifyActive === "tab7"}
-                  className="selector-btn pre-selection-btn parant-btn"
-                >
-                  Neutral
-                </MDBTabsLink>
-              </div>
-            </MDBTabsItem>
-          </MDBTabs>
-          <MDBTabsContent>
-            <MDBTabsPane
-              show={justifyActive === "tab1"}
-              className="center-title"
-            >
-                <CustomButton
-                    type="button"
-                    variant="primary"
-                    radius="20"
-                    size="sm"
-                    className="mt-5"
-                    fontSize="20"
-                    width="250"
-                >
-                    Upload New Resource
-                </CustomButton>
-            </MDBTabsPane>
-            <MDBTabsPane
-              show={justifyActive === "tab2"}
-              className="center-title"
-            >
-                Surprised
-            </MDBTabsPane>
-            <MDBTabsPane
-              show={justifyActive === "tab3"}
-              className="center-title"
-            >
-                Sad
-            </MDBTabsPane>
-            <MDBTabsPane
-              show={justifyActive === "tab4"}
-              className="center-title"
-            >
-                Fear
-            </MDBTabsPane>
-            <MDBTabsPane
-              show={justifyActive === "tab5"}
-              className="center-title"
-            >
-                Anger
-            </MDBTabsPane>
-            <MDBTabsPane
-              show={justifyActive === "tab6"}
-              className="center-title"
-            >
-                Disgust
-            </MDBTabsPane>
-            <MDBTabsPane
-              show={justifyActive === "tab7"}
-              className="center-title"
-            >
-                Neutral
-            </MDBTabsPane>
-          </MDBTabsContent>
-        </MDBContainer>
-      </>
+                    <MDBTabsItem>
+                        <div className="student-btn">
+                            <MDBTabsLink
+                                onClick={() => handleJustifyClick("tab1")}
+                                active={justifyActive === "tab1"}
+                                className="selector-btn pre-selection-btn student-btn"
+                            >
+                                Happy
+                            </MDBTabsLink>
+                        </div>
+                    </MDBTabsItem>
+                    <MDBTabsItem>
+                        <div>
+                            <MDBTabsLink
+                                onClick={() => handleJustifyClick("tab2")}
+                                active={justifyActive === "tab2"}
+                                className="selector-btn pre-selection-btn pre-btn-bord"
+                            >
+                                Surprised
+                            </MDBTabsLink>
+                        </div>
+                    </MDBTabsItem>
+                    <MDBTabsItem>
+                        <div>
+                            <MDBTabsLink
+                                onClick={() => handleJustifyClick("tab3")}
+                                active={justifyActive === "tab3"}
+                                className="selector-btn pre-selection-btn pre-btn-bord"
+                            >
+                                Sad
+                            </MDBTabsLink>
+                        </div>
+                    </MDBTabsItem>
+                    <MDBTabsItem>
+                        <div>
+                            <MDBTabsLink
+                                onClick={() => handleJustifyClick("tab4")}
+                                active={justifyActive === "tab4"}
+                                className="selector-btn pre-selection-btn pre-btn-bord"
+                            >
+                                Fear
+                            </MDBTabsLink>
+                        </div>
+                    </MDBTabsItem>
+                    <MDBTabsItem>
+                        <div>
+                            <MDBTabsLink
+                                onClick={() => handleJustifyClick("tab5")}
+                                active={justifyActive === "tab5"}
+                                className="selector-btn pre-selection-btn pre-btn-bord"
+                            >
+                                Anger
+                            </MDBTabsLink>
+                        </div>
+                    </MDBTabsItem>
+                    <MDBTabsItem>
+                        <div>
+                            <MDBTabsLink
+                                onClick={() => handleJustifyClick("tab6")}
+                                active={justifyActive === "tab6"}
+                                className="selector-btn pre-selection-btn pre-btn-bord"
+                            >
+                                Disgust
+                            </MDBTabsLink>
+                        </div>
+                    </MDBTabsItem>
+                    <MDBTabsItem>
+                        <div>
+                            <MDBTabsLink
+                                onClick={() => handleJustifyClick("tab7")}
+                                active={justifyActive === "tab7"}
+                                className="selector-btn pre-selection-btn parant-btn"
+                            >
+                                Neutral
+                            </MDBTabsLink>
+                        </div>
+                    </MDBTabsItem>
+                </MDBTabs>
+                <MDBTabsContent>
+                    <MDBTabsPane show={justifyActive === "tab1"} className="center-title">
+                        <div>
+                            <Button
+                                variant="primary"
+                                component="label"
+                                className="upload-btn"
+                                sx={{
+                                    fontSize: "20px",
+                                    textDecoration: "none",
+                                    textTransform: "none",
+                                    backgroundColor: "#171742",
+                                    color: "#ffffff",
+                                    borderRadius: "20px",
+                                }}
+                            >
+                                Upload New Resource
+                                <input
+                                    hidden
+                                    accept="image/jpeg"
+                                    multiple
+                                    type="file"
+                                    onChange={handleImageChange}
+                                />
+                            </Button>
+                            <ImageList
+                                sx={{m: "2%", width: "96%", height: 450}}
+                                cols={3}
+                                rowHeight={3}
+                            >
+                                {pictures.map((item) => (
+                                    <ImageListItem>
+                                        <img
+                                            src={item}
+                                            alt="location attraction picture"
+                                            loading="lazy"
+                                        />
+                                    </ImageListItem>
+                                ))}
+                            </ImageList>
+                        </div>
+                    </MDBTabsPane>
+                    <MDBTabsPane show={justifyActive === "tab2"} className="center-title">
+                        Surprised
+                    </MDBTabsPane>
+                    <MDBTabsPane show={justifyActive === "tab3"} className="center-title">
+                        Sad
+                    </MDBTabsPane>
+                    <MDBTabsPane show={justifyActive === "tab4"} className="center-title">
+                        Fear
+                    </MDBTabsPane>
+                    <MDBTabsPane show={justifyActive === "tab5"} className="center-title">
+                        Anger
+                    </MDBTabsPane>
+                    <MDBTabsPane show={justifyActive === "tab6"} className="center-title">
+                        Disgust
+                    </MDBTabsPane>
+                    <MDBTabsPane show={justifyActive === "tab7"} className="center-title">
+                        Neutral
+                    </MDBTabsPane>
+                </MDBTabsContent>
+            </MDBContainer>
+        </>
     );
-}
+};
 
 export default Preferences;

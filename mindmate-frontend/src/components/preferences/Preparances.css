@@ -35,3 +35,7 @@
 .nav-link {
  color: #000000 ;
 }
+.upload-btn:hover{
+    background-color: #171742 !important;
+    color: #ffffff !important;
+}
