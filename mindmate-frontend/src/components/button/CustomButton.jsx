@@ -13,16 +13,15 @@ const ButtonComponent = styled.button`
   user-select: none;
   font-size: ${(props) => props.fontSize}px;
   border-radius: ${(props) => props.borderRadius}px;
-  width:  ${(props) => props.width}px;
-  padding: 
-    ${(props) =>
+  width: ${(props) => props.width}px;
+  padding: ${(props) =>
       props.size === "sm"
-        ? "1.5rem"
-        : props.size === "md"
-        ? "1.8rem"
-        : props.size === "lg"
-        ? "2.0rem"
-        : "1.5rem"};
+          ? "1.5rem"
+          : props.size === "md"
+              ? "1.8rem"
+              : props.size === "lg"
+                  ? "2.0rem"
+                  : "1.5rem"};
   height: ${(props) =>
     props.size === "sm"
       ? "34px"
@@ -35,41 +34,47 @@ const ButtonComponent = styled.button`
   font-weight: 500;
   border: 1px solid transparent;
   background-color: ${(props) =>
-    props.variant === "light"
-      ? "#f8f9fa"
-      : props.variant === "dark"
-      ? "#212529"
-      : props.variant === "primary"
-      ? "#171742"
-      : props.variant === "secondary"
-      ? "#6c757d"
-      : props.variant === "success"
-      ? "#198754"
-      : props.variant === "info"
-      ? "#0dcaf0"
-      : props.variant === "warning"
-      ? "#ffc107"
-      : props.variant === "danger"
-      ? "#dc3545"
-      : "#f8f9fa"};
+      props.variant === "light"
+          ? "#f8f9fa"
+          : props.variant === "dark"
+              ? "#212529"
+              : props.variant === "primary"
+                  ? "#171742"
+                  : props.variant === "cancel"
+                      ? "#F8A910"
+                      : props.variant === "success"
+                          ? "#ff8a00"
+                          : props.variant === "info"
+                              ? "#0dcaf0"
+                              : props.variant === "warning"
+                                  ? "#ffc107"
+                                  : props.variant === "danger"
+                                      ? "#dc3545"
+                                      : "#f8f9fa"};
   color: ${(props) =>
-    props.variant === "light"
-      ? "#000000"
-      : props.variant === "dark"
-      ? "#ffffff"
-      : props.variant === "primary"
-      ? "#ffffff"
-      : props.variant === "secondary"
-      ? "#ffffff"
-      : props.variant === "success"
-      ? "#ffffff"
-      : props.variant === "info"
-      ? "#ffffff"
-      : props.variant === "warning"
-      ? "#ffffff"
-      : props.variant === "danger"
-      ? "#ffffff"
-      : "#ffffff"};
+      props.variant === "light"
+          ? "#000000"
+          : props.variant === "dark"
+              ? "#ffffff"
+              : props.variant === "primary"
+                  ? "#ffffff"
+                  : props.variant === "cancel"
+                      ? "#ffffff"
+                      : props.variant === "success"
+                          ? "#ffffff"
+                          : props.variant === "info"
+                              ? "#ffffff"
+                              : props.variant === "warning"
+                                  ? "#ffffff"
+                                  : props.variant === "danger"
+                                      ? "#ffffff"
+                                      : "#ffffff"};
+  &:hover,
+  &:focus {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: #ffffff
+  }
+
 `;
 const CustomButton = ({
   type,
@@ -101,5 +106,6 @@ const CustomButton = ({
     </ButtonComponent>
   );
 };
+
 
 export default CustomButton;

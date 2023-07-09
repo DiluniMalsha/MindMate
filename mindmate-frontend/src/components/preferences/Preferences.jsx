@@ -8,16 +8,14 @@ import {
     MDBTabsLink,
     MDBTabsPane,
 } from "mdb-react-ui-kit";
-import CustomButton from "../button/CustomButton";
-import FileUploader from "../fileUploder/FileUploader";
-import {ImageList, ImageListItem} from "@mui/material";
-import Button from "@mui/material/Button";
+// import {ImageList, ImageListItem} from "@mui/material";
+// import Button from "@mui/material/Button";
 
 const Preferences = (props) => {
     const [justifyActive, setJustifyActive] = useState("tab1");
-    const [pictures, setPictures] = useState([]);
-    const [picturesBase64, setPicturesBase64] = useState([]);
-
+    // const [pictures, setPictures] = useState([]);
+    // const [picturesBase64, setPicturesBase64] = useState([]);
+    //
     const handleJustifyClick = (value) => {
         if (value === justifyActive) {
             return;
@@ -25,29 +23,29 @@ const Preferences = (props) => {
 
         setJustifyActive(value);
     };
-    const handleImageChange = (event) => {
-        let image = event.target.files[0];
-        let url = URL.createObjectURL(image);
-        let items = [];
-        let itemsBase64 = [];
-        {
-            pictures.map((item) => items.push(item));
-            picturesBase64.map((item) => itemsBase64.push(item));
-        }
-        items.push(url);
-        getBase64(image).then((data) => itemsBase64.push(data));
-        setPictures(items);
-        setPicturesBase64(itemsBase64);
-    };
+    // const handleImageChange = (event) => {
+    //     let image = event.target.files[0];
+    //     let url = URL.createObjectURL(image);
+    //     let items = [];
+    //     let itemsBase64 = [];
+    //     // {
+    //     //     pictures.map((item) => items.push(item));
+    //     //     picturesBase64.map((item) => itemsBase64.push(item));
+    //     // }
+    //     items.push(url);
+    //     getBase64(image).then((data) => itemsBase64.push(data));
+    //     setPictures(items);
+    //     setPicturesBase64(itemsBase64);
+    // };
 
-    function getBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-        });
-    }
+    // function getBase64(file) {
+    //     return new Promise((resolve, reject) => {
+    //         const reader = new FileReader();
+    //         reader.readAsDataURL(file);
+    //         reader.onload = () => resolve(reader.result);
+    //         reader.onerror = (error) => reject(error);
+    //     });
+    // }
 
     return (
         <>
@@ -144,45 +142,45 @@ const Preferences = (props) => {
                 </MDBTabs>
                 <MDBTabsContent>
                     <MDBTabsPane show={justifyActive === "tab1"} className="center-title">
-                        <div>
-                            <Button
-                                variant="primary"
-                                component="label"
-                                className="upload-btn"
-                                sx={{
-                                    fontSize: "20px",
-                                    textDecoration: "none",
-                                    textTransform: "none",
-                                    backgroundColor: "#171742",
-                                    color: "#ffffff",
-                                    borderRadius: "20px",
-                                }}
-                            >
-                                Upload New Resource
-                                <input
-                                    hidden
-                                    accept="image/jpeg"
-                                    multiple
-                                    type="file"
-                                    onChange={handleImageChange}
-                                />
-                            </Button>
-                            <ImageList
-                                sx={{m: "2%", width: "96%", height: 450}}
-                                cols={3}
-                                rowHeight={3}
-                            >
-                                {pictures.map((item) => (
-                                    <ImageListItem>
-                                        <img
-                                            src={item}
-                                            alt="location attraction picture"
-                                            loading="lazy"
-                                        />
-                                    </ImageListItem>
-                                ))}
-                            </ImageList>
-                        </div>
+                        {/*<div>*/}
+                        {/*    <Button*/}
+                        {/*        variant="primary"*/}
+                        {/*        component="label"*/}
+                        {/*        className="upload-btn"*/}
+                        {/*        sx={{*/}
+                        {/*            fontSize: "20px",*/}
+                        {/*            textDecoration: "none",*/}
+                        {/*            textTransform: "none",*/}
+                        {/*            backgroundColor: "#171742",*/}
+                        {/*            color: "#ffffff",*/}
+                        {/*            borderRadius: "20px",*/}
+                        {/*        }}*/}
+                        {/*    >*/}
+                        {/*        Upload New Resource*/}
+                        {/*        <input*/}
+                        {/*            hidden*/}
+                        {/*            accept="image/jpeg"*/}
+                        {/*            multiple*/}
+                        {/*            type="file"*/}
+                        {/*            onChange={handleImageChange}*/}
+                        {/*        />*/}
+                        {/*    </Button>*/}
+                        {/*    <ImageList*/}
+                        {/*        sx={{m: "2%", width: "96%", height: 450}}*/}
+                        {/*        cols={3}*/}
+                        {/*        rowHeight={3}*/}
+                        {/*    >*/}
+                        {/*        {pictures.map((item) => (*/}
+                        {/*            <ImageListItem>*/}
+                        {/*                <img*/}
+                        {/*                    src={item}*/}
+                        {/*                    alt="location attraction picture"*/}
+                        {/*                    loading="lazy"*/}
+                        {/*                />*/}
+                        {/*            </ImageListItem>*/}
+                        {/*        ))}*/}
+                        {/*    </ImageList>*/}
+                        {/*</div>*/}
                     </MDBTabsPane>
                     <MDBTabsPane show={justifyActive === "tab2"} className="center-title">
                         Surprised

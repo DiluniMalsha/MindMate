@@ -5,6 +5,7 @@ import PageNotFound from "./components/pageNotFound/PageNotFound";
 import SignIn from "./view/SignIn/SignIn";
 import Welcome from "./view/welcomePage/Welcome";
 import NavigationPanel from "./components/navigationPanels/NavigationPanel";
+import Scheduler from "./view/scheduler/Scheduler";
 
 const App = (props) => {
     const token = false;
@@ -25,6 +26,7 @@ const App = (props) => {
                         <Route path='/' element={<Welcome/>}/>
                         <Route path="/signIn" element={<SignIn/>}/>
                         <Route path="/settings" element={<Settings/>}/>
+                        <Route path="/scheduler" element={<Scheduler/>}/>
                         {/*<Route path="/preparation" element={<Preferences/>}/>*/}
                     </Routes>
                 </div>

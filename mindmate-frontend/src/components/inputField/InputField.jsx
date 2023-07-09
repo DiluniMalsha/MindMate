@@ -1,11 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const InputComponent = styled.input`
   @font-face {
     font-family: "Lato-light";
     src: local("Lato-light"),
     url("../../assets/font/Lato-Light.ttf") format("truetype");
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
   position: relative;
   display: inline-flex;
@@ -22,9 +28,12 @@ const InputComponent = styled.input`
   padding: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
   placeholder: ${(props) => props.placeholder};
-  font-family: "Lato-light" !important; ;
+  font-family: "Lato-light" !important;;
   font-weight: 500;
+  max: ${(props) => props.max};
+  min: ${(props) => props.min};
   border: 1px solid #d8d8d8;
+  readOnly: false;
   background-color: ${(props) =>
           props.variant === "light"
                   ? "#ffffff"
@@ -86,6 +95,9 @@ const CustomInput = ({
                          fontSize,
                          label,
                          placeholder,
+                         max,
+                         min,
+    readOnly,
                      }) => {
     return (
         <InputComponent
@@ -106,6 +118,9 @@ const CustomInput = ({
             fontSize={fontSize}
             placeholder={placeholder}
             label={label}
+            max={max}
+            min={min}
+            readOnly={readOnly}
         >
             {children}
         </InputComponent>

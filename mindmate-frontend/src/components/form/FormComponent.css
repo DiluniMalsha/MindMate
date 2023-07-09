@@ -16,6 +16,7 @@
     font-style: normal;
     font-weight: 100;
     line-height: normal;
+
 }
 .title-align{
     margin-top:20px;
@@ -24,7 +25,7 @@
     font-style: normal;
     font-size: 25px;
     font-weight: 700;
-    margin-bottom:60px;
+    margin-bottom:30px;
 
 }
 .css-5b9le2-MuiPaper-root{
@@ -50,7 +51,7 @@
     font-family: "lato-bold" !important;
     font-style: normal;
     font-weight: 200;
-    margin-bottom:60px;
+    /*margin-bottom:80px;*/
 
 }
 #gender:active {
@@ -68,4 +69,10 @@
     font-family: "GoldmanBold" !important;
     font-size:18px;
 
+}
+.visible{
+    display: inline-flex;
+}
+.not-visible{
+    display: none;
 }
