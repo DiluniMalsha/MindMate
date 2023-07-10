@@ -15,9 +15,10 @@ const Scheduler = (props) => {
     };
     return (
         <section className="vh-100">
-            <div className="container-fluid h-custom">
+            <div className="container-fluid h-custom" style={{marginTop:'5%'}}>
                 <div className="row d-flex justify-content-center align-items-center h-100 m-0">
-                    <div className="col-md-9 col-lg-6 col-xl-5 ">
+                    <div className="col-md-9 ">
+                        {/*col-lg-6 col-xl-5*/}
                         <MDBContainer className="main-section">
                             <h1 className="setting-heading">Scheduler</h1>
 
