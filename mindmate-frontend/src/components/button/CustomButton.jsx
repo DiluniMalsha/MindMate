@@ -23,13 +23,14 @@ const ButtonComponent = styled.button`
                   ? "2.0rem"
                   : "1.5rem"};
   height: ${(props) =>
-    props.size === "sm"
+   props.size === "sm"
       ? "34px"
       : props.size === "md"
       ? "37px"
       : props.size === "lg"
       ? "40px"
       : "30px"};
+
   font-family: "Inner", "Lato";
   font-weight: 500;
   border: 1px solid transparent;
@@ -41,7 +42,7 @@ const ButtonComponent = styled.button`
               : props.variant === "primary"
                   ? "#171742"
                   : props.variant === "cancel"
-                      ? "#F8A910"
+                      ? "#e8260c"
                       : props.variant === "success"
                           ? "#ff8a00"
                           : props.variant === "info"
@@ -87,6 +88,7 @@ const CustomButton = ({
   radius,
   size,
   fontSize,
+    height,
 }) => {
   return (
     <ButtonComponent
@@ -101,6 +103,7 @@ const CustomButton = ({
       borderRadius={radius}
       size={size}
       fontSize={fontSize}
+      height={height}
     >
       {children}
     </ButtonComponent>
