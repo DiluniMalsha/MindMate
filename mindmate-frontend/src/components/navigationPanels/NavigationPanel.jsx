@@ -9,7 +9,7 @@ import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {useLocation} from "react-router";
 import logo from "../../assets/logo/Logo.png";
-
+import { LogOutOutline } from 'react-ionicons'
 const NavigationPanel = (props) => {
     const location = useLocation();
     const currentPath = location.pathname;
@@ -82,7 +82,16 @@ const NavigationPanel = (props) => {
                 </div>
             </div>
             <Link to="/signIn" style={{textDecoration: "none"}}>
-                <span className="sign-out-btn">Sign Out</span>
+
+                <span className="sign-out-btn">
+                    <LogOutOutline
+                        color={'#ffffff'}
+                        height="40px"
+                        width="40px"
+                    />
+                    <br/>
+                    Sign Out</span>
+
             </Link>
         </>
     );

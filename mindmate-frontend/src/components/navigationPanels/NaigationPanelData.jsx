@@ -15,7 +15,7 @@ import {
 export const NavigationPanelData = [
     {
         title: 'Home',
-        path: '/',
+        path: '/home',
         iconVisibility: true,
         icon: <HomeOutline
             color={'#c0c0c0'}
