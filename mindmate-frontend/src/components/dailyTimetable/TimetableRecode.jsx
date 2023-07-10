@@ -1,3 +1,4 @@
+import {useState} from "react";
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -6,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import { TrashOutline } from 'react-ionicons'
 import { PencilOutline } from 'react-ionicons'
 import Swal from "sweetalert2";
+import AddNewRecord from "../addNewRecord/AddNewRecord";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
@@ -30,13 +32,19 @@ const handleDeleteRow = (event) => {
         if (result.isConfirmed) {
             Swal.fire(
                 'Deleted!',
-                'Your file has been deleted.',
+                'Recode has been deleted.',
                 'success'
             )
         }
     })
 };
 const TimetableRecode = ({startTime, endTime, description}) => {
+
+    const [popupVisible, setPopupVisible] = useState(false);
+    const handlePopUp = (value) => {
+        setPopupVisible(!popupVisible);
+    }
+
     return (
         <div className='m-2'>
             <Box sx={{ flexGrow: 1 }}>
@@ -64,10 +72,9 @@ const TimetableRecode = ({startTime, endTime, description}) => {
                                    <div className="col-1"  style={{cursor: 'pointer'}}>
                                        <PencilOutline
                                            color={'#000000'}
-                                           beat
                                            height="30px"
                                            width="30px"
-
+                                           onClick={handlePopUp}
                                        />
 
                                    </div>
@@ -85,6 +92,7 @@ const TimetableRecode = ({startTime, endTime, description}) => {
                     </Grid>
                 </Grid>
             </Box>
+            {popupVisible && <AddNewRecord id='search-student-div' setPopupVisible={setPopupVisible}/>}
         </div>
     );
 }
