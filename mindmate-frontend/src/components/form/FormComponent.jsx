@@ -177,7 +177,7 @@ const FormComponent = ({
             </Grid>
 
             {password ? <Password/> : null}
-            <div className={formEditable ? "not-visible" : "visible"}>
+            <div className={formEditable ? "not-visible" : "visible"} >
                 <CustomButton
                     type="button"
                     variant="primary"
@@ -192,8 +192,8 @@ const FormComponent = ({
                 </CustomButton>
             </div>
 
-            <div className={formEditable ? "visible row show-update-btn" : "not-visible"}>
-                <div className="col">
+            <div className={formEditable ? "visible row show-update-btn" : "not-visible"} style={{width:'100%', marginRight:'120px'}}>
+                <div className="col" >
                     <CustomButton
                         type="button"
                         variant="primary"
@@ -208,7 +208,7 @@ const FormComponent = ({
                     </CustomButton>
                 </div>
 
-                <div className="col">
+                <div className="col" >
                     <CustomButton
                         type="button"
                         variant="cancel"

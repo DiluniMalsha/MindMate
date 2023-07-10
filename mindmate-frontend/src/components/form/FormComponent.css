@@ -35,8 +35,8 @@
 
 #gender{
     border-radius: 10px;
-    height:20px;
-    padding:20px;
+    height:40px;
+    padding-left:20px;
     width: 100%;
     font-size: 20px;
     position: relative;
@@ -48,9 +48,10 @@
     vertical-align: middle;
     cursor: pointer;
     border-color: #d8d8d8;
-    font-family: "lato-bold" !important;
+    font-family: "GoldmanBold" !important;
     font-style: normal;
     font-weight: 200;
+    color: #757575;
     /*margin-bottom:80px;*/
 
 }
@@ -68,7 +69,6 @@
 .g-gender{
     font-family: "GoldmanBold" !important;
     font-size:18px;
-
 }
 .visible{
     display: inline-flex;
