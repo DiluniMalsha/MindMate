@@ -52,7 +52,7 @@ const FormComponent = ({
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                Swal.fire('Update Successful!', '', 'success')
+                Swal.fire('Update Successful!', '', 'success').then(window.location.reload(true))
             } else if (result.isDenied) {
                 Swal.fire('Changes are not Update', '', 'info')
             }
@@ -84,7 +84,7 @@ const FormComponent = ({
                 </Grid>
                 <Grid item xs={6}>
                     <Item>
-                        <label className="label-align">First Name</label>
+                        <label className="label-align">Last Name</label>
                         <br/>
                         <CustomInput
                             type="text"
@@ -94,6 +94,7 @@ const FormComponent = ({
                             fontSize="20"
                             width='100%'
                             readOnly={!formEditable}
+                            value={address}
                         />
                     </Item>
                 </Grid>
@@ -109,6 +110,7 @@ const FormComponent = ({
                             width="100%"
                             fontSize="20"
                             readOnly={!formEditable}
+
                         />
                     </Item>
                 </Grid>
@@ -133,7 +135,7 @@ const FormComponent = ({
                     <Item>
                         <label className="label-align">Gender</label>
                         <br/>
-                        <select id="gender" name="gender" value={gender}
+                        <select id="gender" name="gender" value={gender }
                                 onChange={handleChange}>
                             <option value="male" className='g-gender'>Male</option>
                             <option value="female" className='g-gender'>Female</option>

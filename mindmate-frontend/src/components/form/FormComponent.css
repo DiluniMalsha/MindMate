@@ -48,10 +48,11 @@
     vertical-align: middle;
     cursor: pointer;
     border-color: #d8d8d8;
-    font-family: "GoldmanBold" !important;
+    font-family: "lato-bold" !important;
     font-style: normal;
     font-weight: 200;
     color: #757575;
+    background-color: transparent !important;
     /*margin-bottom:80px;*/
 
 }
@@ -75,4 +76,7 @@
 }
 .not-visible{
     display: none;
+}
+.css-5b9le2-MuiPaper-root{
+    background-color: transparent !important;
 }
