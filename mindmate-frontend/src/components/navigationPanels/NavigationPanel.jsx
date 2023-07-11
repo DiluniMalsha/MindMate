@@ -29,7 +29,7 @@ const NavigationPanel = (props) => {
     const AccordionSummary = styled((props) => (
         <MuiAccordionSummary {...props} />
     ))(({theme}) => ({
-        backgroundColor: "#171742",
+        backgroundColor: "#1e5d88",
         color: "white",
         textAlign: "center",
         marginTop: "20%",
