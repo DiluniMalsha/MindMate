@@ -26,9 +26,9 @@ const DailyTimetable = (props) => {
     const [popupVisible, setPopupVisible] = useState(false);
     const handlePopUp = (value) => {
         setPopupVisible(!popupVisible);
-    }
+    };
     return (
-        <div className='align-popUp'>
+        <div className="align-popUp">
             <div className="mt-4">
                 <MDBContainer className="border-refs schedule-day-align">
                     <MDBTabs
@@ -121,44 +121,131 @@ const DailyTimetable = (props) => {
                             fontSize="20"
                             onclick={handlePopUp}
                         >
-
                             + Add New Record
                         </CustomButton>
                     </MDBTabs>
                     <MDBTabsContent>
-                        <MDBTabsPane show={justifyActive === "tab1"} className="center-title">
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
+                        <MDBTabsPane
+                            show={justifyActive === "tab1"}
+                            className="center-title"
+                        >
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
                         </MDBTabsPane>
-                        <MDBTabsPane show={justifyActive === "tab2"} className="center-title">
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
+                        <MDBTabsPane
+                            show={justifyActive === "tab2"}
+                            className="center-title"
+                        >
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
                         </MDBTabsPane>
-                        <MDBTabsPane show={justifyActive === "tab3"} className="center-title">
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
+                        <MDBTabsPane
+                            show={justifyActive === "tab3"}
+                            className="center-title"
+                        >
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
                         </MDBTabsPane>
-                        <MDBTabsPane show={justifyActive === "tab4"} className="center-title">
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
+                        <MDBTabsPane
+                            show={justifyActive === "tab4"}
+                            className="center-title"
+                        >
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
                         </MDBTabsPane>
-                        <MDBTabsPane show={justifyActive === "tab5"} className="center-title">
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
+                        <MDBTabsPane
+                            show={justifyActive === "tab5"}
+                            className="center-title"
+                        >
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
                         </MDBTabsPane>
-                        <MDBTabsPane show={justifyActive === "tab6"} className="center-title">
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
+                        <MDBTabsPane
+                            show={justifyActive === "tab6"}
+                            className="center-title"
+                        >
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
                         </MDBTabsPane>
-                        <MDBTabsPane show={justifyActive === "tab7"} className="center-title">
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
-                            <TimetableRecode startTime="08.00 a.m" endTime="10.00 a.m" description="Reading Books"/>
+                        <MDBTabsPane
+                            show={justifyActive === "tab7"}
+                            className="center-title"
+                        >
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
+                            <TimetableRecode
+                                startTime="08.00 a.m"
+                                endTime="10.00 a.m"
+                                description="Reading Books"
+                            />
                         </MDBTabsPane>
                     </MDBTabsContent>
                 </MDBContainer>
             </div>
-            {popupVisible && <AddNewRecord id='search-student-div' setPopupVisible={setPopupVisible}/>}
+            {popupVisible && (
+                <AddNewRecord
+                    title="Add New Timetable Record"
+                    swalTitle="Record has been added successfully!"
+                    id="search-student-div"
+                    setPopupVisible={setPopupVisible}
+                />
+            )}
         </div>
     );
 };
