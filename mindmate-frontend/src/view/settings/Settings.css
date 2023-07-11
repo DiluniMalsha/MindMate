@@ -39,7 +39,8 @@
 }
 
 .h-custom {
-    margin-top:3% !important;
+    padding-top:3%;
+    /*margin-top:3% !important;*/
     /*height: calc(100% - 73px);*/
     /*margin-top:3%;*/
 }
@@ -139,7 +140,7 @@
 }
 
 .selector-btn:not(:disabled):not(.disabled).active, .selector-btn:not(:disabled):not(.disabled):active, .show > .selector-btn.dropdown-toggle {
-    background-color: #171742;
+    background-color: #1e5d88;
     color: white;
 }
 
