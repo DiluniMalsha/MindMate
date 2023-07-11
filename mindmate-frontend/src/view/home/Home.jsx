@@ -1,11 +1,9 @@
-import AddNewRecord from "../../components/addNewRecord/AddNewRecord";
-import React from "react";
+import "./Home.css"
 
 const Home = (props) => {
     return (
-        <div>
-            <section className="main-section">
-                <AddNewRecord title='Add New Timetable Record'/>
+        <div className='background-color vh-100'>
+            <section className="main-section background-color">
             </section>
         </div>
     );
