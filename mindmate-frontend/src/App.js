@@ -20,12 +20,12 @@ const App = (props) => {
         <div className="App">
             <Router>
                 <Grid container>
-                    <Grid item xs={1}>
+                    <Grid item xs={.8} className='background-color'>
                             <div className='NavMobileDisplay'>
                                 <NavigationPanel/>
                             </div>
                     </Grid>
-                    <Grid item xs={11} sx={{textAlign:'center', justifyContent:'center'}}>
+                    <Grid item xs={11.2} sx={{textAlign:'center', justifyContent:'center'}}>
                         <div className="center-div">
                             <Routes>
                                 <Route path='/*' element={<PageNotFound/>}/>
