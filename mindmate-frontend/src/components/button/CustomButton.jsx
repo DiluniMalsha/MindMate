@@ -40,7 +40,7 @@ const ButtonComponent = styled.button`
           : props.variant === "dark"
               ? "#212529"
               : props.variant === "primary"
-                  ? "#171742"
+                  ? "#1ce8b5"
                   : props.variant === "cancel"
                       ? "#e8260c"
                       : props.variant === "success"
