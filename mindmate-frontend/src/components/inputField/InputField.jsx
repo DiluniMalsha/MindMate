@@ -8,11 +8,13 @@ const InputComponent = styled.input`
     src: local("Lato-light"),
     url("../../assets/font/Lato-Light.ttf") format("truetype");
   }
+
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
+
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -28,11 +30,11 @@ const InputComponent = styled.input`
   padding: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
   placeholder: ${(props) => props.placeholder};
-  font-family: "Lato-light" !important;;
+  font-family: "Lato-light";
   font-weight: 500;
   max: ${(props) => props.max};
   min: ${(props) => props.min};
-  border: 1px solid #d8d8d8;
+  border: 1px solid #a8a8a8;
   readOnly: false;
   background-color: ${(props) =>
           props.variant === "light"
@@ -51,7 +53,7 @@ const InputComponent = styled.input`
                                                                   ? "#ffffff"
                                                                   : props.variant === "danger"
                                                                           ? "#ffffff"
-                                                                          : "#ffffff"};
+                                                                          : "rgba(255,255,255,0)"};
   color: ${(props) =>
           props.variant === "light"
                   ? "#000000"
@@ -97,7 +99,8 @@ const CustomInput = ({
                          placeholder,
                          max,
                          min,
-    readOnly,
+                         value,
+                         readOnly,
                      }) => {
     return (
         <InputComponent
@@ -121,6 +124,7 @@ const CustomInput = ({
             max={max}
             min={min}
             readOnly={readOnly}
+            value={value}
         >
             {children}
         </InputComponent>
