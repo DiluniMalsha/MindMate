@@ -52,7 +52,11 @@ const FormComponent = ({
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                Swal.fire('Update Successful!', '', 'success').then(window.location.reload(true))
+                Swal.fire('Update Successful!', 'Updated data', 'success').then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload(true);
+                    }
+                })
             } else if (result.isDenied) {
                 Swal.fire('Changes are not Update', '', 'info')
             }
@@ -76,8 +80,9 @@ const FormComponent = ({
                             type="text"
                             placeholder={firstname}
                             size="20"
-                            radius="10"
-                            fontSize="20"
+                            radius="8"
+                            fontSize="18.946"
+                            width='100%'
                             readOnly={!formEditable}
                         />
                     </Item>
@@ -90,11 +95,12 @@ const FormComponent = ({
                             type="text"
                             placeholder={lastname}
                             size="20"
-                            radius="10"
-                            fontSize="20"
+                            radius="8"
+                            fontSize="18"
                             width='100%'
                             readOnly={!formEditable}
-                            value={address}
+                            value={lastname}
+                            className='component-input'
                         />
                     </Item>
                 </Grid>
@@ -106,11 +112,10 @@ const FormComponent = ({
                             type="text"
                             placeholder={address}
                             size="20"
-                            radius="10"
+                            radius="8"
                             width="100%"
-                            fontSize="20"
+                            fontSize="18"
                             readOnly={!formEditable}
-
                         />
                     </Item>
                 </Grid>
@@ -122,11 +127,10 @@ const FormComponent = ({
                             type="tel"
                             placeholder={contactNo}
                             size="20"
-                            radius="10"
+                            radius="8"
                             width="100%"
-                            fontSize='20'
+                            fontSize='18'
                             readOnly={!formEditable}
-
                         />
                     </Item>
                 </Grid>
@@ -135,7 +139,7 @@ const FormComponent = ({
                     <Item>
                         <label className="label-align">Gender</label>
                         <br/>
-                        <select id="gender" name="gender" value={gender }
+                        <select id="gender" name="gender" value={gender}
                                 onChange={handleChange}>
                             <option value="male" className='g-gender'>Male</option>
                             <option value="female" className='g-gender'>Female</option>
@@ -150,9 +154,9 @@ const FormComponent = ({
                             type="number"
                             placeholder={age}
                             size="20"
-                            radius="10"
+                            radius="8"
                             width="100%"
-                            fontSize='20'
+                            fontSize='18'
                             max='20'
                             min='1'
                             readOnly={!formEditable}
@@ -168,9 +172,9 @@ const FormComponent = ({
                             type="text"
                             placeholder={relationship}
                             size="20"
-                            radius="10"
+                            radius="8"
                             width="100%"
-                            fontSize="20"
+                            fontSize="18"
                             readOnly={!formEditable}
                         />
                     </Item>
@@ -179,14 +183,14 @@ const FormComponent = ({
             </Grid>
 
             {password ? <Password/> : null}
-            <div className={formEditable ? "not-visible" : "visible"} >
+            <div className={formEditable ? "not-visible" : "visible"}>
                 <CustomButton
                     type="button"
-                    variant="primary"
-                    radius="20"
+                    variant="edit"
+                    radius="8"
                     size="sm"
-                    className="mt-3 mb-4"
-                    fontSize="20"
+                    className="mt-3 mb-4 button-mobile-response"
+                    fontSize="18"
                     width="150"
                     onclick={handleEdit}
                 >
@@ -194,15 +198,16 @@ const FormComponent = ({
                 </CustomButton>
             </div>
 
-            <div className={formEditable ? "visible row show-update-btn" : "not-visible"} style={{width:'100%', marginRight:'120px'}}>
-                <div className="col" >
+            <div className={formEditable ? "visible row show-update-btn" : "not-visible"}
+                 style={{width: '100%', marginRight: '120px'}}>
+                <div className="col">
                     <CustomButton
                         type="button"
-                        variant="primary"
-                        radius="20"
+                        variant="update"
+                        radius="8"
                         size="sm"
-                        className="mt-3 mb-4"
-                        fontSize="20"
+                        className="mt-3 mb-4 button-mobile-response"
+                        fontSize="18"
                         width="150"
                         onclick={handleUpdate}
                     >
@@ -210,14 +215,14 @@ const FormComponent = ({
                     </CustomButton>
                 </div>
 
-                <div className="col" >
+                <div className="col">
                     <CustomButton
                         type="button"
                         variant="cancel"
-                        radius="20"
+                        radius="8"
                         size="sm"
-                        className="mt-3 mb-4"
-                        fontSize="20"
+                        className="mt-3 mb-4 button-mobile-response"
+                        fontSize="18"
                         width="150"
                         onclick={handleCancel}
                     >

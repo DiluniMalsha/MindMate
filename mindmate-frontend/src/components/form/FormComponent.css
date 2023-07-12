@@ -3,42 +3,47 @@
     src: local("GoldmanBold"),
     url("../../assets/font/Lato-Light.ttf") format("truetype");
 }
+
 @font-face {
     font-family: "lato-bold";
     src: local("GoldmanBold"),
     url("../../assets/font/Lato-Bold.ttf") format("truetype");
 }
+
 .label-align {
-    text-align: left !important;
-    color: #000;
-    font-family: "GoldmanBold" !important;
-    font-size: 20px;
+    color: #959595;
+    text-align: center;
+    /* Paragraph01 */
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 18px;
     font-style: normal;
-    font-weight: 100;
-    line-height: normal;
+    font-weight: 400;
+    line-height: 25px;
 
 }
-.title-align{
-    margin-top:20px;
+
+.title-align {
+    margin-top: 20px;
     text-align: center;
     font-family: "lato-bold" !important;
     font-style: normal;
     font-size: 25px;
     font-weight: 700;
-    margin-bottom:30px;
+    margin-bottom: 30px;
 
 }
-.css-5b9le2-MuiPaper-root{
+
+.css-5b9le2-MuiPaper-root {
     box-shadow: none !important;
     text-align: left !important;
 }
 
-#gender{
-    border-radius: 10px;
-    height:40px;
-    padding-left:20px;
+#gender {
+    border-radius: 8px;
+    height: 40px;
+    padding-left: 20px;
     width: 100%;
-    font-size: 20px;
+    font-size: 18px;
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -47,8 +52,8 @@
     text-decoration: none;
     vertical-align: middle;
     cursor: pointer;
-    border-color: #d8d8d8;
-    font-family: "lato-bold" !important;
+    border: 1px solid #a8a8a8;
+    font-family: Nunito Sans, sans-serif !important;
     font-style: normal;
     font-weight: 200;
     color: #757575;
@@ -56,27 +61,79 @@
     /*margin-bottom:80px;*/
 
 }
+
 #gender:active {
-     border-color: #d8d8d8;
-     outline: 0;
- }
+    border-color: #d8d8d8;
+    outline: 0;
+}
 
 #gender:focus {
-     border-color: #d8d8d8;
-     box-shadow: none;
-     outline: 0;
- }
-
-.g-gender{
-    font-family: "GoldmanBold" !important;
-    font-size:18px;
+    border-color: #d8d8d8;
+    box-shadow: none;
+    outline: 0;
 }
-.visible{
+
+#gender:active {
+    border-color: #d8d8d8;
+    outline: 0;
+}
+
+#gender:focus {
+    border-color: #d8d8d8;
+    box-shadow: none;
+    outline: 0;
+}
+
+.g-gender {
+    font-family: "GoldmanBold" !important;
+    font-size: 18px;
+}
+
+.visible {
     display: inline-flex;
 }
-.not-visible{
+
+.not-visible {
     display: none;
 }
-.css-5b9le2-MuiPaper-root{
+
+.css-5b9le2-MuiPaper-root {
     background-color: transparent !important;
+}
+
+body.swal2-shown > [aria-hidden="true"] {
+    /*transition: 0.1s filter;*/
+    filter: blur(6px);
+}
+
+@media screen and (max-width: 768px) {
+    .title-align {
+        font-size: 18px !important;
+        text-align: left !important;
+        margin-left: 10px;
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+
+    .label-align {
+        font-size: 14px;
+        color: #000000
+    }
+
+    .item-margin {
+        margin-top: 10px !important;
+    }
+
+    .button-mobile-response {
+        height: 20px !important;
+        font-size: 16px !important;
+        /*border-radius: 20px !important;*/
+    }
+    #gender{
+        font-size:13px !important;
+    }
+    .change-password-margin{
+        margin-bottom: 100px !important;
+    }
+
 }
