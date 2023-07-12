@@ -39,8 +39,6 @@ const App = (props) => {
                         </div>
                     </Grid>
                 </Grid>
-
-
             </Router>
         </div>
     );
