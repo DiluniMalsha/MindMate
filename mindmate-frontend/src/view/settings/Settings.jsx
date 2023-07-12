@@ -24,7 +24,7 @@ function Settings() {
     return (
         <section className="">
             <div className="container-fluid h-custom">
-                <div className="row d-flex justify-content-center align-items-center h-100 m-0">
+                <div className="row d-flex justify-content-center align-items-center  m-0">
                     <div className="col-md-9   ">
                         <MDBContainer className="main-section">
                             <h1 className="setting-heading">Settings</h1>
@@ -41,7 +41,7 @@ function Settings() {
                                             active={justifyActive === "tab1"}
                                             className="selector-btn selection-btn student-btn"
                                         >
-                                            Student
+                                            Child Settings
                                         </MDBTabsLink>
                                     </div>
                                 </MDBTabsItem>
@@ -52,7 +52,7 @@ function Settings() {
                                             active={justifyActive === "tab2"}
                                             className="selector-btn selection-btn parant-btn"
                                         >
-                                            Parent
+                                            Profile Settings
                                         </MDBTabsLink>
                                     </div>
                                 </MDBTabsItem>
@@ -77,7 +77,7 @@ function Settings() {
                                                 relDis='none'
                                             />
                                         </div>
-                                        <div className="col child-settings-sections">
+                                        <div className="col-md child-settings-sections">
                                             <Preferences/>
                                         </div>
                                     </div>
@@ -88,7 +88,7 @@ function Settings() {
                                     className="center-title"
                                 >
                                     <div className="row w-100">
-                                        <div className="col child-settings-sections">
+                                        <div className="col-md child-settings-sections">
 
                                             <FormComponent
                                                 title="My Profile"
@@ -102,7 +102,7 @@ function Settings() {
                                                 display='ture'
                                             />
                                         </div>
-                                        <div className="col child-settings-sections">
+                                        <div className="col-md child-settings-sections">
                                             {/*<FormComponent*/}
                                             {/*    title="Change Password"*/}
                                             {/*    disabled='block'*/}

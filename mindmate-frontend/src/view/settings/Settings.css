@@ -1,5 +1,10 @@
+@font-face {
+    font-family: "lato-bold";
+    src: local("GoldmanBold"),
+    url("../../assets/font/Lato-Bold.ttf") format("truetype");
+}
 
-.child-profile{
+.child-profile {
     border-radius: 20px;
     border: 1px solid #9B9B9B;
     background: #FFF;
@@ -10,14 +15,14 @@
 /*    margin-left:80px;*/
 /*}*/
 
-@media screen and (min-width: 1200px){
-    .tab-tabs{
+@media screen and (min-width: 1200px) {
+    .tab-tabs {
         display: none;
     }
 }
 
-@media screen and(max-width: 1200px){
-    .tab-tabs{
+@media screen and(max-width: 1200px) {
+    .tab-tabs {
         display: inline-block;
     }
 }
@@ -39,8 +44,9 @@
 }
 
 .h-custom {
-    padding-top:3%;
-    /*margin-top:3% !important;*/
+    height: 100%;
+    padding-top: 3%;
+    /*margin-top:3%     !important;*/
     /*height: calc(100% - 73px);*/
     /*margin-top:3%;*/
 }
@@ -52,26 +58,51 @@
 }
 
 .student {
-    width: 50% !important;
+    /*width: 50% !important;*/
     text-align: center !important;
 }
 
-.btn-width{
-    width: 800px;
-    margin-left:auto;
-    margin-right:auto;
+.btn-width {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
 }
-.setting-heading{
-    margin-right:auto;
+@media screen and (max-width:560px) {
+    .btn-width {
+        width: 300px;
+    }
+    .selection-btn{
+        font-size:12px;
+    }
+}
+
+.setting-heading {
+    margin-right: auto;
     margin-bottom: 40px;
 }
-.child-settings-sections{
-    border:1px solid #9B9B9B ;
-    border-radius: 20px;
-    margin:20px;
+@media screen and (max-width: 768px) {
+    .setting-heading {
+        margin-bottom: 12px !important;
+        font-size: 18px;
+        color: #1E5D88 !important;
+
+    }
 }
-.title-section{
-    margin:30px;
+
+.child-settings-sections {
+    border: 1px solid #9B9B9B;
+    border-radius: 15px;
+    margin: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .child-settings-sections {
+        margin: 0px !important;
+    }
+}
+
+.title-section {
+    margin: 30px;
     color: #171742;
     text-align: center;
     font-size: 25px;
@@ -80,6 +111,7 @@
     font-weight: 500;
     line-height: normal;
 }
+
 .input-data {
     margin-top: 40px;
     height: 40px !important;
@@ -131,12 +163,13 @@
 .logo-img-res {
     width: 100px;
 }
-.student-btn{
-    border-radius:20px 0 0 20px !important;
 
+.student-btn {
+    border-radius: 20px 0 0 20px !important;
 }
-.parant-btn{
-    border-radius:0 20px 20px 0 !important;
+
+.parant-btn {
+    border-radius: 0 20px 20px 0 !important;
 }
 
 .selector-btn:not(:disabled):not(.disabled).active, .selector-btn:not(:disabled):not(.disabled):active, .show > .selector-btn.dropdown-toggle {
@@ -167,30 +200,52 @@
 .btn.focus, .btn:focus {
     box-shadow: none;
 }
-.selection-btn{
-    height:60px;
+
+.selection-btn {
+    height: 60px;
     border: 1px solid #171742 !important;
-    color:#000000;
-    font-size: 25px;
+    color: #000000;
+    font-size: calc(15px + 0.5vw);
     font-style: normal;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: lato-bold;
     text-align: center;
     font-weight: 500;
-    line-height:40px
+    line-height: 40px
 }
 
-.guest-title{
+.guest-title {
     font-size: 18px;
     color: #171742;
     font-weight: bold;
 
 }
-.center-title{
+
+.center-title {
     text-align: center;
 }
-.link-deco{
+
+.link-deco {
     text-decoration: none !important;
 }
-.row{
-    margin-left:0 !important;
+
+.row {
+    margin-left: 0 !important;
+}
+
+@media screen and (max-width: 768px) {
+    .selection-btn{
+        font-size: 15px;
+        height: 40px;
+        line-height: 20px;
+    }
+    .child-settings-sections {
+        border: none !important;
+        border-radius: 10px !important;
+        margin: 20px;
+    }
+    .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
 }
