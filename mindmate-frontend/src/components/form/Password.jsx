@@ -48,7 +48,7 @@ const Password = ({title,
                         size="20"
                         radius="10"
                         width="100%"
-                        fontSize='20'
+                        fontSize='18'
                     />
                 </Item>
             </Grid>
@@ -59,9 +59,9 @@ const Password = ({title,
                     <CustomInput
                         type="password"
                         size="20"
-                        radius="10"
+                        radius="8"
                         width="100%"
-                        fontSize='20'
+                        fontSize='18'
                     />
                 </Item>
             </Grid>
@@ -72,21 +72,22 @@ const Password = ({title,
                     <CustomInput
                         type="password"
                         size="20"
-                        radius="10"
+                        radius="8"
                         width="100%"
-                        fontSize='20'
+                        fontSize='18'
                     />
                 </Item>
             </Grid>
             <CustomButton
                 type="button"
                 variant="primary"
-                radius="20"
+                radius="8"
                 size="sm"
                 className="mt-3 mb-4"
-                fontSize="20"
+                fontSize="18"
                 width="150"
                 onclick={handleUpdatePassword}
+                className="change-password-margin"
             >
                 Update
             </CustomButton>
