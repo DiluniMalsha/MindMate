@@ -113,58 +113,58 @@ export const NavigationPanelData = [
 export const MNavigationPanelData = [
     {
         title: 'Home',
-        path: '/',
+        path: '/home',
         iconVisibility: true,
         icon: <HomeOutline
             color={'#c0c0c0'}
             title={"Home"}
-            height="40px"
-            width="40px"
+            height="25px"
+            width="25px"
         />,
-        ss:
+        iconActive:
             <Home
                 color={'#ffffff'}
-                title={"ActiveHome"}
-                height="40px"
-                width="40px"
+                title={"Home"}
+                height="25px"
+                width="25px"
             />,
         subItems: []
     },
     {
-        title: 'Child',
-        path: '/child',
+        title: 'EmotionTracker',
+        path: '/emotion-tracker',
         iconVisibility: true,
         icon: <FitnessOutline
             color={'#c0c0c0'}
             title={"EmotionTracker"}
-            height="40px"
-            width="40px"
+            height="25px"
+            width="25px"
         />,
-        ss:
+        iconActive:
             <Fitness
                 color={'#ffffff'}
-                title={"ActiveEmotionTracker"}
-                height="40px"
-                width="40px"
+                title={"Emotion Tracker"}
+                height="25px"
+                width="25px"
             />,
         subItems: []
     },
     {
-        title: 'Schedule',
-        path: '/schedule',
+        title: 'Scheduler',
+        path: '/scheduler',
         iconVisibility: true,
         icon: <CalendarOutline
             color={'#c0c0c0'}
             title={"Scheduler"}
-            height="40px"
-            width="40px"
+            height="25px"
+            width="25px"
         />,
-        ss:
+        iconActive:
             <Calendar
                 color={'#ffffff'}
-                title={"ActiveScheduler"}
-                height="40px"
-                width="40px"
+                title={"Scheduler"}
+                height="25px"
+                width="25px"
             />,
         subItems: []
     },
@@ -175,15 +175,15 @@ export const MNavigationPanelData = [
         icon: <SettingsOutline
             color={'#c0c0c0'}
             title={"Settings"}
-            height="40px"
-            width="40px"
+            height="25px"
+            width="25px"
         />,
-        ss:
+        iconActive:
             <Settings
                 color={'#ffffff'}
-                title={"ActiveSettings"}
-                height="40px"
-                width="40px"
+                title={"Settings"}
+                height="25px"
+                width="25px"
             />,
         subItems: []
     }

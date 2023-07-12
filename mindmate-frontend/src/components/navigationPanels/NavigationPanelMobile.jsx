@@ -3,7 +3,6 @@ import {styled} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import {MNavigationPanelData} from "./NaigationPanelData";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {AccordionSummary} from "@mui/material";
 import {useLocation} from "react-router";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import {Link} from "react-router-dom";
@@ -16,10 +15,10 @@ const NavigationPanelMobile = (props) => {
     const AccordionSummary = styled((props) => (
         <MuiAccordionSummary {...props} />
     ))(({theme}) => ({
-        backgroundColor: "#171742",
+        backgroundColor: "#1e5d88",
         color: "white",
         textAlign: "center",
-        marginTop: "20%",
+        marginTop: "10%",
         "& .MuiAccordionSummary-expandIconWrapper": {
             color: "white",
         },
@@ -32,7 +31,7 @@ const NavigationPanelMobile = (props) => {
         <Box sx={{flexGrow: 1}} className="mobile-nav-main">
             <div className="row mobile-row">
                 {MNavigationPanelData.map((item) => (
-                    <div className="col">
+                    <div className="col  m-navigation-item-link">
                         <AccordionSummary
                             expandIcon={
                                 item.subItems.length === 0 ? null : <ExpandMoreIcon/>
@@ -49,9 +48,13 @@ const NavigationPanelMobile = (props) => {
                                         : "navigation-item-link"
                                 }
                             >
-                                <span>
-                                    {item.iconVisibility ? item.icon : null}
-                                </span>
+                <span>
+                  {currentPath.endsWith(item.path)
+                      ? item.iconActive
+                      : item.icon}
+                    <div className="icon-title" style={{fontSize:'10px', marginTop:'5px'}}>{item.title}</div>
+                    {/*{item.iconVisibility ? item.icon : null}*/}
+                </span>
                             </Link>
                         </AccordionSummary>
                     </div>
