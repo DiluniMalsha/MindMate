@@ -3,11 +3,11 @@ import './App.css'
 import Settings from "./view/settings/Settings";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import SignIn from "./view/SignIn/SignIn";
-// import Welcome from "./view/welcomePage/Welcome";
 import NavigationPanel from "./components/navigationPanels/NavigationPanel";
 import Scheduler from "./view/scheduler/Scheduler";
 import Home from "./view/home/Home";
 import Grid from "@mui/material/Grid";
+import NavigationPanelMobile from "./components/navigationPanels/NavigationPanelMobile";
 
 const App = (props) => {
     const token = false;
@@ -17,15 +17,19 @@ const App = (props) => {
     }
     return (
 
-        <div className="App">
+        <div className="App" style={{ height:'100vh'}}>
             <Router>
+
                 <Grid container>
-                    <Grid item xs={.8} className='background-color'>
-                            <div className='NavMobileDisplay'>
+                    <Grid item sm={1} xs={0} className='background-color'>
+                            <div className='NavDesktopDisplay'>
                                 <NavigationPanel/>
                             </div>
+                        <div className='NavMobileDisplay'>
+                            <NavigationPanelMobile/>
+                        </div>
                     </Grid>
-                    <Grid item xs={11.2} sx={{textAlign:'center', justifyContent:'center'}}>
+                    <Grid item sm={11} xs={12} sx={{textAlign:'center', justifyContent:'center'}}>
                         <div className="center-div">
                             <Routes>
                                 <Route path='/*' element={<PageNotFound/>}/>
