@@ -30,8 +30,8 @@ const InputComponent = styled.input`
   padding: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
   placeholder: ${(props) => props.placeholder};
-  font-family: "Lato-light";
-  font-weight: 500;
+  font-family: Nunito Sans, sans-serif;
+  //font-weight: 500;
   max: ${(props) => props.max};
   min: ${(props) => props.min};
   border: 1px solid #a8a8a8;
@@ -82,6 +82,10 @@ const InputComponent = styled.input`
     border-color: #d8d8d8;
     box-shadow: none;
     outline: 0;
+  }
+  @media screen and (max-width: 768px){
+    font-size:13px !important;
+    padding: 20px !important;
   }
 `;
 
