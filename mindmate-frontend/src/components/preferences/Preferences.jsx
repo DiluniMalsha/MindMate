@@ -8,8 +8,13 @@ import {
     MDBTabsLink,
     MDBTabsPane,
 } from "mdb-react-ui-kit";
-// import {ImageList, ImageListItem} from "@mui/material";
-// import Button from "@mui/material/Button";
+import happy from '../../assets/faceIcon/happy.svg'
+import fear from '../../assets/faceIcon/fear.svg'
+import angry from '../../assets/faceIcon/angry.svg'
+import sad from '../../assets/faceIcon/sad.svg'
+import disgusted from '../../assets/faceIcon/disgusted.svg'
+import neutral from '../../assets/faceIcon/neutral.svg'
+import surprised from '../../assets/faceIcon/surprised.svg'
 
 const Preferences = (props) => {
     const [justifyActive, setJustifyActive] = useState("tab1");
@@ -50,9 +55,9 @@ const Preferences = (props) => {
     return (
         <>
             <div>
-                <p className="title-align-preferences">Her Preferences</p>
+                <p className="title-align-preferences title-align">Her Preferences</p>
                 <p className="description-para">
-                    We need some resources to use for Mihasa when <br/>
+                    We need some resources to use for Mihasa when <br className='dis-br'/>
                     she is in different moods
                 </p>
             </div>
@@ -67,9 +72,9 @@ const Preferences = (props) => {
                             <MDBTabsLink
                                 onClick={() => handleJustifyClick("tab1")}
                                 active={justifyActive === "tab1"}
-                                className="selector-btn pre-selection-btn student-btn"
+                                className="selector-btn pre-selection-btn preferences-btn"
                             >
-                                Happy
+                                <img src={happy} alt='HappyMode' width='30' className='icon-img-repons'/>
                             </MDBTabsLink>
                         </div>
                     </MDBTabsItem>
@@ -80,7 +85,7 @@ const Preferences = (props) => {
                                 active={justifyActive === "tab2"}
                                 className="selector-btn pre-selection-btn pre-btn-bord"
                             >
-                                Surprised
+                                <img src={surprised} alt='HappyMode' width='30' className='icon-img-repons'/>
                             </MDBTabsLink>
                         </div>
                     </MDBTabsItem>
@@ -91,7 +96,7 @@ const Preferences = (props) => {
                                 active={justifyActive === "tab3"}
                                 className="selector-btn pre-selection-btn pre-btn-bord"
                             >
-                                Sad
+                                <img src={sad} alt='HappyMode' width='30' className='icon-img-repons'/>
                             </MDBTabsLink>
                         </div>
                     </MDBTabsItem>
@@ -102,7 +107,7 @@ const Preferences = (props) => {
                                 active={justifyActive === "tab4"}
                                 className="selector-btn pre-selection-btn pre-btn-bord"
                             >
-                                Fear
+                                <img src={fear} alt='HappyMode' width='30' className='icon-img-repons'/>
                             </MDBTabsLink>
                         </div>
                     </MDBTabsItem>
@@ -113,7 +118,7 @@ const Preferences = (props) => {
                                 active={justifyActive === "tab5"}
                                 className="selector-btn pre-selection-btn pre-btn-bord"
                             >
-                                Anger
+                                <img src={angry} alt='HappyMode' width='30' className='icon-img-repons'/>
                             </MDBTabsLink>
                         </div>
                     </MDBTabsItem>
@@ -124,7 +129,7 @@ const Preferences = (props) => {
                                 active={justifyActive === "tab6"}
                                 className="selector-btn pre-selection-btn pre-btn-bord"
                             >
-                                Disgust
+                                <img src={disgusted} alt='HappyMode' width='30' className='icon-img-repons'/>
                             </MDBTabsLink>
                         </div>
                     </MDBTabsItem>
@@ -133,9 +138,9 @@ const Preferences = (props) => {
                             <MDBTabsLink
                                 onClick={() => handleJustifyClick("tab7")}
                                 active={justifyActive === "tab7"}
-                                className="selector-btn pre-selection-btn parant-btn"
+                                className="selector-btn pre-selection-btn preferences-btn-right"
                             >
-                                Neutral
+                                <img src={neutral} alt='HappyMode' width='30' className='icon-img-repons'/>
                             </MDBTabsLink>
                         </div>
                     </MDBTabsItem>
