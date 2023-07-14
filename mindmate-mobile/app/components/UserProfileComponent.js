@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
     color: colors.ash,
     borderRadius: 10,
     fontFamily: "LatoLight",
+    justifyContent: "center",
   },
   label: {
     fontFamily: "LatoRegular",
