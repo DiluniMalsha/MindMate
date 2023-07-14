@@ -20,16 +20,6 @@ const closePopUp = (setPopupVisible) => (event) => {
 };
 
 const handleAddData = (swalTitle) => (event) => {
-    // Swal.fire({
-    //     title: 'Are you sure?',
-    //     text: "You won't be able to revert this!",
-    //     icon: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonColor: '#3085d6',
-    //     cancelButtonColor: '#d33',
-    //     confirmButtonText: 'Yes, delete it!'
-    // }).then((result) => {
-    //     if (result.isConfirmed) {
     Swal.fire("Saved!", swalTitle, "success").then((result) => {
         if (result.isConfirmed) {
             window.location.reload(true);
@@ -91,17 +81,6 @@ const AddNewRecord = ({
                                     Saturday
                                 </option>
                             </select>
-                            {/*<label htmlFor="pet-select">Choose a pet:</label>*/}
-
-                            {/*<select name="pets" id="gender" id="pet-select" style={{padding:'15px'}}>*/}
-                            {/*    <option value="" className='g-gender'>--Please choose an option--</option>*/}
-                            {/*    <option value="dog">Dog</option>*/}
-                            {/*    <option value="cat">Cat</option>*/}
-                            {/*    <option value="hamster">Hamster</option>*/}
-                            {/*    <option value="parrot">Parrot</option>*/}
-                            {/*    <option value="spider">Spider</option>*/}
-                            {/*    <option value="goldfish">Goldfish</option>*/}
-                            {/*</select>*/}
                         </Item>
                     </Grid>
                     <Grid item xs={6}>

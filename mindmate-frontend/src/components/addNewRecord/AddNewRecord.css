@@ -77,3 +77,25 @@
     text-decoration: none;
     color: #757575 !important;
 }
+
+@media screen and (max-width:1000px) {
+    .selection-gender{
+        font-size:12px !important;
+    }
+    .add-new-main-section{
+        height:20px !important;
+    }
+    .record-form {
+        position: absolute;
+        width: 80% !important;
+        top: 15% !important;
+        left: 10%;
+        background-color: #FFFFFF;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .title-align-add-form{
+        font-size:14px;
+    }
+
+}
