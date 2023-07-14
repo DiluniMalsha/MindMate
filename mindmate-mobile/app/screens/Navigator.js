@@ -48,7 +48,7 @@ function Navigator(props) {
             return <Ionicons name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: "white",
-          tabBarInactiveTintColor: "grey",
+          tabBarInactiveTintColor: "#ACD9FF",
           tabBarLabelStyle: {
             paddingBottom: 25,
             fontSize: 12,
