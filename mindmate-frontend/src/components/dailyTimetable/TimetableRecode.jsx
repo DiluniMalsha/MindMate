@@ -46,15 +46,15 @@ const TimetableRecode = ({startTime, endTime, description}) => {
     }
 
     return (
-        <div className="m-2">
+        <div className="m-1">
             <Box sx={{flexGrow: 1}}>
-                <Grid container spacing={2}>
-                    <Grid item xs={1.5}>
-                        <Item sx={{backgroundColor: "#171742", color: "#ffffff"}}>
+                <Grid container spacing={{ xs: 1, sm: 2, md: 2 }}>
+                    <Grid item xs={3} lg={1.5}>
+                        <Item sx={{backgroundColor: "#1e5d88", color: "#ffffff"}} className='schedule-time'>
                             {startTime} <br/> to <br/> {endTime}
                         </Item>
                     </Grid>
-                    <Grid item xs={10.5}>
+                    <Grid item xs={9} lg={10.5}>
                         <Item
                             sx={{
                                 textAlign: "left",
@@ -65,8 +65,8 @@ const TimetableRecode = ({startTime, endTime, description}) => {
                         >
                             <div className="item-text-align">
                                 <div className="row">
-                                    <div className="col-10">{description}</div>
-                                    <div className="col-1" style={{cursor: "pointer"}}>
+                                    <div className="col-xl-10 col-8">{description}</div>
+                                    <div className="col-xl-1 col-2 " style={{cursor: "pointer"}}>
                                         <PencilOutline
                                             color={"#000000"}
                                             height="30px"
@@ -74,7 +74,7 @@ const TimetableRecode = ({startTime, endTime, description}) => {
                                             onClick={handlePopUp}
                                         />
                                     </div>
-                                    <div className="col-1" style={{cursor: "pointer"}}>
+                                    <div className="col-1 deleteIcon" style={{cursor: "pointer"}}>
                                         <TrashOutline
                                             onClick={handleDeleteRow}
                                             color={"#ff0000"}
