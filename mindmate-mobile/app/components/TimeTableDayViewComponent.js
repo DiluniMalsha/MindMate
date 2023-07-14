@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
   },
   task: {
     width: "70%",
+    justifyContent: "center",
   },
   timeText: {
     fontFamily: "LatoBold",
