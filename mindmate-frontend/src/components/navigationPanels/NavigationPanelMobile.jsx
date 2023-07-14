@@ -52,7 +52,7 @@ const NavigationPanelMobile = (props) => {
                   {currentPath.endsWith(item.path)
                       ? item.iconActive
                       : item.icon}
-                    <div className="icon-title" style={{fontSize:'10px', marginTop:'5px'}}>{item.title}</div>
+                    <div className="icon-title" style={{fontSize:'10px', marginTop:'5px',color:item.color}}>{item.title}</div>
                     {/*{item.iconVisibility ? item.icon : null}*/}
                 </span>
                             </Link>

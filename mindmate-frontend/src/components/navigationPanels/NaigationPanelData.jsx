@@ -115,12 +115,14 @@ export const MNavigationPanelData = [
         title: 'Home',
         path: '/home',
         iconVisibility: true,
+        color: '#c0c0c0',
         icon: <HomeOutline
             color={'#c0c0c0'}
             title={"Home"}
             height="25px"
             width="25px"
         />,
+        // colorActive: '#ffffff',
         iconActive:
             <Home
                 color={'#ffffff'}
