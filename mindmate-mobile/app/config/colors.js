@@ -6,4 +6,6 @@ export default {
   red: "#CD1818",
   yellow: "#F8A910",
   blue: "#1f65ff",
+  addButtonColor: "#5783db",
+  updateButtonColor: "#5dbea3",
 };

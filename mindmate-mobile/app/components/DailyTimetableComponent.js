@@ -35,7 +35,7 @@ function DailyTimetableComponent(props) {
   ]);
 
   const renderScene = ({ route }) => {
-    return <TimeTableDayViewComponent day={route.title} />;
+    return <TimeTableDayViewComponent day={route.title} color={route.color} />;
   };
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -92,7 +92,7 @@ function DailyTimetableComponent(props) {
                 renderLabel={({ route, color }) => (
                   <Text
                     style={{
-                      color: route.color,
+                      color: colors.primary,
                       fontSize: 13,
                       fontFamily: "LatoBold",
                     }}
@@ -100,12 +100,7 @@ function DailyTimetableComponent(props) {
                     {route.title}
                   </Text>
                 )}
-                indicatorStyle={[
-                  styles.indicatorStyle,
-                  {
-                    borderColor: tabViewDayColor,
-                  },
-                ]}
+                indicatorStyle={styles.indicatorStyle}
                 style={styles.tabBar}
               />
             )}
@@ -252,7 +247,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.primary,
+    backgroundColor: colors.addButtonColor,
   },
   addNewButtonText: {
     color: colors.white,
@@ -287,6 +282,7 @@ const styles = StyleSheet.create({
     borderRadius: 200,
     padding: 1.5,
     height: "100%",
+    borderColor: colors.primary,
   },
 
   formFieldFull: {
@@ -361,7 +357,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.primary,
+    backgroundColor: colors.addButtonColor,
   },
   modelBackground: {
     position: "absolute",

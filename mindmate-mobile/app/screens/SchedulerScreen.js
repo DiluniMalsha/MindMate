@@ -37,6 +37,7 @@ function SchedulerScreen(props) {
         renderScene={renderScene}
         onIndexChange={setIndex}
         initialLayout={{ width: Dimensions.get("window").width }}
+        swipeEnabled={false}
         renderTabBar={(props) => (
           <TabBar
             {...props}
