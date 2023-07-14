@@ -1,6 +1,4 @@
 import {MDBContainer, MDBTabs, MDBTabsContent, MDBTabsItem, MDBTabsLink, MDBTabsPane} from "mdb-react-ui-kit";
-import FormComponent from "../../components/form/FormComponent";
-import Password from "../../components/form/Password";
 import React, {useState} from "react";
 import DailyTimetable from "../../components/dailyTimetable/DailyTimetable";
 
@@ -15,7 +13,7 @@ const Scheduler = (props) => {
     };
     // style={{marginTop:'5%'}}
     return (
-        <section className="background-color vh-100">
+        <section className="">
             <div className="container-fluid h-custom" >
                 <div className="row d-flex justify-content-center align-items-center h-100 m-0">
                     <div className="col-md-9 ">
@@ -69,21 +67,24 @@ const Scheduler = (props) => {
                                     <div className="row w-100">
                                         <div className="col child-settings-sections">
 
-                                            <FormComponent
-                                                title="My Profile"
-                                                firstname="Mihiri"
-                                                lastname='Peiris'
-                                                address='No. 64/5, Kuruduwaththa, Meepawala'
-                                                contactNo='+94 7190644'
-                                                age='12'
-                                                relDis='gride'
-                                                relationship='Mother'
-                                                display='ture'
-                                            />
+                                            {/*<FormComponent*/}
+                                            {/*    title="My Profile"*/}
+                                            {/*    firstname="Mihiri"*/}
+                                            {/*    lastname='Peiris'*/}
+                                            {/*    address='No. 64/5, Kuruduwaththa, Meepawala'*/}
+                                            {/*    contactNo='+94 7190644'*/}
+                                            {/*    age='12'*/}
+                                            {/*    relDis='gride'*/}
+                                            {/*    relationship='Mother'*/}
+                                            {/*    display='ture'*/}
+                                            {/*/>*/}
                                         </div>
                                         <div className="col child-settings-sections">
-                                            <Password title="Change Password"/>
+                                            {/*<Password title="Change Password"/>*/}
                                         </div>
+
+
+
                                     </div>
                                 </MDBTabsPane>
                             </MDBTabsContent>
