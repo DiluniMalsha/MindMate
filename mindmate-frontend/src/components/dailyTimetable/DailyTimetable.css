@@ -11,6 +11,7 @@
 
 }
 
+
 .spe-day {
     padding-left: 10px !important;
 }
@@ -49,4 +50,67 @@
 
 .trash-align {
     text-align: right !important;
+}
+
+.button-mobile-response-add-btn{
+    display:none !important;
+    height:3px !important ;
+    padding:18px !important;
+}
+
+@media screen and (max-width: 1440px){
+    .button-mobile-response-add-btn{
+        display:inline-flex !important;
+    }
+
+    .add-new-button-container-2{
+        display:none !important;
+    }
+    .days {
+
+        width: 40px !important;
+        text-align: left !important;
+    }
+    .day {
+        border-radius: 50% !important;
+        height: 40px !important;
+        width: 47px!important;
+        padding-top: 10px !important;
+        font-size: 12px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .day {
+        border-radius: 50% !important;
+        height: 40px !important;
+        width: 47px!important;
+        padding-top: 10px !important;
+        font-size: 12px;
+    }
+    .schedule-day-align {
+        width: 100% !important;
+    }
+
+    /*.selector-btn{*/
+    /*    padding:0 !important;*/
+    /*}*/
+}
+
+@media screen and (max-width: 768px) {
+    .schedule-time{
+        font-size: 12px !important;
+        width:80px !important;
+        padding:3px !important;
+        height: 60px !important;
+    }
+    .item-text-align{
+        font-size: 13px !important;
+    }
+    .deleteIcon{
+        width:12px !important;
+        height:12px !important;
+        margin-right: 5px !important;
+    }
 }

@@ -31,6 +31,17 @@ const DailyTimetable = (props) => {
         <div className="align-popUp">
             <div className="mt-4">
                 <MDBContainer className="border-refs schedule-day-align">
+                    <CustomButton
+                        variant="primary"
+                        radius="20"
+                        size="sm"
+                        fontSize="14"
+                        width="185"
+                        onclick={handlePopUp}
+                        className='mb-4 button-mobile-response-add-btn'
+                    >
+                        + Add New Record
+                    </CustomButton>
                     <MDBTabs
                         pills
                         justify
@@ -116,10 +127,11 @@ const DailyTimetable = (props) => {
                         <CustomButton
                             variant="primary"
                             width="240"
-                            size="lg"
+                            size="md"
                             radius="20"
-                            fontSize="20"
+                            fontSize="16"
                             onclick={handlePopUp}
+                            className='add-new-button-container-2'
                         >
                             + Add New Record
                         </CustomButton>
