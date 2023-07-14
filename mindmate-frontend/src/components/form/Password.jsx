@@ -83,11 +83,10 @@ const Password = ({title,
                 variant="primary"
                 radius="8"
                 size="sm"
-                className="mt-3 mb-4"
+                className="mt-3 mb-4 change-password-margin"
                 fontSize="18"
                 width="150"
                 onclick={handleUpdatePassword}
-                className="change-password-margin"
             >
                 Update
             </CustomButton>
