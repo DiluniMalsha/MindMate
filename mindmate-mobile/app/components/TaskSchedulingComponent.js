@@ -30,11 +30,18 @@ function TaskSchedulingComponent(props) {
         ? "0" + currentDate.getDate()
         : currentDate.getDate();
     setSelectedDate(currentDate.getFullYear() + "-" + month + "-" + day);
+    const selectedDates = { ...datesWithEvents };
+    selectedDates[selectedDate] = {
+      selected: true,
+      selectedColor: colors.primary,
+    };
+    setMarkedDates(selectedDates);
   }, []);
 
   //values for the calendar
   const [selectedDate, setSelectedDate] = useState("");
-  const [markedDates, setMarkedDates] = useState({
+  const [markedDates, setMarkedDates] = useState();
+  const [datesWithEvents, setDatesWithEvents] = useState({
     "2023-07-01": {
       selected: true,
       selectedColor: colors.yellow,
@@ -42,16 +49,16 @@ function TaskSchedulingComponent(props) {
         {
           id: 1,
           name: "Dancing Concert",
-          from: "04:00 PM",
-          to: "06:00 PM",
-          remindTime: "03:30 PM",
+          from: 1689438446875,
+          to: 1689438446875,
+          remindTime: 1689438446875,
         },
         {
           id: 2,
           name: "Special Dinner",
-          from: "08:00 PM",
-          to: "09:00 PM",
-          remindTime: "07:00 PM",
+          from: 1689438446875,
+          to: 1689438446875,
+          remindTime: 1689438446875,
         },
       ],
     },
@@ -62,9 +69,9 @@ function TaskSchedulingComponent(props) {
         {
           id: 1,
           name: "Road Trip",
-          from: "08:00 AM",
-          to: "05:00 PM",
-          remindTime: "06:00 AM",
+          from: 1689438446875,
+          to: 1689438446875,
+          remindTime: 1689438446875,
         },
       ],
     },
@@ -76,16 +83,29 @@ function TaskSchedulingComponent(props) {
 
   //values for popup modal
   const [modalVisible, setModalVisible] = useState(false);
-  const [fromTime, setFromTime] = useState(new Date(1598051730000));
-  const [toTime, setToTime] = useState(new Date(1598051730000));
-  const [reminderTime, setReminderTime] = useState(new Date(1598051730000));
+  const [fromTime, setFromTime] = useState(new Date(1689438446875));
+  const [toTime, setToTime] = useState(new Date());
+  const [reminderTime, setReminderTime] = useState(new Date());
   const [fromShow, setFromShow] = useState(false);
   const [toShow, setToShow] = useState(false);
   const [reminderTimeShow, setReminderTimeShow] = useState(false);
+  const [note, setNote] = useState("");
+
+  const [updateEventStatus, setUpdateEventStatus] = useState(false);
 
   //calendr functions
   const handleDayPress = (day) => {
+    console.log(day);
+    console.log(new Date().valueOf());
     setSelectedDate(day.dateString);
+
+    const selectedDates = { ...datesWithEvents };
+    selectedDates[day.dateString] = {
+      selected: true,
+      selectedColor: colors.primary,
+    };
+    setMarkedDates(selectedDates);
+
     const dayDetails = markedDates[day.dateString];
     if (dayDetails != undefined) {
       if (dayDetails.events != undefined) {
@@ -99,21 +119,39 @@ function TaskSchedulingComponent(props) {
     }
   };
 
+  //popup functions
+  const popUpAddForm = () => {
+    setModalVisible(true);
+  };
+  const popUpEditForm = (note, from, to, reminder) => {
+    setUpdateEventStatus(true);
+    setModalVisible(true);
+    setNote(note);
+    setFromTime(new Date(from));
+    setToTime(new Date(to));
+    setReminderTime(new Date(reminder));
+  };
+  const closePopUp = () => {
+    setUpdateEventStatus(false);
+    setModalVisible(!modalVisible);
+    setNote("");
+    setFromTime(new Date());
+    setToTime(new Date());
+    setReminderTime(new Date());
+  };
+
   //popup time picker functions
   const fromTimeOnChange = (event, selected) => {
-    console.log(selected);
     const current = selected;
     setFromShow(false);
     setFromTime(current);
   };
   const toTimeOnChange = (event, selected) => {
-    console.log(selected);
     const current = selected;
     setToShow(false);
     setToTime(current);
   };
   const reminderTimeOnChange = (event, selected) => {
-    console.log(selected);
     const current = selected;
     setReminderTimeShow(false);
     setReminderTime(current);
@@ -127,6 +165,23 @@ function TaskSchedulingComponent(props) {
   const showReminderTimepicker = () => {
     setReminderTimeShow(true);
   };
+
+  //popup on change functions
+  const handleNoteChange = (text) => {
+    setNote(text);
+    console.log(note);
+  };
+
+  //custom functions
+  function getTimeString(s) {
+    const time = new Date(s);
+    return time.toLocaleTimeString();
+    // return (
+    //   (time.getHours() < 10 ? "0" : time.getHours()) +
+    //   ":" +
+    //   (time.getMinutes() < 10 ? "0" : time.getMinutes())
+    // );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -149,15 +204,22 @@ function TaskSchedulingComponent(props) {
         {eventsAvailable && (
           <View style={styles.agendaActiveContainer}>
             {events.map((e) => (
-              <View key={e.id} style={styles.agendaItem}>
-                <Text style={styles.agendaItemName}>{e.name}</Text>
-                <Text style={styles.agendaItemTime}>
-                  From {e.from} to {e.to}
-                </Text>
-                <Text style={styles.agendaItemRemindTime}>
-                  Remind at {e.remindTime}
-                </Text>
-              </View>
+              <TouchableOpacity
+                key={e.id}
+                onPress={() =>
+                  popUpEditForm(e.name, e.from, e.to, e.remindTime)
+                }
+              >
+                <View style={styles.agendaItem}>
+                  <Text style={styles.agendaItemName}>{e.name}</Text>
+                  <Text style={styles.agendaItemTime}>
+                    From {getTimeString(e.from)} to {getTimeString(e.to)}
+                  </Text>
+                  <Text style={styles.agendaItemRemindTime}>
+                    Remind at {getTimeString(e.remindTime)}
+                  </Text>
+                </View>
+              </TouchableOpacity>
             ))}
           </View>
         )}
@@ -166,7 +228,7 @@ function TaskSchedulingComponent(props) {
             <Text style={styles.agendaInactiveItemText}>No Events</Text>
           </View>
         )}
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <TouchableOpacity onPress={popUpAddForm}>
           <Ionicons name="add-circle" size={40} color={colors.primary} />
         </TouchableOpacity>
       </View>
@@ -182,7 +244,9 @@ function TaskSchedulingComponent(props) {
           <View style={styles.modelBackground} />
           <View style={styles.modalView}>
             <View>
-              <Text style={styles.formTitle}>Add New Time Table Record</Text>
+              <Text style={styles.formTitle}>
+                {updateEventStatus ? "" : "Add New"} Reminder
+              </Text>
 
               <View style={styles.formFieldFull}>
                 <Text style={styles.label}>Date</Text>
@@ -199,6 +263,8 @@ function TaskSchedulingComponent(props) {
                   autoCapitalize={"none"}
                   autoCorrect={false}
                   textContentType={"name"}
+                  value={note}
+                  onChangeText={(text) => handleNoteChange(text)}
                 ></TextInput>
               </View>
 
@@ -282,7 +348,7 @@ function TaskSchedulingComponent(props) {
               </TouchableHighlight>
               <TouchableHighlight
                 style={styles.modalCancelButton}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={closePopUp}
               >
                 <Text style={styles.modalButtonText}>Cancel</Text>
               </TouchableHighlight>
@@ -343,7 +409,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: "center",
   },
-
   formFieldFull: {
     width: "96%",
     padding: 10,
@@ -400,9 +465,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     marginBottom: 5,
   },
-  row: {
-    flexDirection: "row",
-  },
 
   modal: {
     flex: 1,
@@ -455,6 +517,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  row: {
+    flexDirection: "row",
   },
 });
 
