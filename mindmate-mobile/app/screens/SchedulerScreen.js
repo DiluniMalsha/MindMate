@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Text, StyleSheet, Dimensions } from "react-native";
+import { SafeAreaView, Text, StyleSheet, Dimensions, View } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
 
 import colors from "../config/colors";
@@ -29,7 +29,7 @@ function SchedulerScreen(props) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.pageTitle}>Scheduler</Text>
       <TabView
         style={styles.schedulerTab}
@@ -57,7 +57,7 @@ function SchedulerScreen(props) {
           />
         )}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 

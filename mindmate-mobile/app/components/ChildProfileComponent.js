@@ -267,7 +267,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 
-  scrollView: {},
+  scrollView: {
+    marginBottom: 100,
+  },
   tabBar: {
     backgroundColor: colors.white,
   },

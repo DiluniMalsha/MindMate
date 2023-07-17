@@ -10,6 +10,7 @@ import {
   View,
   Modal,
   TextInput,
+  ScrollView,
 } from "react-native";
 import { Calendar, LocaleConfig } from "react-native-calendars";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -184,179 +185,181 @@ function TaskSchedulingComponent(props) {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Calendar
-        theme={{
-          indicatorColor: colors.primary,
-          arrowColor: colors.primary,
-          disabledArrowColor: colors.ash,
-          textDayFontFamily: "LatoRegular",
-          textMonthFontFamily: "LatoBold",
-          textDayHeaderFontFamily: "LatoBold",
-        }}
-        style={styles.calendar}
-        onDayPress={(day) => handleDayPress(day)}
-        markedDates={markedDates}
-        enableSwipeMonths={true}
-      />
+    <ScrollView style={styles.scrollView}>
+      <View style={styles.container}>
+        <Calendar
+          theme={{
+            indicatorColor: colors.primary,
+            arrowColor: colors.primary,
+            disabledArrowColor: colors.ash,
+            textDayFontFamily: "LatoRegular",
+            textMonthFontFamily: "LatoBold",
+            textDayHeaderFontFamily: "LatoBold",
+          }}
+          style={styles.calendar}
+          onDayPress={(day) => handleDayPress(day)}
+          markedDates={markedDates}
+          enableSwipeMonths={true}
+        />
 
-      <View style={styles.agendaContainer}>
-        {eventsAvailable && (
-          <View style={styles.agendaActiveContainer}>
-            {events.map((e) => (
-              <TouchableOpacity
-                key={e.id}
-                onPress={() =>
-                  popUpEditForm(e.name, e.from, e.to, e.remindTime)
-                }
-              >
-                <View style={styles.agendaItem}>
-                  <Text style={styles.agendaItemName}>{e.name}</Text>
-                  <Text style={styles.agendaItemTime}>
-                    From {getTimeString(e.from)} to {getTimeString(e.to)}
-                  </Text>
-                  <Text style={styles.agendaItemRemindTime}>
-                    Remind at {getTimeString(e.remindTime)}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-        {!eventsAvailable && (
-          <View style={[styles.agendaItem, styles.agendaInactiveItem]}>
-            <Text style={styles.agendaInactiveItemText}>No Events</Text>
-          </View>
-        )}
-        <TouchableOpacity onPress={popUpAddForm}>
-          <Ionicons name="add-circle" size={40} color={colors.primary} />
-        </TouchableOpacity>
-      </View>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.modal}>
-          <View style={styles.modelBackground} />
-          <View style={styles.modalView}>
-            <View>
-              <Text style={styles.formTitle}>
-                {updateEventStatus ? "" : "Add New"} Reminder
-              </Text>
-
-              <View style={styles.formFieldFull}>
-                <Text style={styles.label}>Date</Text>
-                <View style={styles.formInput}>
-                  <Text>{selectedDate}</Text>
-                </View>
-              </View>
-
-              <View style={styles.formFieldFull}>
-                <Text style={styles.label}>Note</Text>
-                <TextInput
-                  style={styles.formInput}
-                  placeholder={"Enter Event Note"}
-                  autoCapitalize={"none"}
-                  autoCorrect={false}
-                  textContentType={"name"}
-                  value={note}
-                  onChangeText={(text) => handleNoteChange(text)}
-                ></TextInput>
-              </View>
-
-              <View style={styles.row}>
-                <View style={styles.formFieldHalf}>
-                  <Text style={styles.label}>From</Text>
-                  <TouchableWithoutFeedback onPress={showFromTimepicker}>
-                    <View style={styles.formTimePicker}>
-                      <Text style={styles.formTimePickerText}>
-                        {fromTime.getHours() < 10 ? "0" : ""}
-                        {fromTime.getHours()} :{" "}
-                        {fromTime.getMinutes() < 10 ? "0" : ""}
-                        {fromTime.getMinutes()}
-                      </Text>
-                      {fromShow && (
-                        <DateTimePicker
-                          testID="fromTimePicker"
-                          value={fromTime}
-                          mode={"time"}
-                          is24Hour={true}
-                          onChange={fromTimeOnChange}
-                        />
-                      )}
-                    </View>
-                  </TouchableWithoutFeedback>
-                </View>
-
-                <View style={styles.formFieldHalf}>
-                  <Text style={styles.label}>To</Text>
-                  <TouchableWithoutFeedback onPress={showToTimepicker}>
-                    <View style={styles.formTimePicker}>
-                      <Text style={styles.formTimePickerText}>
-                        {toTime.getHours() < 10 ? "0" : ""}
-                        {toTime.getHours()} :{" "}
-                        {toTime.getMinutes() < 10 ? "0" : ""}
-                        {toTime.getMinutes()}
-                      </Text>
-                      {toShow && (
-                        <DateTimePicker
-                          testID="toTimePicker"
-                          value={toTime}
-                          mode={"time"}
-                          is24Hour={true}
-                          onChange={toTimeOnChange}
-                        />
-                      )}
-                    </View>
-                  </TouchableWithoutFeedback>
-                </View>
-              </View>
-
-              <View style={styles.formFieldFull}>
-                <Text style={styles.label}>Remind Earlier At</Text>
-                <TouchableWithoutFeedback onPress={showReminderTimepicker}>
-                  <View style={styles.formTimePicker}>
-                    <Text style={styles.formTimePickerText}>
-                      {reminderTime.getHours() < 10 ? "0" : ""}
-                      {reminderTime.getHours()} :{" "}
-                      {reminderTime.getMinutes() < 10 ? "0" : ""}
-                      {reminderTime.getMinutes()}
+        <View style={styles.agendaContainer}>
+          {eventsAvailable && (
+            <View style={styles.agendaActiveContainer}>
+              {events.map((e) => (
+                <TouchableOpacity
+                  key={e.id}
+                  onPress={() =>
+                    popUpEditForm(e.name, e.from, e.to, e.remindTime)
+                  }
+                >
+                  <View style={styles.agendaItem}>
+                    <Text style={styles.agendaItemName}>{e.name}</Text>
+                    <Text style={styles.agendaItemTime}>
+                      From {getTimeString(e.from)} to {getTimeString(e.to)}
                     </Text>
-                    {reminderTimeShow && (
-                      <DateTimePicker
-                        testID="reminderTimePicker"
-                        value={reminderTime}
-                        mode={"time"}
-                        is24Hour={true}
-                        onChange={reminderTimeOnChange}
-                      />
-                    )}
+                    <Text style={styles.agendaItemRemindTime}>
+                      Remind at {getTimeString(e.remindTime)}
+                    </Text>
                   </View>
-                </TouchableWithoutFeedback>
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
+          {!eventsAvailable && (
+            <View style={[styles.agendaItem, styles.agendaInactiveItem]}>
+              <Text style={styles.agendaInactiveItemText}>No Events</Text>
+            </View>
+          )}
+          <TouchableOpacity onPress={popUpAddForm}>
+            <Ionicons name="add-circle" size={40} color={colors.primary} />
+          </TouchableOpacity>
+        </View>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.modal}>
+            <View style={styles.modelBackground} />
+            <View style={styles.modalView}>
+              <View>
+                <Text style={styles.formTitle}>
+                  {updateEventStatus ? "" : "Add New"} Reminder
+                </Text>
+
+                <View style={styles.formFieldFull}>
+                  <Text style={styles.label}>Date</Text>
+                  <View style={styles.formInput}>
+                    <Text>{selectedDate}</Text>
+                  </View>
+                </View>
+
+                <View style={styles.formFieldFull}>
+                  <Text style={styles.label}>Note</Text>
+                  <TextInput
+                    style={styles.formInput}
+                    placeholder={"Enter Event Note"}
+                    autoCapitalize={"none"}
+                    autoCorrect={false}
+                    textContentType={"name"}
+                    value={note}
+                    onChangeText={(text) => handleNoteChange(text)}
+                  ></TextInput>
+                </View>
+
+                <View style={styles.row}>
+                  <View style={styles.formFieldHalf}>
+                    <Text style={styles.label}>From</Text>
+                    <TouchableWithoutFeedback onPress={showFromTimepicker}>
+                      <View style={styles.formTimePicker}>
+                        <Text style={styles.formTimePickerText}>
+                          {fromTime.getHours() < 10 ? "0" : ""}
+                          {fromTime.getHours()} :{" "}
+                          {fromTime.getMinutes() < 10 ? "0" : ""}
+                          {fromTime.getMinutes()}
+                        </Text>
+                        {fromShow && (
+                          <DateTimePicker
+                            testID="fromTimePicker"
+                            value={fromTime}
+                            mode={"time"}
+                            is24Hour={true}
+                            onChange={fromTimeOnChange}
+                          />
+                        )}
+                      </View>
+                    </TouchableWithoutFeedback>
+                  </View>
+
+                  <View style={styles.formFieldHalf}>
+                    <Text style={styles.label}>To</Text>
+                    <TouchableWithoutFeedback onPress={showToTimepicker}>
+                      <View style={styles.formTimePicker}>
+                        <Text style={styles.formTimePickerText}>
+                          {toTime.getHours() < 10 ? "0" : ""}
+                          {toTime.getHours()} :{" "}
+                          {toTime.getMinutes() < 10 ? "0" : ""}
+                          {toTime.getMinutes()}
+                        </Text>
+                        {toShow && (
+                          <DateTimePicker
+                            testID="toTimePicker"
+                            value={toTime}
+                            mode={"time"}
+                            is24Hour={true}
+                            onChange={toTimeOnChange}
+                          />
+                        )}
+                      </View>
+                    </TouchableWithoutFeedback>
+                  </View>
+                </View>
+
+                <View style={styles.formFieldFull}>
+                  <Text style={styles.label}>Remind Earlier At</Text>
+                  <TouchableWithoutFeedback onPress={showReminderTimepicker}>
+                    <View style={styles.formTimePicker}>
+                      <Text style={styles.formTimePickerText}>
+                        {reminderTime.getHours() < 10 ? "0" : ""}
+                        {reminderTime.getHours()} :{" "}
+                        {reminderTime.getMinutes() < 10 ? "0" : ""}
+                        {reminderTime.getMinutes()}
+                      </Text>
+                      {reminderTimeShow && (
+                        <DateTimePicker
+                          testID="reminderTimePicker"
+                          value={reminderTime}
+                          mode={"time"}
+                          is24Hour={true}
+                          onChange={reminderTimeOnChange}
+                        />
+                      )}
+                    </View>
+                  </TouchableWithoutFeedback>
+                </View>
+              </View>
+              <View style={styles.modalButtonBar}>
+                <TouchableHighlight
+                  style={styles.modalAddButton}
+                  onPress={() => console.log("Add Button Pressed")}
+                >
+                  <Text style={styles.modalButtonText}>Add</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={styles.modalCancelButton}
+                  onPress={closePopUp}
+                >
+                  <Text style={styles.modalButtonText}>Cancel</Text>
+                </TouchableHighlight>
               </View>
             </View>
-            <View style={styles.modalButtonBar}>
-              <TouchableHighlight
-                style={styles.modalAddButton}
-                onPress={() => console.log("Add Button Pressed")}
-              >
-                <Text style={styles.modalButtonText}>Add</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={styles.modalCancelButton}
-                onPress={closePopUp}
-              >
-                <Text style={styles.modalButtonText}>Cancel</Text>
-              </TouchableHighlight>
-            </View>
           </View>
-        </View>
-      </Modal>
-    </SafeAreaView>
+        </Modal>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -520,6 +523,9 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
+  },
+  scrollView: {
+    marginBottom: 100,
   },
 });
 

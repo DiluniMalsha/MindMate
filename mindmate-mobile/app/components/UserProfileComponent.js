@@ -174,8 +174,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
   },
-
-  scrollView: {},
+  scrollView: {
+    marginBottom: 100,
+  },
   profileButton: {
     left: "25%",
     width: "50%",

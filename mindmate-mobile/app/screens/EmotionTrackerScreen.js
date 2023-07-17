@@ -99,7 +99,7 @@ function EmotionTrackerScreen(props) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.emotionsContainer}>
         <Image source={image} style={styles.emotionImage} />
         <Text style={styles.emotionText}>Mihasa is Now in a {mood} Mood</Text>
@@ -207,7 +207,7 @@ function EmotionTrackerScreen(props) {
         </View>
       </ScrollView>
       <Text style={styles.pageTitle}>Emotion Tracker</Text>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     position: "relative",
     width: "50%",
     height: "10%",
-    top: "25%",
+    top: "20%",
     marginBottom: "5%",
     borderRadius: 25,
     alignItems: "center",
@@ -249,9 +249,11 @@ const styles = StyleSheet.create({
   },
   emotionText: {
     position: "relative",
-    top: "20%",
+    top: "16%",
+    margin: 5,
     fontFamily: "LatoRegular",
     fontSize: 16,
+
     color: colors.white,
   },
   graphButton: {

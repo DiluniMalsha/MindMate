@@ -25,6 +25,18 @@ function TimeTableDayViewComponent({ day }) {
       to: "10:00 AM",
       task: "Reading Books",
     },
+    {
+      id: 4,
+      from: "08:00 AM",
+      to: "10:00 AM",
+      task: "Reading Books",
+    },
+    {
+      id: 5,
+      from: "08:00 AM",
+      to: "10:00 AM",
+      task: "Reading Books",
+    },
   ];
 
   const editRecord = (id) => {
