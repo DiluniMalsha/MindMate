@@ -9,7 +9,7 @@
     text-align: center;
     font-family: "lato-bold" !important;
     font-style: normal;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 700;
     margin-bottom: 0 !important;
 
@@ -17,7 +17,7 @@
 
 .description-para {
     font-family: "lato-Thin" !important;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 25px;
     font-weight: 600;
 }
@@ -52,6 +52,12 @@
     border-radius: 0 10px 10px 0 !important;
 }
 
+@media screen and (max-width: 1705px){
+    .icon-img-repons{
+        width:20px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .description-para {
         font-size: 12px !important;
@@ -63,6 +69,12 @@
         display:none !important;
     }
     .icon-img-repons{
-        width:20px;
+        width:15px;
+    }
+}
+
+@media screen and (max-width: 380px){
+    .icon-img-repons{
+        width:12px;
     }
 }
