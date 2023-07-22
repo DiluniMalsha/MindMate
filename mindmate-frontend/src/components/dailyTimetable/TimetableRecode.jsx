@@ -4,10 +4,10 @@ import {styled} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import {TrashOutline} from 'react-ionicons'
-import {PencilOutline} from 'react-ionicons'
+import {CreateOutline, TrashOutline} from 'react-ionicons'
 import Swal from "sweetalert2";
 import AddNewRecord from "../addNewRecord/AddNewRecord";
+import "./DailyTimetable.css"
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
@@ -54,7 +54,7 @@ const TimetableRecode = ({startTime, endTime, description}) => {
                             {startTime} <br/> to <br/> {endTime}
                         </Item>
                     </Grid>
-                    <Grid item xs={9} lg={10.5}>
+                    <Grid item xs={9} lg={10.5} >
                         <Item
                             sx={{
                                 textAlign: "left",
@@ -62,16 +62,18 @@ const TimetableRecode = ({startTime, endTime, description}) => {
                                 fontSize: "20px",
                                 bottom: "0",
                             }}
+                            className='background-tras'
                         >
-                            <div className="item-text-align">
+                            <div className="item-text-align background-tras">
                                 <div className="row">
                                     <div className="col-xl-10 col-8">{description}</div>
-                                    <div className="col-xl-1 col-2 " style={{cursor: "pointer"}}>
-                                        <PencilOutline
-                                            color={"#000000"}
+                                    <div className="col-xl-1 col-2" style={{cursor: "pointer"}} >
+                                        <CreateOutline
+                                            color={"#a3a3a3"}
                                             height="30px"
                                             width="30px"
                                             onClick={handlePopUp}
+                                            className="icon-size"
                                         />
                                     </div>
                                     <div className="col-1 deleteIcon" style={{cursor: "pointer"}}>
@@ -80,6 +82,7 @@ const TimetableRecode = ({startTime, endTime, description}) => {
                                             color={"#ff0000"}
                                             height="30px"
                                             width="30px"
+                                            className="icon-size"
                                         />
                                     </div>
                                 </div>
