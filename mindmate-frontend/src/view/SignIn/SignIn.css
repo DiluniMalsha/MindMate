@@ -14,8 +14,8 @@
 }
 
 .left-color-div {
-    background: rgb(2, 0, 36);
-    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(23, 23, 66, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: rgb(30, 93, 136);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgb(30, 93, 136) 0%, rgba(255, 255, 255, 1) 100%);
 }
 
 .right-side {
@@ -68,7 +68,7 @@
 }
 
 .mobile-view {
-    background-color: #171742;
+    background-color: #1E5D88;
     height: 100vh
 }
 

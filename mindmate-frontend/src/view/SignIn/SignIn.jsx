@@ -9,7 +9,7 @@ const SignIn = (props) => {
                 <div
                     className="col-sm-5 col-md-4 col-lg-4"
                     style={{
-                        backgroundColor: "#171742",
+                        backgroundColor: "#1E5D88",
                         textAlign: "center",
                         height: "100vh",
                     }}
