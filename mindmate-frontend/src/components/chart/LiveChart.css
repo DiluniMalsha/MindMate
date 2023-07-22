@@ -1,0 +1,33 @@
+.btn-title {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.chart-border {
+    /*border: solid 1px #1e5d88;*/
+    /*border-radius:10px;*/
+    /*width:50%;*/
+    /*height:20%;*/
+}
+
+.chart-btn-set {
+    text-align: left;
+}
+
+.chart-btn-responsive {
+    margin-top: 3px !important;
+    margin-bottom: 5px;
+    margin-right: 20px;
+    border: 1px solid #1e5d88 !important;
+}
+
+.chart-btn-responsive:hover {
+    border: none !important;
+}
+
+.chart-btn-responsive:focus {
+    border: none !important;
+}
+
+.align-right {
+}
