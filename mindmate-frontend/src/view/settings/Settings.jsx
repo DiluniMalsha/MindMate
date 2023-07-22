@@ -63,7 +63,7 @@ function Settings() {
                                     show={justifyActive === "tab1"}
                                     className="center-title"
                                 >
-                                    <div className="row w-100">
+                                    <div className="row ">
                                         <div className="col child-settings-sections">
 
                                             <FormComponent
