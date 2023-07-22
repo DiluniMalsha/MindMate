@@ -29,7 +29,7 @@ const ButtonComponent = styled.button`
                           ? "37px"
                           : props.size === "lg"
                                   ? "40px"
-                                          : "30px"};
+                                  : "30px"};
 
   font-family: "Inner", "Lato";
   font-weight: 500;
@@ -48,10 +48,12 @@ const ButtonComponent = styled.button`
                                                   : props.variant === "edit"
                                                           ? "#006de4"
                                                           : props.variant === "warning"
-                                                                  ? "#ffc107"
-                                                                  : props.variant === "danger"
-                                                                          ? "#dc3545"
-                                                                          : "#f8f9fa"};
+                                                                  ? "#ffc107" :
+                                                                  props.variant === "active"
+                                                                          ? "rgba(255,255,255,0)"
+                                                                          : props.variant === "danger"
+                                                                                  ? "#dc3545"
+                                                                                  : "#f8f9fa"};
   color: ${(props) =>
           props.variant === "light"
                   ? "#000000"
@@ -67,14 +69,36 @@ const ButtonComponent = styled.button`
                                                           ? "#ffffff"
                                                           : props.variant === "warning"
                                                                   ? "#ffffff"
-                                                                  : props.variant === "danger"
-                                                                          ? "#ffffff"
-                                                                          : "#ffffff"};
+                                                                  : props.variant === "active"
+                                                                          ? "#000000"
+                                                                          : props.variant === "history"
+                                                                                  ? "#000000"
+                                                                                  : props.variant === "danger"
+                                                                                          ? "#ffffff"
+                                                                                          : "#ffffff"};
 
   &:hover,
   &:focus {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    color: #ffffff
+    color: #ffffff;
+    background-color: ${(props) =>
+            props.variant === "active"
+                    ? "#1e5d88"
+                    : props.variant === "history"
+                            ? "#E5B0B0"
+                            : "#E5B0B0"
+    };
+  }
+
+  &:active {
+    background-color: ${(props) =>
+            props.variant === "active"
+                    ? "#1e5d88"
+                    : props.variant === "history"
+                            ? "#E5B0B0"
+                            : "#E5B0B0"
+    };
+
   }
 
 `;
