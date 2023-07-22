@@ -29,7 +29,11 @@ const Password = ({title,
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                Swal.fire('Password Changed Successful!', '', 'success')
+                Swal.fire('Password Changed Successful!', '', 'success').then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload(true);
+                    }
+                })
             } else if (result.isDenied) {
                 Swal.fire('Changes are not save', '', 'info')
             }
