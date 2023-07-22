@@ -105,6 +105,7 @@ const CustomInput = ({
                          min,
                          value,
                          readOnly,
+                         onchange,
                      }) => {
     return (
         <InputComponent
@@ -119,6 +120,7 @@ const CustomInput = ({
             }
             id={id}
             onClick={onclick}
+            onChange={onchange}
             width={width}
             borderRadius={radius}
             size={size}
