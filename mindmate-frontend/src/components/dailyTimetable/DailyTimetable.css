@@ -8,9 +8,7 @@
     /*text-align: center !important;*/
     padding-top: 15px !important;
     font-size: 18px;
-
 }
-
 
 .spe-day {
     padding-left: 10px !important;
@@ -21,7 +19,6 @@
 }
 
 /*time table Recode*/
-
 .time-square {
     text-align: center;
     padding: 10px;
@@ -41,7 +38,7 @@
 }
 
 .item-text-align {
-    padding-top: 2%
+    padding-top: 2%;
 }
 
 .icons-align {
@@ -52,29 +49,35 @@
     text-align: right !important;
 }
 
-.button-mobile-response-add-btn{
-    display:none !important;
-    height:3px !important ;
-    padding:18px !important;
+.button-mobile-response-add-btn {
+    display: none !important;
+    height: 3px !important;
+    padding: 18px !important;
 }
 
-@media screen and (max-width: 1440px){
-    .button-mobile-response-add-btn{
-        display:inline-flex !important;
+.css-1qap535-MuiPaper-root {
+    background-color: transparent !important;
+}
+
+@media screen and (max-width: 1440px) {
+    .button-mobile-response-add-btn {
+        display: inline-flex !important;
     }
 
-    .add-new-button-container-2{
-        display:none !important;
+    .add-new-button-container-2 {
+        display: none !important;
     }
+
     .days {
 
         width: 40px !important;
         text-align: left !important;
     }
+
     .day {
         border-radius: 50% !important;
         height: 40px !important;
-        width: 47px!important;
+        width: 47px !important;
         padding-top: 10px !important;
         font-size: 12px;
     }
@@ -85,12 +88,34 @@
     .day {
         border-radius: 50% !important;
         height: 40px !important;
-        width: 47px!important;
+        width: 47px !important;
         padding-top: 10px !important;
         font-size: 12px;
     }
+
     .schedule-day-align {
         width: 100% !important;
+    }
+
+    .schedule-time {
+        font-size: 12px !important;
+        width: 80px !important;
+        padding: 3px !important;
+        height: 60px !important;
+    }
+
+    .item-text-align {
+        font-size: 13px !important;
+    }
+
+    .deleteIcon {
+        width: 12px !important;
+        height: 12px !important;
+        margin-right: 5px !important;
+    }
+
+    .icon-size {
+        zoom: 0.8;
     }
 
     /*.selector-btn{*/
@@ -98,19 +123,16 @@
     /*}*/
 }
 
-@media screen and (max-width: 768px) {
-    .schedule-time{
-        font-size: 12px !important;
-        width:80px !important;
-        padding:3px !important;
-        height: 60px !important;
+@media screen and (max-width: 405px) {
+    .day {
+        border-radius: 50% !important;
+        height: 35px !important;
+        width: 38px !important;
+        padding-top: 10px !important;
+        font-size: 10px;
     }
-    .item-text-align{
-        font-size: 13px !important;
-    }
-    .deleteIcon{
-        width:12px !important;
-        height:12px !important;
-        margin-right: 5px !important;
+
+    .days {
+        width: 20px !important;
     }
 }
