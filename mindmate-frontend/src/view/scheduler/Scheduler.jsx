@@ -1,6 +1,10 @@
 import {MDBContainer, MDBTabs, MDBTabsContent, MDBTabsItem, MDBTabsLink, MDBTabsPane} from "mdb-react-ui-kit";
 import React, {useState} from "react";
 import DailyTimetable from "../../components/dailyTimetable/DailyTimetable";
+// import ReminderCalender from "../../components/reminderCalender/ReminderCalender";
+// import UpComingEvent from "../../components/events/UpComingEvent";
+import "./Scheduler.css"
+import SchedulerTimetable from "../../components/schedulerTimetable/SchedulerTimetable";
 
 const Scheduler = (props) => {
     const [justifyActive, setJustifyActive] = useState("tab1");
@@ -14,11 +18,11 @@ const Scheduler = (props) => {
     // style={{marginTop:'5%'}}
     return (
         <section className="">
-            <div className="container-fluid h-custom" >
+            <div className="container-fluid h-custom">
                 <div className="row d-flex justify-content-center align-items-center h-100 m-0">
                     <div className="col-md-9 ">
                         {/*col-lg-6 col-xl-5*/}
-                        <MDBContainer className="main-section">
+                        <MDBContainer className="main-section ">
                             <h1 className="setting-heading">Scheduler</h1>
 
                             <MDBTabs
@@ -53,7 +57,7 @@ const Scheduler = (props) => {
                             <MDBTabsContent>
                                 <MDBTabsPane
                                     show={justifyActive === "tab1"}
-                                    className="center-title"
+                                    className="center-title h-100 schedule-calender-side"
                                 >
                                     <div className="row w-100">
                                         <DailyTimetable/>
@@ -64,28 +68,9 @@ const Scheduler = (props) => {
                                     show={justifyActive === "tab2"}
                                     className="center-title"
                                 >
-                                    <div className="row w-100">
-                                        <div className="col child-settings-sections">
-
-                                            {/*<FormComponent*/}
-                                            {/*    title="My Profile"*/}
-                                            {/*    firstname="Mihiri"*/}
-                                            {/*    lastname='Peiris'*/}
-                                            {/*    address='No. 64/5, Kuruduwaththa, Meepawala'*/}
-                                            {/*    contactNo='+94 7190644'*/}
-                                            {/*    age='12'*/}
-                                            {/*    relDis='gride'*/}
-                                            {/*    relationship='Mother'*/}
-                                            {/*    display='ture'*/}
-                                            {/*/>*/}
-                                        </div>
-                                        <div className="col child-settings-sections">
-                                            {/*<Password title="Change Password"/>*/}
-                                        </div>
-
-
-
-                                    </div>
+                                    {/*<div className="row w-100 ">*/}
+                                        <SchedulerTimetable/>
+                                    {/*</div>*/}
                                 </MDBTabsPane>
                             </MDBTabsContent>
                         </MDBContainer>
