@@ -1,5 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import './App.css'
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Settings from "./view/settings/Settings";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import SignIn from "./view/SignIn/SignIn";
@@ -8,17 +7,17 @@ import Scheduler from "./view/scheduler/Scheduler";
 import Home from "./view/home/Home";
 import Grid from "@mui/material/Grid";
 import NavigationPanelMobile from "./components/navigationPanels/NavigationPanelMobile";
+import ReminderCalender from "./components/reminderCalender/ReminderCalender";
+import './App.css'
+import EmotionTracker from "./view/EmotionTracker/EmotionTracker";
 
 const App = (props) => {
-    const token = false;
+    // const token = true;
 
-    if (token) {
-        return <SignIn/>
-    }
     return (
 
         <div className="App" style={{ height:'100vh'}}>
-            <Router>
+            <BrowserRouter>
 
                 <Grid container>
                     <Grid item sm={1} xs={0} className='background-color'>
@@ -38,12 +37,13 @@ const App = (props) => {
                                 <Route path="/settings" element={<Settings/>}/>
                                 <Route path="/scheduler" element={<Scheduler/>}/>
                                 <Route path="/home" element={<Home/>}/>
-                                {/*<Route path="/preparation" element={<Preferences/>}/>*/}
+                                <Route path="/reminder" element={<ReminderCalender/>}/>
+                                <Route path="/emotion-tracker" element={<EmotionTracker/>}/>
                             </Routes>
                         </div>
                     </Grid>
                 </Grid>
-            </Router>
+            </BrowserRouter>
         </div>
     );
 }
