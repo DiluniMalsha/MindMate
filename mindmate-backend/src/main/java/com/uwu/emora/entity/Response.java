@@ -30,6 +30,6 @@ public class Response {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
-    private Resources resource;
+    private Resource resource;
 
 }

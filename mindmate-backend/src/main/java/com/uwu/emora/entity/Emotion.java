@@ -29,5 +29,5 @@ public class Emotion {
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(mappedBy = "emotion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Resources> resources;
+    private List<Resource> resources;
 }
