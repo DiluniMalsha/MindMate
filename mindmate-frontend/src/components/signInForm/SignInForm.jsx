@@ -81,7 +81,7 @@ function SignInFrom() {
                 </Link>
 
                 <div className="text-center pt-1 mb-5 pb-1">
-                    <Link to="/sideBar">
+                    <Link to="/">
                     <CustomButton
                         variant="primary"
                         width="410"
