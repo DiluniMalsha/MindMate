@@ -1,0 +1,18 @@
+.graph-border{
+    font-Size:20px;
+}
+.emotion-display{
+    display:none;
+}
+.background-colors{
+    background: rgb(30,93,136);
+    background: linear-gradient(90deg, rgba(30,93,136,0.05926120448179273) 0%, rgba(23,253,253,0.05085784313725494) 100%, rgba(255,255,255,0.4682247899159664) 171742%);
+}
+@media screen and (max-width:768px){
+    .emotion-display{
+        display:block;
+    }
+    .emotion-display-2{
+        display:none;
+    }
+}

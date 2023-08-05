@@ -1,10 +1,10 @@
 import {MDBContainer, MDBTabs, MDBTabsContent, MDBTabsItem, MDBTabsLink, MDBTabsPane} from "mdb-react-ui-kit";
 import React, {useState} from "react";
 import DailyTimetable from "../../components/dailyTimetable/DailyTimetable";
-// import ReminderCalender from "../../components/reminderCalender/ReminderCalender";
-// import UpComingEvent from "../../components/events/UpComingEvent";
 import "./Scheduler.css"
 import SchedulerTimetable from "../../components/schedulerTimetable/SchedulerTimetable";
+import {CalendarOutline} from "react-ionicons";
+import HeadingTitle from "../../components/title/HeadingTitle";
 
 const Scheduler = (props) => {
     const [justifyActive, setJustifyActive] = useState("tab1");
@@ -16,14 +16,22 @@ const Scheduler = (props) => {
         setJustifyActive(value);
     };
     // style={{marginTop:'5%'}}
+    let icon = <CalendarOutline
+                color={'#4285f5'}
+                title={"Scheduler"}
+                height="20px"
+                width="20px"
+                style={{marginBottom: '5px'}}
+                />
     return (
         <section className="">
+            <HeadingTitle title={'Scheduler'} icon={icon} ml={'70px'}/>
             <div className="container-fluid h-custom">
                 <div className="row d-flex justify-content-center align-items-center h-100 m-0">
                     <div className="col-md-9 ">
                         {/*col-lg-6 col-xl-5*/}
                         <MDBContainer className="main-section ">
-                            <h1 className="setting-heading">Scheduler</h1>
+                            {/*<h1 className="setting-heading">Scheduler</h1>*/}
 
                             <MDBTabs
                                 pills

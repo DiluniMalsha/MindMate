@@ -11,8 +11,10 @@ import {
 import FormComponent from "../../components/form/FormComponent";
 import Preferences from "../../components/preferences/Preferences";
 import Password from "../../components/form/Password";
+import {SettingsOutline} from "react-ionicons";
+import HeadingTitle from "../../components/title/HeadingTitle";
 
-function Settings() {
+const Settings = (props) => {
     const [justifyActive, setJustifyActive] = useState("tab1");
     const handleJustifyClick = (value) => {
         if (value === justifyActive) {
@@ -21,14 +23,22 @@ function Settings() {
 
         setJustifyActive(value);
     };
+    let icon = <SettingsOutline
+                    color={'#4285f5'}
+                    title={"Settings"}
+                    height="20px"
+                    width="20px"
+                    style={{marginBottom: '5px'}}
+                />
     return (
         <section className="">
+            <HeadingTitle title={'Settings'} icon={icon} ml={'60px'}/>
             <div className="container-fluid h-custom">
+                {/*<HeadingBar/>*/}
                 <div className="row d-flex justify-content-center align-items-center  m-0">
                     <div className="col-md-9   ">
                         <MDBContainer className="main-section">
-                            <h1 className="setting-heading">Settings</h1>
-
+                            {/*<h1 className="setting-heading">Settings</h1>*/}
                             <MDBTabs
                                 pills
                                 justify

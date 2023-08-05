@@ -15,17 +15,6 @@
 /*    margin-left:80px;*/
 /*}*/
 
-@media screen and (min-width: 1200px) {
-    .tab-tabs {
-        display: none;
-    }
-}
-
-@media screen and(max-width: 1200px) {
-    .tab-tabs {
-        display: inline-block;
-    }
-}
 
 
 .admin-name {
@@ -51,11 +40,6 @@
     /*margin-top:3%;*/
 }
 
-@media (max-width: 450px) {
-    .h-custom {
-        height: 100%;
-    }
-}
 
 .student {
     /*width: 50% !important;*/
@@ -68,15 +52,7 @@
     margin-right: auto;
 }
 
-@media screen and (max-width: 560px) {
-    .btn-width {
-        width: 300px;
-    }
 
-    .selection-btn {
-        font-size: 12px;
-    }
-}
 
 .setting-heading {
     color: #1E5D88;
@@ -84,19 +60,13 @@
     margin-bottom: 40px;
 }
 
-@media screen and (max-width: 768px) {
-    .setting-heading {
-        margin-bottom: 12px !important;
-        font-size: 18px;
-        color: #1E5D88 !important;
 
-    }
-}
 
 .child-settings-sections {
     border: 1px solid #9B9B9B;
     border-radius: 15px;
     margin: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .title-section {
@@ -132,23 +102,6 @@
     font-weight: bold !important;
 
 }
-
-
-@media screen and (max-width: 991px) {
-    .logo-img {
-        display: none;
-    }
-
-    .admin-name {
-        display: none;
-    }
-
-    .admin-name-res {
-        display: block !important;
-    }
-
-}
-
 .admin-name-res {
     font-weight: bolder;
     font-size: 35px;
@@ -229,6 +182,32 @@
 .row {
     margin-left: 0 !important;
 }
+@media screen and (min-width: 1200px) {
+    .tab-tabs {
+        display: none;
+    }
+}
+
+@media screen and(max-width: 1200px) {
+    .tab-tabs {
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .logo-img {
+        display: none;
+    }
+
+    .admin-name {
+        display: none;
+    }
+
+    .admin-name-res {
+        display: block !important;
+    }
+
+}
 
 @media screen and (max-width: 768px) {
     .selection-btn {
@@ -251,4 +230,27 @@
         margin: 0px !important;
     }
 
+}
+@media screen and (max-width: 768px) {
+    .setting-heading {
+        margin-bottom: 12px !important;
+        font-size: 22px;
+        color: #1E5D88 !important;
+
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .btn-width {
+        width: 300px;
+    }
+
+    .selection-btn {
+        font-size: 12px;
+    }
+}
+@media screen and  (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
 }

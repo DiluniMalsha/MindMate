@@ -1,0 +1,52 @@
+.heading-title {
+    color: #636363;
+    font-weight: 500;
+    font-size: 1.714rem;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.subtitle-name {
+    color: rgba(147, 147, 147, 0.62);
+    font-size: 14px;
+    position:absolute;
+    margin-top:10px;
+}
+
+.show-mood {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 8px;
+    width: 25rem;
+    height: 20rem;
+}
+
+.mood-section {
+    margin-top: 5%;
+    width: 150px !important;
+    height: 150px !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.mood-des {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.upcoming {
+    line-height: 0.2rem;
+    font-weight:450;
+    font-size: 1.4rem;
+}
+.chart-section{
+    width:95%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    height: 69vh;
+    border-radius:8px;
+}
+.chart-size{
+    width:100%;
+}
