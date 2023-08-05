@@ -19,7 +19,6 @@ const EmotionTracker = (props) => {
             <HeadingTitle title={'EmotionTracker'} icon={icon} ml={'100px'}/>
             <div className="container-fluid h-custom">
                 <div className="row d-flex justify-content-center align-items-center  m-0">
-                    <h1 className="setting-heading">Emotion Tracker</h1>
                     <div className="col-md-4 emotion-display">
                         <EmotionFaceSection face={happy} mood='Happy'/>
                     </div>
