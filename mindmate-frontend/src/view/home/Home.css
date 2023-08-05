@@ -1,24 +1,8 @@
-.heading-title {
-    color: #636363;
-    font-weight: 500;
-    font-size: 1.714rem;
-    text-align: left;
-    margin-left: 20px;
-    margin-top: 20px;
-    justify-content: center;
-}
-
-.subtitle-name {
-    color: rgba(147, 147, 147, 0.62);
-    font-size: 14px;
-    position:absolute;
-    margin-top:10px;
-}
 
 .show-mood {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 8px;
-    width: 25rem;
+    /*width: 25rem;*/
     height: 20rem;
 }
 
@@ -44,9 +28,35 @@
 .chart-section{
     width:95%;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    height: 69vh;
+    height: 100%;
     border-radius:8px;
 }
 .chart-size{
     width:100%;
+}
+@media screen and (max-width:900px){
+    .chart-section{
+        width:100%;
+    }
+}
+@media screen and (max-width:768px){
+    .mood-section{
+        width:120px !important;
+        height:120px !important;
+    }
+    .show-mood{
+        height: 18rem !important;
+    }
+    .mood-des{
+        font-size:18px !important;
+    }
+    .upcoming{
+        font-size:15px !important;
+    }
+    .chart-section{
+        padding-bottom:20px;
+    }
+    .chart-grid{
+        margin-bottom: 80px !important;
+    }
 }

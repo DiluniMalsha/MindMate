@@ -23,7 +23,7 @@ const Home = (props) => {
             <HeadingTitle title='Dashboard' icon={icons} ml={'70px'}/>
             <div className='second-div mt-4 ms-4'>
                 <Grid container spacing={2}>
-                    <Grid item xs={3}>
+                    <Grid item xs={11} md={3}>
                         <div className='show-mood'>
                             <img src={mood} alt='mood' className='mood-section'/>
                             <br/>
@@ -75,12 +75,9 @@ const Home = (props) => {
                             </div>
                         </div>
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={11} md={9} className='chart-grid'>
                         <div className='chart-section'>
-                            {/*<div className='chart-size'>*/}
                             <LiveChart width='1200' height='600' display='none'/>
-                            {/*</div>*/}
-
                         </div>
                     </Grid>
                 </Grid>
