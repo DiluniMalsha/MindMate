@@ -15,6 +15,24 @@
 
 }
 .face-img{
-    width:25vw;
-    height:25vh;
+    width:230px;
+    height:230px;
+}
+
+@media screen and (max-width:1200px) {
+    .face-img{
+        width:120px;
+        height:120px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .response-div{
+        display:none;
+    }
+    .face-img{
+        width:120px;
+        height:120px;
+    }
+    
 }
