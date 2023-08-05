@@ -11,7 +11,7 @@ const MainLayout = (props) => {
     return (
         <>
             <Grid container>
-                <Grid item sm={1} xs={0} className='background-color'>
+                <Grid item xl={1} md={1.5} sm={0} xs={1}  className='background-color'>
                     <div className='NavDesktopDisplay'>
                         <NavigationPanel/>
                     </div>
@@ -19,12 +19,11 @@ const MainLayout = (props) => {
                         <NavigationPanelMobile/>
                     </div>
                 </Grid>
-                <Grid item sm={11} xs={12} sx={{textAlign: 'center', justifyContent: 'center'}}>
+                <Grid item xl={11} md={10} sm={12}  xs={12} sx={{textAlign: 'center', justifyContent: 'center'}}>
                     <div className="heading-style">
                         <HeadingBar/>
                     </div>
                     <div className="center-div">
-
                         <Outlet/>
                     </div>
                 </Grid>
