@@ -31,16 +31,10 @@
     height: 1px;
     background: #eee;
 }
-
 .h-custom {
     height: 100%;
-    padding-top: 3%;
-    /*margin-top:3%     !important;*/
-    /*height: calc(100% - 73px);*/
-    /*margin-top:3%;*/
+    padding-top: 1%;
 }
-
-
 .student {
     /*width: 50% !important;*/
     text-align: center !important;
