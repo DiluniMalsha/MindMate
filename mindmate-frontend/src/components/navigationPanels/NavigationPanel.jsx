@@ -81,7 +81,7 @@ const NavigationPanel = (props) => {
                     ))}
                 </div>
             </div>
-            <Link to="/" style={{textDecoration: "none"}}>
+            <Link to="/signIn" style={{textDecoration: "none"}}>
 
                 <span className="sign-out-btn">
                     <LogOutOutline

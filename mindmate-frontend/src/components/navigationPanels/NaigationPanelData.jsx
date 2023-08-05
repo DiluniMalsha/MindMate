@@ -15,7 +15,7 @@ import {
 export const NavigationPanelData = [
     {
         title: 'Home',
-        path: '/home',
+        path: '/',
         iconVisibility: true,
         icon: <HomeOutline
             color={'#c0c0c0'}
@@ -91,7 +91,7 @@ export const NavigationPanelData = [
     },
     {
         title: 'Dataset',
-        path: '/dataset',
+        path: '/data-Set',
         iconVisibility: false,
         icon: <AlbumsOutline
             color={'#c0c0c0'}
@@ -113,7 +113,7 @@ export const NavigationPanelData = [
 export const MNavigationPanelData = [
     {
         title: 'Home',
-        path: '/home',
+        path: '/',
         iconVisibility: true,
         color: '#c0c0c0',
         icon: <HomeOutline
