@@ -7,7 +7,7 @@ const LiveChart = ({title, width, height, display}) => {
     return (
         <>
             <div className="checking-pattern-btn-set">
-                <p className="title-align btn-title">
+                <p className="btn-title">
                     {title}
                 </p>
                 <Grid container spacing={2} sx={{marginBottom:'20px'}}>
