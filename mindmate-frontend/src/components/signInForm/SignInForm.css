@@ -31,7 +31,7 @@
     border-right: none;
     border-bottom: solid #656565 1px;
     padding: 3px 10px;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .text-line:focus {
@@ -42,7 +42,7 @@
 
 .sign-in-label {
     text-align: left;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .sign-in-main {
