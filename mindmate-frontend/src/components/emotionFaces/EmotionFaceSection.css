@@ -26,13 +26,15 @@
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:768px){
     .response-div{
         display:none;
     }
     .face-img{
-        width:120px;
-        height:120px;
+        width:100px;
+        height:100px;
     }
-    
+    .mood-heading{
+        font-size: 12px ;
+    }
 }

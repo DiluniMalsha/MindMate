@@ -1,5 +1,5 @@
 import CustomButton from "../button/CustomButton";
-import './EmotionFaceSection.css'
+import "./EmotionFaceSection.css"
 const EmotionFaceSection = ({face, mood}) => {
     return (
         <>
@@ -12,7 +12,7 @@ const EmotionFaceSection = ({face, mood}) => {
                 variant="history"
                 radius="20"
                 size="sm"
-                className="chart-btn-responsive history-btn-style me-0"
+                className="chart-btn-responsive me-0"
                 fontSize="18"
                 width="180"
             >
