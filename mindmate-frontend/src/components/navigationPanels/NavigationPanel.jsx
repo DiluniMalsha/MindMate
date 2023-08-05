@@ -9,6 +9,7 @@ import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {useLocation} from "react-router";
 import logo from "../../assets/logo/Logo.png";
+import emora from "../../assets/logo/Emora.png";
 import { LogOutOutline } from 'react-ionicons'
 const NavigationPanel = (props) => {
     const location = useLocation();
@@ -44,7 +45,7 @@ const NavigationPanel = (props) => {
         <>
             <div className="side-bar">
                 <div className="logo-name">
-                    <img src={logo} alt="Mindmate" width={120}/>
+                    <img src={emora} alt="Mindmate" width={120}/>
                 </div>
                 <div className="navigation-item-list">
                     {NavigationPanelData.map((item) => (
