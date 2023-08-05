@@ -1,4 +1,5 @@
 import React from "react";
+import "./HeadingTitle.css"
 import {ChevronForwardOutline, HelpCircleOutline} from "react-ionicons";
 
 const HeadingTitle = ({title, icon, ml}) => {
@@ -26,7 +27,7 @@ const HeadingTitle = ({title, icon, ml}) => {
                 </span>
                 <HelpCircleOutline
                     color={'#4285f5'}
-                    title={"Home"}
+                    title={"Help"}
                     height="20px"
                     width="20px"
                     style={{marginBottom: '4px',marginLeft:ml}}
