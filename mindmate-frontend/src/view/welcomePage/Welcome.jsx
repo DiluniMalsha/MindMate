@@ -1,5 +1,6 @@
 import logo from "../../assets/logo/Logo.png";
-import robot from "../../assets/robotPicture/robot.png";
+// import robot from "../../assets/robotPicture/robot.png";
+import animatedRobot from "../../assets/robotPicture/bAnimatedRobot.gif";
 import CustomButton from "../../components/button/CustomButton";
 import {Link} from "react-router-dom";
 import "./Welcome.css";
@@ -9,7 +10,7 @@ const Welcome = (props) => {
         <div className="welcome-main">
             <img src={logo} alt="MindMate" className="maidMate-logo"/>
             <p className="welcome">Welcome Back</p>
-            <img src={robot} alt="Robot" className="robot"/>
+            <img src={animatedRobot} alt="Robot" className="robot" width="1000px" height="400px"/>
             <br/>
             <Link to="/signIn">
                 <CustomButton
