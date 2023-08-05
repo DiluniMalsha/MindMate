@@ -6,8 +6,8 @@
 .chart-border {
     /*border: solid 1px #1e5d88;*/
     /*border-radius:10px;*/
-    /*width:50%;*/
-    /*height:20%;*/
+    width:100%;
+    height:25%;
 }
 
 .chart-btn-set {
@@ -28,6 +28,29 @@
 .chart-btn-responsive:focus {
     border: none !important;
 }
-
-.align-right {
+.display-his-btn-2{
+    display:none !important;
+}
+@media screen and (max-width:950px) {
+    .chart-btn-responsive{
+        width: 100px !important;
+        font-size:13px !important;
+        padding:20px !important;
+    }
+    .history-btn-style{
+        width: 150px !important;
+    }
+    .history-grid{
+        text-align:center !important;
+    }
+    .display-his-btn{
+        display:none !important;
+    }
+    .display-his-btn-2{
+        margin-top:40px !important;
+        display:inline-flex;
+    }
+    .grid-btn-set{
+        text-align:center !important;
+    }
 }
