@@ -87,7 +87,7 @@ function SignInFrom() {
                         width="410"
                         radius="40"
                         fontSize="24"
-                        height="lg"
+                        height="sm"
                         className="sign-in-btn"
                     >
                         Sign in

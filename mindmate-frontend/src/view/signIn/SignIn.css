@@ -36,20 +36,6 @@
 
 
 }
-
-@media screen and (max-width: 1200px) {
-    .signIn-logo {
-        margin-top: 100%;
-        width: 80% !important;
-    }
-}
-
-@media screen and (max-width: 650px) {
-    .row-signIn {
-        width: 102.6%;
-    }
-}
-
 @media screen and (max-width: 800px) {
     .row-signIn {
         display: none;
@@ -69,26 +55,40 @@
 
 .mobile-view {
     background-color: #1E5D88;
-    height: 100vh
+    height: 80vh
 }
 
 .top-side {
-    height: 25vh;
+    height: 35vh;
     text-align: center;
-
 }
 
 .bottom-side {
     background-color: #ffffff;
-    border-radius: 80px 80px 0 0;
-    height: 75vh;
+    border-radius: 40px 40px 0 0;
+    height: 50vh;
     text-align: center;
 }
 
 .m-log-align {
     padding-top: 65px;
 }
-
+@media screen and (max-width: 1200px) {
+    .signIn-logo {
+        margin-top: 100%;
+        width: 80% !important;
+    }
+}
+@media screen and (max-width: 768px) {
+    .m-log-align {
+        width: 50% !important;
+    }
+}
+@media screen and (max-width: 650px) {
+    .row-signIn {
+        width: 102.6%;
+    }
+}
 @media screen and (max-width: 600px) {
     .m-log-align {
         width: 60% !important;
@@ -96,7 +96,7 @@
 }
 @media screen and (max-width: 450px) {
     .m-log-align {
-        width: 70% !important;
+        width: 60% !important;
     }
 }
 
