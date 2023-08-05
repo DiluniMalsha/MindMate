@@ -1,0 +1,34 @@
+.name-div{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 300px;
+    height: 150px;
+    text-align:right;
+    justify-content:center;
+    border-radius:5px;
+    align-items: center;
+    padding-top:100px;
+    background-color: #1e5d88;
+    color: #ffffff
+
+}
+.name-subtitle{
+    text-align: right !important;
+    font-size:18px;
+    font-weight: bold;
+    vertical-align: middle ;
+    color: #6e6b7b;
+
+}
+.geet{
+    font-size:18px !important;
+    text-align: right;
+    padding-right: 20px;
+    padding-top: 17px;
+
+}
+.date-time{
+    text-align: left !important;
+    padding-left: 20px;
+    font-weight: 500;
+    padding-top: 17px;
+}

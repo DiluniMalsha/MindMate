@@ -1,5 +1,5 @@
 import SetTime from "./SetTime";
-import "./homeHeading.css"
+import "./HomeHeading.css"
 
 const SetDate = (props) => {
     const date = new Date();

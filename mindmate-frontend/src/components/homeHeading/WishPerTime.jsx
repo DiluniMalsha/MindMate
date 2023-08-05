@@ -1,4 +1,4 @@
-import "./homeHeading.css"
+import "./HomeHeading.css"
 
 const WishPerTime = (props) => {
 

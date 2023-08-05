@@ -1,5 +1,5 @@
 import WishPerTime from "./WishPerTime";
-import "./homeHeading.css"
+import "./HomeHeading.css"
 import SetDate from "./SetDate";
 import SetTime from "./SetTime";
 import Grid from "@mui/material/Grid";
