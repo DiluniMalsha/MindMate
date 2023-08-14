@@ -31,7 +31,7 @@ public class Child {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private LocalDate dateOfBirth;
+    private int age;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)

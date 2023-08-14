@@ -1,11 +1,11 @@
 package com.uwu.emora.controller;
 
+import com.uwu.emora.dto.child.ChildDto;
+import com.uwu.emora.dto.CommonResponse;
 import com.uwu.emora.service.ChildService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +18,18 @@ public class ChildController {
     @GetMapping(value = "/test")
     public ResponseEntity test() {
         return ResponseEntity.ok("Hello Test");
+    }
+
+    @PutMapping(value = "/")
+    public ResponseEntity updateParent(@RequestBody ChildDto childDto) {
+        childService.updateChild(childDto);
+        return ResponseEntity.ok(new CommonResponse<>(true, "Child Details Updated Successfully"));
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity updateParent(@PathVariable("id") long id) {
+        ChildDto childDetails = childService.getChildDetails(id);
+        return ResponseEntity.ok(new CommonResponse<>(true, childDetails));
     }
 }
 

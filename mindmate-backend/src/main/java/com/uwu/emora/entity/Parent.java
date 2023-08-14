@@ -9,7 +9,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -25,7 +24,7 @@ public class Parent {
 
     private String firstName;
     private String lastName;
-    private LocalDate dateOfBirth;
+    private int age;
     private String address;
     private String contactNumber;
 
