@@ -36,7 +36,7 @@ const Home = (props) => {
                                 variant="history"
                                 radius="10"
                                 size="sm"
-                                className="mt-4"
+                                className="mt-4 btn-mrg"
                                 fontSize="18"
                                 width="180"
                             >
@@ -65,7 +65,7 @@ const Home = (props) => {
                                         variant="primary"
                                         radius="10"
                                         size="sm"
-                                        className="mt-4"
+                                        className="mt-4 btn-mrg"
                                         fontSize="18"
                                         width="200"
                                     >

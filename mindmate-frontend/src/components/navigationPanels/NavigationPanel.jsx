@@ -8,8 +8,8 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {useLocation} from "react-router";
-import logo from "../../assets/logo/Logo.png";
-import emora from "../../assets/logo/Emora.png";
+// import logo from "../../assets/logo/Logo.png";
+import emora from "../../assets/logo/EmoraNew.png";
 import { LogOutOutline } from 'react-ionicons'
 const NavigationPanel = (props) => {
     const location = useLocation();

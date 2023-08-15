@@ -35,7 +35,7 @@ const SetDate = (props) => {
             break;
     }
 
-    let d =date.getDay()
+    let d = date.getDay()
     // eslint-disable-next-line default-case
     switch(d){
         case 1: c = "Monday";

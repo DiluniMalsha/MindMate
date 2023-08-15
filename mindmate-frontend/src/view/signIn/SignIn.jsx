@@ -1,6 +1,6 @@
 import "./SignIn.css";
 // import logo from "../../assets/logo/Logo.png";
-import logo from "../../assets/logo/Emora.png";
+import logo from "../../assets/logo/EmoraNew.png";
 import SignInFrom from "../../components/signInForm/SignInForm";
 
 const SignIn = (props) => {

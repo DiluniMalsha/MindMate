@@ -41,11 +41,11 @@
 }
 @media screen and (max-width:768px){
     .mood-section{
-        width:120px !important;
-        height:120px !important;
+        width:100px !important;
+        height:100px !important;
     }
     .show-mood{
-        height: 18rem !important;
+        height: 14rem !important;
     }
     .mood-des{
         font-size:18px !important;
@@ -58,5 +58,11 @@
     }
     .chart-grid{
         margin-bottom: 80px !important;
+    }
+    .btn-mrg{
+        margin-top: 0 !important;
+        width:40% !important;
+        height: 20px !important;
+        font-size:12px !important;
     }
 }
