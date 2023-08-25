@@ -25,18 +25,15 @@
     font-weight:450;
     font-size: 1.4rem;
 }
-.chart-section{
-    width:95%;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    height: 100%;
-    border-radius:8px;
-}
 .chart-size{
     width:100%;
 }
 @media screen and (max-width:900px){
     .chart-section{
         width:100%;
+    }
+    .second-div{
+        margin-top:10px !important;
     }
 }
 @media screen and (max-width:768px){

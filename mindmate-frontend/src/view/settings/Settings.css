@@ -16,7 +16,6 @@
 /*}*/
 
 
-
 .admin-name {
     font-weight: bolder;
     font-size: 35px;
@@ -31,10 +30,12 @@
     height: 1px;
     background: #eee;
 }
+
 .h-custom {
     height: 100%;
     padding-top: 1%;
 }
+
 .student {
     /*width: 50% !important;*/
     text-align: center !important;
@@ -47,13 +48,11 @@
 }
 
 
-
 .setting-heading {
     color: #1E5D88;
     margin-right: auto;
     margin-bottom: 40px;
 }
-
 
 
 .child-settings-sections {
@@ -96,6 +95,7 @@
     font-weight: bold !important;
 
 }
+
 .admin-name-res {
     font-weight: bolder;
     font-size: 35px;
@@ -176,6 +176,7 @@
 .row {
     margin-left: 0 !important;
 }
+
 @media screen and (min-width: 1200px) {
     .tab-tabs {
         display: none;
@@ -221,10 +222,11 @@
     }
 
     .child-settings-sections {
-        margin: 0px !important;
+        margin: 0 10px 10px 0 !important
     }
 
 }
+
 @media screen and (max-width: 768px) {
     .setting-heading {
         margin-bottom: 12px !important;
@@ -243,6 +245,7 @@
         font-size: 12px;
     }
 }
+
 @media screen and  (max-width: 450px) {
     .h-custom {
         height: 100%;

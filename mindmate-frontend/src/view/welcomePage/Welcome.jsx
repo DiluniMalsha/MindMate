@@ -1,4 +1,3 @@
-import logo from "../../assets/logo/Logo.png";
 // import robot from "../../assets/robotPicture/robot.png";
 import animatedRobot from "../../assets/logo/EmoraNew.png";
 import CustomButton from "../../components/button/CustomButton";

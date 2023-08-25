@@ -37,7 +37,7 @@ const Settings = (props) => {
                 {/*<HeadingBar/>*/}
                 <div className="row d-flex justify-content-center align-items-center  m-0">
                     <div className="col-md-9   ">
-                        <MDBContainer className="main-section">
+                        <MDBContainer className="main-secti on">
                             {/*<h1 className="setting-heading">Settings</h1>*/}
                             <MDBTabs
                                 pills
@@ -75,7 +75,6 @@ const Settings = (props) => {
                                 >
                                     <div className="row ">
                                         <div className="col child-settings-sections">
-
                                             <FormComponent
                                                 title="Mihasa's Profile"
                                                 firstname="Mihasa"
@@ -87,7 +86,7 @@ const Settings = (props) => {
                                                 relDis='none'
                                             />
                                         </div>
-                                        <div className="col-md child-settings-sections">
+                                        <div className="col-md child-settings-sections" style={{width:'98%'}}>
                                             <Preferences/>
                                         </div>
                                     </div>
