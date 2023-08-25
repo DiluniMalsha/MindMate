@@ -31,7 +31,7 @@ const HeadingTitle = ({title, icon, ml}) => {
                     height="20px"
                     width="20px"
                     style={{marginBottom: '4px',marginLeft:ml}}
-                    className='m-2 '
+                    className='m-2'
                 />
             </div>
         </>
