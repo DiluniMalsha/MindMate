@@ -2,8 +2,8 @@ import CustomButton from "../button/CustomButton";
 import "./EmotionFaceSection.css"
 const EmotionFaceSection = ({face, mood}) => {
     return (
-        <>
-            <img src={face} alt='mood' className='face-img'/>
+        <div className=''>
+            <img src={face} alt='mood' className='face-img mood-section'/>
             <br/>
             <br/>
             <p className='mood-heading'>Mihasa is Now in a {mood} Mood</p>
@@ -29,7 +29,7 @@ const EmotionFaceSection = ({face, mood}) => {
 
                 </p>
             </div>
-        </>
+        </div>
     );
 }
 

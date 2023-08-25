@@ -3,7 +3,7 @@
     border: 1px solid #9B9B9B !important;
     background: #FFFFFFFF;
     padding:30px;
-    margin-top: 20px;
+    margin-top: 10%;
     font-family: Nunito Sans, sans-serif !important;
     font-size:16px;
 
@@ -35,6 +35,6 @@
         height:100px;
     }
     .mood-heading{
-        font-size: 12px ;
+        font-size: 15px ;
     }
 }
