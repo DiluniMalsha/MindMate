@@ -8,9 +8,46 @@ import {eyeOff} from "react-icons-kit/feather/eyeOff";
 import {MDBInput} from "mdb-react-ui-kit";
 import CustomButton from "../button/CustomButton";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
+// import {BASE_URL} from "../../utils/constants";
 
 
-function SignInFrom() {
+function SignInFrom(setToken) {
+
+    const [username, setUserName] = useState();
+    const [password, setPassword] = useState();
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        console.log("he")
+
+        let data = new FormData();
+        data.append('grant_type', 'password');
+        data.append('username', username);
+        data.append('password', password);
+
+        const headers = {
+            'Authorization': 'Basic cGFyZW50Og=='
+        }
+        axios.post("http://localhost:8080/oauth/token",data, {headers} )
+            .then((res) => {
+                localStorage.setItem("loggedUserToken", res.data.access_token);
+                window.location.replace("/")
+            })
+            .catch(err => {
+                console.error(err)
+                Swal.fire(
+                    'Failed',
+                    err,
+                    'error'
+                ).then(r => {
+                    // window.location.reload(false)
+                })
+            })
+    }
+
+
     const [type, setType] = useState("password");
     const [icon, setIcon] = useState(eyeOff);
     const [checkIcon, setCheckIcon] = useState(file);
@@ -27,12 +64,12 @@ function SignInFrom() {
     };
 
     const getUserName = () => {
-        const userName= document.getElementById("userName").value;
+        const userName = document.getElementById("userName").value;
         console.log(userName);
-        if (userName === "mihiripeiris") {
+        setUserName(userName)
+        if (userName === "mihiri") {
             setCheckIcon(check);
-        }
-        else{
+        } else {
             setCheckIcon(file);
         }
     };
@@ -50,7 +87,7 @@ function SignInFrom() {
 
                 <label className="sign-in-label">Username</label>
                 <div className="input-field">
-                      <span className="icon-class" style={{cursor:"cursor"}}>
+                      <span className="icon-class" style={{cursor: "cursor"}}>
                         <Icon icon={checkIcon} size={25}/>
                       </span>
                 <MDBInput
@@ -74,6 +111,8 @@ function SignInFrom() {
                         type={type}
                         className="text-line"
                         placeholder="................"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                     />
                 </div>
                 <Link className="forget-aline" to="/">
@@ -81,18 +120,17 @@ function SignInFrom() {
                 </Link>
 
                 <div className="text-center pt-1 mb-5 pb-1">
-                    <Link to="/">
-                    <CustomButton
-                        variant="primary"
-                        width="410"
-                        radius="40"
-                        fontSize="24"
-                        height="sm"
-                        className="sign-in-btn"
-                    >
-                        Sign in
-                    </CustomButton>
-                    </Link>
+                        <CustomButton
+                            variant="primary"
+                            width="410"
+                            radius="40"
+                            fontSize="24"
+                            height="sm"
+                            className="sign-in-btn"
+                            onclick={handleSubmit}
+                        >
+                            Sign in
+                        </CustomButton>
                 </div>
             </div>
         </div>
