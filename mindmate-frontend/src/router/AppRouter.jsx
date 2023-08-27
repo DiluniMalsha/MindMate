@@ -9,6 +9,7 @@ import Settings from "../view/settings/Settings";
 import DataSet from "../view/dataSet/DataSet";
 import Scheduler from "../view/scheduler/Scheduler";
 import ReminderCalender from "../components/reminderCalender/ReminderCalender"
+import ProtectedRoute from "./ProtectedRoute"
 
 const router = createBrowserRouter([
     {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
             {
-                // element: <ProtectedRoute />,
+                element: <ProtectedRoute />,
                 children: [
                     {
                         index: true,
