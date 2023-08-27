@@ -1,9 +1,9 @@
-import "./SignIn.css";
-// import logo from "../../assets/logo/Logo.png";
 import logo from "../../assets/logo/EmoraNew.png";
 import SignInFrom from "../../components/signInForm/SignInForm";
+import "./SignIn.css";
 
-const SignIn = (props) => {
+const SignIn = ({setToken}) => {
+
     return (
         <div>
             <div className="row row-signIn">
@@ -25,7 +25,7 @@ const SignIn = (props) => {
                 <div className="col-sm-5 offset-sm-2 col-md-8 offset-md-0 col-lg-8 left-color-div">
                     <div className="right-side">
                         <div className="sign-in-form-align ">
-                            <SignInFrom/>
+                            <SignInFrom setToken={setToken}/>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@ const SignIn = (props) => {
 
                 <div className="row-9 bottom-side ">
                     <div className="login-form--m">
-                        <SignInFrom/>
+                        <SignInFrom setToken={setToken}/>
                     </div>
                 </div>
             </div>
