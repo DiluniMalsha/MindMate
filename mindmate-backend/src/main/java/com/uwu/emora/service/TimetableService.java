@@ -14,5 +14,5 @@ public interface TimetableService {
 
     void deleteTimetableRecord(long id);
 
-    List<TimetableRecordDto> getTimetableRecordsForDay(Day day);
+    List<TimetableRecordDto> getTimetableRecordsForDay(Day day,long id);
 }

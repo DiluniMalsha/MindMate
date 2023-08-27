@@ -17,13 +17,13 @@ public class TimeTableController {
 
     private final TimetableService timetableService;
 
-    @PostMapping(value = "/")
+    @PostMapping(value = "")
     public ResponseEntity addTimetableRecord(@RequestBody TimetableRecordDto timetableRecordDto) {
         timetableService.addTimetableRecord(timetableRecordDto);
         return ResponseEntity.ok(new CommonResponse<>(true, "Timetable Record Added Successfully"));
     }
 
-    @PutMapping(value = "/")
+    @PutMapping(value = "")
     public ResponseEntity updateTimetableRecord(@RequestBody TimetableRecordDto timetableRecordDto) {
         timetableService.updateTimetableRecord(timetableRecordDto);
         return ResponseEntity.ok(new CommonResponse<>(true, "Timetable Record Updated Successfully"));
@@ -35,9 +35,9 @@ public class TimeTableController {
         return ResponseEntity.ok(new CommonResponse<>(true, "Timetable Record Deleted Successfully"));
     }
 
-    @GetMapping(value = "/{day}")
-    public ResponseEntity deleteTimetableRecord(@PathVariable("day") Day day) {
-        List<TimetableRecordDto> timetableRecordsForDay = timetableService.getTimetableRecordsForDay(day);
+    @GetMapping(value = "/{day}/{id}")
+    public ResponseEntity deleteTimetableRecord(@PathVariable("day") Day day,@PathVariable("id") long id) {
+        List<TimetableRecordDto> timetableRecordsForDay = timetableService.getTimetableRecordsForDay(day,id);
         return ResponseEntity.ok(new CommonResponse<>(true, timetableRecordsForDay));
     }
 }

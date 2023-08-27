@@ -16,4 +16,5 @@ public class TimetableRecordDto {
     private String fromTime;
     private String toTime;
     private String task;
+    private long childId;
 }

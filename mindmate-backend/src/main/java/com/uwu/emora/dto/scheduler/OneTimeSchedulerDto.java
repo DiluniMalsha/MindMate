@@ -1,11 +1,10 @@
-package com.uwu.emora.entity;
+package com.uwu.emora.dto.scheduler;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -13,17 +12,10 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Scheduler {
+public class OneTimeSchedulerDto {
 
-    @Id
     private String id;
-
-    private LocalDate date;
+    private String date;
     private String note;
-    private LocalDateTime remindTime;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    private Child child;
+    private String remindTime;
 }
