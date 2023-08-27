@@ -17,27 +17,33 @@ public class TimeTableController {
 
     private final TimetableService timetableService;
 
+    //    Add daily timetable tasks
     @PostMapping(value = "")
     public ResponseEntity addTimetableRecord(@RequestBody TimetableRecordDto timetableRecordDto) {
         timetableService.addTimetableRecord(timetableRecordDto);
         return ResponseEntity.ok(new CommonResponse<>(true, "Timetable Record Added Successfully"));
     }
 
+    //    Edit timetable records
     @PutMapping(value = "")
     public ResponseEntity updateTimetableRecord(@RequestBody TimetableRecordDto timetableRecordDto) {
         timetableService.updateTimetableRecord(timetableRecordDto);
         return ResponseEntity.ok(new CommonResponse<>(true, "Timetable Record Updated Successfully"));
     }
 
+    //    Delete timetable records
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteTimetableRecord(@PathVariable("id") long id) {
         timetableService.deleteTimetableRecord(id);
         return ResponseEntity.ok(new CommonResponse<>(true, "Timetable Record Deleted Successfully"));
     }
 
+    //    View timetable
     @GetMapping(value = "/{day}/{id}")
-    public ResponseEntity deleteTimetableRecord(@PathVariable("day") Day day,@PathVariable("id") long id) {
+    public ResponseEntity getTimetableRecordsForDay(@PathVariable("day") Day day,@PathVariable("id") long id) {
         List<TimetableRecordDto> timetableRecordsForDay = timetableService.getTimetableRecordsForDay(day,id);
         return ResponseEntity.ok(new CommonResponse<>(true, timetableRecordsForDay));
     }
+
+    // TODO    Send reminders for timetable tasks
 }
