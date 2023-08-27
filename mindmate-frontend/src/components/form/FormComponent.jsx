@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import CustomInput from "../inputField/InputField";
 import "./FormComponent.css";
 import {styled} from '@mui/material/styles';
@@ -16,26 +16,7 @@ const Item = styled(Paper)(({theme}) => ({
     color: theme.palette.text.secondary,
 }));
 
-const FormComponent = ({
-                           title,
-                           firstname,
-                           lastname,
-                           address,
-                           contactNo,
-                           genders,
-                           age,
-                           relationship,
-                           display,
-                           password,
-                           details,
-                           relDis,
-                       }) => {
-
-    const [gender, setGender] = React.useState('');
-
-    const handleChange = (event) => {
-        setGender(event.target.value);
-    };
+const FormComponent = (props) => {
 
     const [formEditable, setFormEditable] = React.useState(false);
 
@@ -63,27 +44,62 @@ const FormComponent = ({
         })
     };
 
+
     const handleCancel = (event) => {
         setFormEditable(false);
     }
 
-    return (
-        <>
-            <p className="title-align">{title}</p>
+    const [firstName, setFirstName] = useState(props.firstname);
+    const [lastName, setLastName] = useState(props.lastname);
+    const [address, setAddress] = useState(props.address);
+    const [contactNo, setContactNo] = useState(props.contactNo);
+    const [gender, setGender] = React.useState(props.genders);
+    const [age, setAge] = useState(props.age);
+    const [relationship, setRelationship] = useState(props.relationship);
 
-            <Grid container rowSpacing={1} columnSpacing={{xs: 1, sm: 2, md: 3}} sx={{display: display}}>
+    const handleChange = (event) => {
+        setGender(event.target.value);
+    };
+    const handleFirstNameChange = event => {
+        setFirstName(event.target.value);
+    }
+    const handleLastNameChange = event => {
+        setLastName(event.target.value);
+    }
+    const handleChangeAddress = event =>{
+        setAddress(event.target.value);
+    }
+    const handleChangeContactNo = event =>{
+        setContactNo(event.target.value);
+    }
+    const handleChangeAge = event => {
+        setAge(event.target.value);
+    }
+    const handleChangeRelationship = event => {
+        setRelationship(event.target.value);
+    }
+
+
+    return (
+
+        <>
+            <p className="title-align">{props.title}</p>
+
+            <Grid container rowSpacing={1} columnSpacing={{xs: 1, sm: 2, md: 3}} sx={{display: props.display}}>
                 <Grid item xs={6}>
                     <Item>
                         <label className="label-align">First Name</label>
                         <br/>
                         <CustomInput
                             type="text"
-                            placeholder={firstname}
+                            // placeholder={}
+                            value={firstName}
                             size="20"
                             radius="8"
                             fontSize="18.946"
                             width='100%'
                             readOnly={!formEditable}
+                            onchange={handleFirstNameChange}
                         />
                     </Item>
                 </Grid>
@@ -93,14 +109,14 @@ const FormComponent = ({
                         <br/>
                         <CustomInput
                             type="text"
-                            placeholder={lastname}
                             size="20"
                             radius="8"
                             fontSize="18"
                             width='100%'
                             readOnly={!formEditable}
-                            value={lastname}
+                            value={lastName}
                             className='component-input'
+                            onchange={handleLastNameChange}
                         />
                     </Item>
                 </Grid>
@@ -110,12 +126,13 @@ const FormComponent = ({
                         <br/>
                         <CustomInput
                             type="text"
-                            placeholder={address}
+                            value={address}
                             size="20"
                             radius="8"
                             width="100%"
                             fontSize="18"
                             readOnly={!formEditable}
+                            onchange={handleChangeAddress}
                         />
                     </Item>
                 </Grid>
@@ -125,12 +142,13 @@ const FormComponent = ({
                         <br/>
                         <CustomInput
                             type="tel"
-                            placeholder={contactNo}
+                            value={contactNo}
                             size="20"
                             radius="8"
                             width="100%"
                             fontSize='18'
                             readOnly={!formEditable}
+                            onchange={handleChangeContactNo}
                         />
                     </Item>
                 </Grid>
@@ -141,8 +159,8 @@ const FormComponent = ({
                         <br/>
                         <select id="gender" name="gender" value={gender}
                                 onChange={handleChange}>
-                            <option value="male" className='g-gender'>Male</option>
-                            <option value="female" className='g-gender'>Female</option>
+                            <option value="MALE" className='g-gender'>Male</option>
+                            <option value="FEMALE" className='g-gender'>Female</option>
                         </select>
                     </Item>
                 </Grid>
@@ -152,7 +170,7 @@ const FormComponent = ({
                         <br/>
                         <CustomInput
                             type="number"
-                            placeholder={age}
+                            value={age}
                             size="20"
                             radius="8"
                             width="100%"
@@ -160,29 +178,31 @@ const FormComponent = ({
                             max='20'
                             min='1'
                             readOnly={!formEditable}
+                            onchange={handleChangeAge}
                         />
                     </Item>
 
                 </Grid>
-                <Grid item xs={12} sx={{display: relDis}}>
+                <Grid item xs={12} sx={{display: props.relDis}}>
                     <Item>
                         <label className="label-align">Relationship to Mihasa</label>
                         <br/>
                         <CustomInput
                             type="text"
-                            placeholder={relationship}
+                            value={relationship}
                             size="20"
                             radius="8"
                             width="100%"
                             fontSize="18"
                             readOnly={!formEditable}
+                            onchange={handleChangeRelationship}
                         />
                     </Item>
                 </Grid>
 
             </Grid>
 
-            {password ? <Password/> : null}
+            {props.password ? <Password/> : null}
             <div className={formEditable ? "not-visible" : "visible"}>
                 <CustomButton
                     type="button"
