@@ -1,18 +1,12 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Welcome from "./view/welcomePage/Welcome";
-import SignIn from "./view/SignIn/SignIn";
+import AppRouter from "./router/AppRouter";
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/signIn" element={<SignIn />} />
-        </Routes>
-      </Router>
-    </div>
-  );
+const App = () => {
+    return (
+
+        <div className="App" style={{height: '100vh'}}>
+            <AppRouter/>
+        </div>
+    );
 }
 
 export default App;

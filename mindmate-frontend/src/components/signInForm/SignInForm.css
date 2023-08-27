@@ -31,7 +31,7 @@
     border-right: none;
     border-bottom: solid #656565 1px;
     padding: 3px 10px;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .text-line:focus {
@@ -42,7 +42,7 @@
 
 .sign-in-label {
     text-align: left;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .sign-in-main {
@@ -74,17 +74,21 @@
     .let-sign-font {
         font-size: 36px;
     }
-
 }
 @media screen and (max-width: 800px) {
     .let-sign-font {
-        font-size: 30px;
+        font-size: 24px;
     }
     .sign-in-label{
-        font-size:20px;
+        font-size:18px;
     }
     .text-line{
-        font-size:18px;
+        font-size:16px;
+    }
+    .sign-in-btn {
+        margin-top: 50px;
+        width: 70% !important;
+        font-size:18px !important;
     }
 
 }
