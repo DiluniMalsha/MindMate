@@ -1,9 +1,11 @@
 package com.uwu.emora.service.impl;
 
 import com.uwu.emora.dto.timetable.TimetableRecordDto;
+import com.uwu.emora.entity.Child;
 import com.uwu.emora.entity.Timetable;
 import com.uwu.emora.enums.Day;
 import com.uwu.emora.exception.CustomServiceException;
+import com.uwu.emora.repository.ChildRepository;
 import com.uwu.emora.repository.TimetableRepository;
 import com.uwu.emora.service.TimetableService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 public class TimetableServiceImpl implements TimetableService {
 
     private final TimetableRepository timetableRepository;
+    private final ChildRepository childRepository;
 
     @Override
     public void addTimetableRecord(TimetableRecordDto timeTableRecordDto) {
@@ -25,11 +28,15 @@ public class TimetableServiceImpl implements TimetableService {
                 .findTimetableByDayAndFromTimeAndToTime(
                         timeTableRecordDto.getDay(), timeTableRecordDto.getFromTime(), timeTableRecordDto.getToTime());
         if (existingRecord == null) {
+
+            Child child = childRepository.findById(timeTableRecordDto.getChildId()).orElseThrow(() -> new CustomServiceException("Child Not Found!"));
+
             Timetable timetable = new Timetable();
             timetable.setDay(timeTableRecordDto.getDay());
             timetable.setFromTime(timeTableRecordDto.getFromTime());
             timetable.setToTime(timeTableRecordDto.getToTime());
             timetable.setTask(timeTableRecordDto.getTask());
+            timetable.setChild(child);
             timetableRepository.save(timetable);
         } else {
             throw new CustomServiceException("There is an existing timetable record for the given timeslot!");
@@ -63,8 +70,9 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     @Override
-    public List<TimetableRecordDto> getTimetableRecordsForDay(Day day) {
-        return timetableRepository.findTimetablesByDayOrderByFromTime(day)
+    public List<TimetableRecordDto> getTimetableRecordsForDay(Day day,long id) {
+        Child child = childRepository.findById(id).orElseThrow(() -> new CustomServiceException("Child Not Found!"));
+        return timetableRepository.findTimetablesByDayAndChildOrderByFromTime(day,child)
                 .stream()
                 .map(tb ->
                         new TimetableRecordDto(
@@ -72,7 +80,7 @@ public class TimetableServiceImpl implements TimetableService {
                                 tb.getDay(),
                                 tb.getFromTime(),
                                 tb.getToTime(),
-                                tb.getTask()))
+                                tb.getTask(),id))
                 .collect(Collectors.toList());
 
     }

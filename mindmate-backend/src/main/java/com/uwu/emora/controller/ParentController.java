@@ -28,7 +28,7 @@ public class ParentController {
         return ResponseEntity.ok(new CommonResponse<>(true, parentDetails));
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/password/change")
     public ResponseEntity changePassword(@RequestBody PasswordChangeDto passwordChangeDto) {
         parentService.changePassword(passwordChangeDto);
         return ResponseEntity.ok(new CommonResponse<>(true, "Password Changed Successfully"));

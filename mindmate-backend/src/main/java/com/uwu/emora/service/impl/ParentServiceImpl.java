@@ -63,8 +63,9 @@ public class ParentServiceImpl implements ParentService {
         Optional<Parent> optionalParent = parentRepository.findById(passwordChangeDto.getId());
         if (optionalParent.isPresent()) {
             Parent parent = optionalParent.get();
-            if (passwordEncoder.matches(parent.getPassword(), passwordChangeDto.getCurrentPassword())) {
+            if (passwordEncoder.matches(passwordChangeDto.getCurrentPassword(), parent.getPassword())) {
                 parent.setPassword(passwordEncoder.encode(passwordChangeDto.getNewPassword()));
+                parentRepository.save(parent);
             } else {
                 throw new CustomServiceException("Current Password Doesn't Match!");
             }

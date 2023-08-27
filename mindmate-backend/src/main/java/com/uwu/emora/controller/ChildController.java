@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/child")
-@CrossOrigin
 public class ChildController {
 
     private final ChildService childService;
@@ -22,13 +21,13 @@ public class ChildController {
     }
 
     @PutMapping(value = "")
-    public ResponseEntity updateParent(@RequestBody ChildDto childDto) {
+    public ResponseEntity updateChild(@RequestBody ChildDto childDto) {
         childService.updateChild(childDto);
         return ResponseEntity.ok(new CommonResponse<>(true, "Child Details Updated Successfully"));
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity updateParent(@PathVariable("id") long id) {
+    public ResponseEntity getChildDetails(@PathVariable("id") long id) {
         ChildDto childDetails = childService.getChildDetails(id);
         return ResponseEntity.ok(new CommonResponse<>(true, childDetails));
     }

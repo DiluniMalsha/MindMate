@@ -17,8 +17,7 @@ import java.time.LocalDateTime;
 public class Scheduler {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     private LocalDate date;
     private String note;
