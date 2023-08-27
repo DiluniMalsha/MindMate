@@ -43,8 +43,10 @@ public class ParentServiceImpl implements ParentService {
         if (optionalParent.isPresent()) {
             Parent parent = optionalParent.get();
             ParentDto parentDto = new ParentDto();
+            parentDto.setId(parent.getId());
             parentDto.setFirstName(parent.getFirstName());
             parentDto.setLastName(parent.getLastName());
+            parentDto.setAddress(parent.getAddress());
             parentDto.setEmergencyContactNumber(parent.getContactNumber());
             parentDto.setGender(parent.getGender());
             parentDto.setAge(parent.getAge());
