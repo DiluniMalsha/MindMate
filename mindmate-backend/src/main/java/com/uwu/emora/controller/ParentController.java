@@ -16,14 +16,14 @@ public class ParentController {
 
     private final ParentService parentService;
 
-    @PutMapping(value = "/")
+    @PutMapping(value = "")
     public ResponseEntity updateParent(@RequestBody ParentDto parentDto) {
         parentService.updateParent(parentDto);
         return ResponseEntity.ok(new CommonResponse<>(true, "Parent Details Updated Successfully"));
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity updateParent(@PathVariable("id") long id) {
+    public ResponseEntity getParentDetails(@PathVariable("id") long id) {
         ParentDto parentDetails = parentService.getParentDetails(id);
         return ResponseEntity.ok(new CommonResponse<>(true, parentDetails));
     }
