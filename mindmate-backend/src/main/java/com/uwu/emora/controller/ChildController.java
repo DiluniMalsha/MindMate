@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/child")
+@CrossOrigin
 public class ChildController {
 
     private final ChildService childService;
@@ -20,7 +21,7 @@ public class ChildController {
         return ResponseEntity.ok("Hello Test");
     }
 
-    @PutMapping(value = "/")
+    @PutMapping(value = "")
     public ResponseEntity updateParent(@RequestBody ChildDto childDto) {
         childService.updateChild(childDto);
         return ResponseEntity.ok(new CommonResponse<>(true, "Child Details Updated Successfully"));
