@@ -1,5 +1,5 @@
 import "./Settings.css";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     MDBContainer,
     MDBTabs,
@@ -13,9 +13,14 @@ import Preferences from "../../components/preferences/Preferences";
 import Password from "../../components/form/Password";
 import {SettingsOutline} from "react-ionicons";
 import HeadingTitle from "../../components/title/HeadingTitle";
+import {getParentDetails} from "../../repository/perantRepository";
+import {addOneParent, selectByIdParent} from "../../store/slices/parentSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 const Settings = (props) => {
     const [justifyActive, setJustifyActive] = useState("tab1");
+    const parent = useSelector((state) => selectByIdParent(state, 1))
+    const dispatcher = useDispatch()
     const handleJustifyClick = (value) => {
         if (value === justifyActive) {
             return;
@@ -24,12 +29,22 @@ const Settings = (props) => {
         setJustifyActive(value);
     };
     let icon = <SettingsOutline
-                    color={'#4285f5'}
-                    title={"Settings"}
-                    height="20px"
-                    width="20px"
-                    style={{marginBottom: '5px'}}
-                />
+        color={'#4285f5'}
+        title={"Settings"}
+        height="20px"
+        width="20px"
+        style={{marginBottom: '5px'}}
+    />
+
+    useEffect(() => {
+        getParentDetails(1)
+            .then((res) => {
+                dispatcher(addOneParent({...res.data.body}))
+                console.log(res.data.body)
+            })
+            .catch(err => console.log(err))
+    })
+
     return (
         <section className="">
             <HeadingTitle title={'Settings'} icon={icon} ml={'60px'}/>
@@ -86,7 +101,7 @@ const Settings = (props) => {
                                                 relDis='none'
                                             />
                                         </div>
-                                        <div className="col-md child-settings-sections" style={{width:'98%'}}>
+                                        <div className="col-md child-settings-sections" style={{width: '98%'}}>
                                             <Preferences/>
                                         </div>
                                     </div>
@@ -99,17 +114,21 @@ const Settings = (props) => {
                                     <div className="row w-100">
                                         <div className="col-md child-settings-sections">
 
-                                            <FormComponent
-                                                title="My Profile"
-                                                firstname="Mihiri"
-                                                lastname='Peiris'
-                                                address='No. 64/5, Kuruduwaththa, Meepawala'
-                                                contactNo='+94 7190644'
-                                                age='12'
-                                                relDis='gride'
-                                                relationship='Mother'
-                                                display='ture'
-                                            />
+                                            {parent != null ?
+                                                <FormComponent
+                                                    title="My Profile"
+                                                    firstname={parent?.firstName}
+                                                    lastname={parent?.lastName}
+                                                    address={parent?.address}
+                                                    contactNo={parent?.emergencyContactNumber}
+                                                    age={parent?.age}
+                                                    relationship={parent?.relationship}
+                                                    genders={parent?.gender}
+                                                    relDis='gride'
+                                                    display='ture'
+                                                />
+                                                : null}
+
                                         </div>
                                         <div className="col-md child-settings-sections">
                                             {/*<FormComponent*/}
