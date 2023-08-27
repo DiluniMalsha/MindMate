@@ -23,28 +23,24 @@ public class SchedulerController {
         return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Added Successfully"));
     }
 
-    // TODO   View calendar with scheduled tasks
+    //   View calendar with scheduled tasks
     @GetMapping(value = "/tasks/{childId}")
     public ResponseEntity getScheduledTasks(@PathVariable("childId") long childId) {
         List<OneTimeSchedulerDto> tasks = schedulerService.getScheduledTasks(childId);
         return ResponseEntity.ok(new CommonResponse<>(true, tasks));
     }
 
-    // TODO  Edit scheduled tasks
+    //  Edit scheduled tasks
     @PutMapping(value = "/onetime/{childId}")
     public ResponseEntity editScheduledTask(@PathVariable("childId") long childId, @RequestBody OneTimeSchedulerDto dto) {
         schedulerService.editScheduledTask(dto, childId);
         return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Updated Successfully"));
     }
 
-    // TODO  Delete scheduled tasks
+    //  Delete scheduled tasks
     @DeleteMapping(value = "/onetime/{childId}/{reminderId}")
     public ResponseEntity deleteScheduledTask(@PathVariable("childId") long childId, @PathVariable("reminderId") String reminderId) {
         schedulerService.deleteScheduledTask(reminderId, childId);
         return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Deleted Successfully"));
     }
-
-    // TODO   Send early reminders for the tasks
-
-
 }
