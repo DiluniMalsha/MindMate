@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/scheduler")
@@ -14,10 +16,35 @@ public class SchedulerController {
 
     private final SchedulerService schedulerService;
 
+    //    Schedule new tasks
     @PostMapping(value = "/onetime/{childId}")
     public ResponseEntity scheduleOnetime(@PathVariable("childId") long childId, @RequestBody OneTimeSchedulerDto dto) {
         schedulerService.scheduleOnetime(dto, childId);
         return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Added Successfully"));
     }
+
+    // TODO   View calendar with scheduled tasks
+    @GetMapping(value = "/tasks/{childId}")
+    public ResponseEntity getScheduledTasks(@PathVariable("childId") long childId) {
+        List<OneTimeSchedulerDto> tasks = schedulerService.getScheduledTasks(childId);
+        return ResponseEntity.ok(new CommonResponse<>(true, tasks));
+    }
+
+    // TODO  Edit scheduled tasks
+    @PutMapping(value = "/onetime/{childId}")
+    public ResponseEntity editScheduledTask(@PathVariable("childId") long childId, @RequestBody OneTimeSchedulerDto dto) {
+        schedulerService.editScheduledTask(dto, childId);
+        return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Updated Successfully"));
+    }
+
+    // TODO  Delete scheduled tasks
+    @DeleteMapping(value = "/onetime/{childId}/{reminderId}")
+    public ResponseEntity deleteScheduledTask(@PathVariable("childId") long childId, @PathVariable("reminderId") String reminderId) {
+        schedulerService.deleteScheduledTask(reminderId, childId);
+        return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Deleted Successfully"));
+    }
+
+    // TODO   Send early reminders for the tasks
+
 
 }

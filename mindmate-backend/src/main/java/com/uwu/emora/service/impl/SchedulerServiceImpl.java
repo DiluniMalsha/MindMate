@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -90,5 +91,54 @@ public class SchedulerServiceImpl implements SchedulerService {
             //TODO
             //send reminder
         }
+    }
+
+    @Override
+    public List<OneTimeSchedulerDto> getScheduledTasks(long childId) {
+        return schedulerRepository.findAll().stream().map(s ->
+                new OneTimeSchedulerDto(s.getId(),
+                        s.getDate().toString(),
+                        s.getNote(),
+                        s.getRemindTime().toString())).collect(Collectors.toList());
+    }
+
+    @Override
+    public void editScheduledTask(OneTimeSchedulerDto dto, long childId) {
+        Child child = childRepository.findById(childId).orElseThrow(() -> new CustomServiceException("Child not found"));
+        Scheduler scheduler = schedulerRepository.findById(dto.getId()).orElseThrow(() -> new CustomServiceException("One Time Scheduler Not Found!"));
+
+        String str = dto.getDate() + " " + dto.getRemindTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime remindDateTime = LocalDateTime.parse(str, formatter);
+
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dto.getDate(), formatter);
+
+        TimeZone timeZone = TimeZone.getTimeZone("Asia/Kolkata");
+        ZoneId zoneId = timeZone.toZoneId();
+        ZonedDateTime zonedRemindDateTime = ZonedDateTime.of(remindDateTime, zoneId);
+
+        if (scheduler.getRemindTime().compareTo(remindDateTime) != 0) {
+            reminderScheduler.deleteSchedule(scheduler.getId());
+            reminderScheduler.schedule(ReminderType.ONETIME, scheduler.getId(), zonedRemindDateTime);
+        }
+
+        //Update database
+        scheduler.setNote(dto.getNote());
+        scheduler.setDate(date);
+        scheduler.setRemindTime(remindDateTime);
+        scheduler.setChild(child);
+        schedulerRepository.save(scheduler);
+    }
+
+    @Override
+    public void deleteScheduledTask(String reminderId, long childId) {
+        Child child = childRepository.findById(childId).orElseThrow(() -> new CustomServiceException("Child not found"));
+        Scheduler scheduler = schedulerRepository.findById(reminderId).orElseThrow(() -> new CustomServiceException("One Time Scheduler Not Found!"));
+
+        reminderScheduler.deleteSchedule(scheduler.getId());
+
+        //Update database
+        schedulerRepository.delete(scheduler);
     }
 }

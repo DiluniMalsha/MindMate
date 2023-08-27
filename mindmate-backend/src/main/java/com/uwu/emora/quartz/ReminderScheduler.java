@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
-import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -27,6 +26,17 @@ public class ReminderScheduler {
 
     }
 
+    public void deleteSchedule(String scheduleId) {
+        try {
+            scheduler.deleteJob(new JobKey(scheduleId, "reminder-jobs"));
+            TriggerKey triggerKey = new TriggerKey(scheduleId, "reminder-jobs");
+            scheduler.unscheduleJob(triggerKey);
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private JobDetail buildJobDetail(ReminderType type, String id) {
 
         JobDataMap jobDataMap = new JobDataMap();
@@ -34,7 +44,7 @@ public class ReminderScheduler {
         jobDataMap.put("reminderId", id);
 
         return JobBuilder.newJob(ReminderJob.class)
-                .withIdentity(UUID.randomUUID().toString(), "reminder-jobs")
+                .withIdentity(id, "reminder-jobs")
                 .withDescription("Send reminder Job")
                 .usingJobData(jobDataMap)
                 .storeDurably()
