@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/scheduler")
+@CrossOrigin
 public class SchedulerController {
 
     private final SchedulerService schedulerService;

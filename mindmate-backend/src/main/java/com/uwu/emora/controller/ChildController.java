@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/child")
+@CrossOrigin
 public class ChildController {
 
     private final ChildService childService;
