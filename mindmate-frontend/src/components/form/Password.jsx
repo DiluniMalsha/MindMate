@@ -51,23 +51,34 @@ const Password = ({
             if (newPassword === reNewPassword) {
                 Swal.fire({
                     title: 'Do you want to save the changes?',
-                    showDenyButton: true,
+                    icon: 'question',
+                    // showDenyButton: true,
                     showCancelButton: true,
                     confirmButtonText: 'Save',
-                    denyButtonText: `Don't save`,
+                    // denyButtonText: `Don't save`,
                 }).then((result) => {
                     if (result.isConfirmed) {
                         updateParentPassword(passwordDetails).then((res) => {
                             if (res.status === 200) {
+                                console.log(res.data)
                                 console.log("pass")
                                 // dispatcher(updatePassword({...res.data}));
-                                Swal.fire('Password Changed Successful!', '', 'success').then((result) => {
+                                if (res.data.success === true) {
+                                    Swal.fire('Success', res.data.message, 'success').then((result) => {
+                                        if (result.isConfirmed) {
+                                            localStorage.removeItem("loggedUserToken");
+                                            window.location.reload(true);
+                                        }
+                                    })
+                                } else {
+                                    Swal.fire('Error', res.data.message, 'error').then((result) => {
+                                    })
+                                }
+                            } else {
+                                Swal.fire('Error', "Something Went Wrong", 'error').then((result) => {
                                     if (result.isConfirmed) {
-                                        window.location.reload(true);
                                     }
                                 })
-                            } else {
-                                console.log("error")
                             }
                         })
                     } else if (result.isDenied) {

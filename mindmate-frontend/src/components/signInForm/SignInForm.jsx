@@ -10,6 +10,7 @@ import CustomButton from "../button/CustomButton";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 // import {BASE_URL} from "../../utils/constants";
 
 
@@ -30,7 +31,7 @@ function SignInFrom(setToken) {
         const headers = {
             'Authorization': 'Basic cGFyZW50Og=='
         }
-        axios.post("http://localhost:8080/oauth/token",data, {headers} )
+        axios.post("http://localhost:8080/oauth/token", data, {headers})
             .then((res) => {
                 localStorage.setItem("loggedUserToken", res.data.access_token);
                 window.location.replace("/")
@@ -38,8 +39,8 @@ function SignInFrom(setToken) {
             .catch(err => {
                 console.error(err)
                 Swal.fire(
-                    'Failed',
-                    err,
+                    'Failed!',
+                    "You have entered an invalid username or password!",
                     'error'
                 ).then(r => {
                     // window.location.reload(false)
@@ -90,14 +91,14 @@ function SignInFrom(setToken) {
                       <span className="icon-class" style={{cursor: "cursor"}}>
                         <Icon icon={checkIcon} size={25}/>
                       </span>
-                <MDBInput
-                    wrapperClass="mb-4"
-                    id="userName"
-                    type="text"
-                    className="text-line"
-                    placeholder="mihiripeiris"
-                    onChange={getUserName}
-                />
+                    <MDBInput
+                        wrapperClass="mb-4"
+                        id="userName"
+                        type="text"
+                        className="text-line"
+                        placeholder="mihiripeiris"
+                        onChange={getUserName}
+                    />
                 </div>
 
                 <label className="sign-in-label">Password</label>
@@ -120,17 +121,17 @@ function SignInFrom(setToken) {
                 </Link>
 
                 <div className="text-center pt-1 mb-5 pb-1">
-                        <CustomButton
-                            variant="primary"
-                            width="410"
-                            radius="40"
-                            fontSize="24"
-                            height="sm"
-                            className="sign-in-btn"
-                            onclick={handleSubmit}
-                        >
-                            Sign in
-                        </CustomButton>
+                    <CustomButton
+                        variant="primary"
+                        width="410"
+                        radius="40"
+                        fontSize="24"
+                        height="sm"
+                        className="sign-in-btn"
+                        onclick={handleSubmit}
+                    >
+                        Sign in
+                    </CustomButton>
                 </div>
             </div>
         </div>

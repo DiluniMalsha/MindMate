@@ -8,9 +8,9 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {useLocation} from "react-router";
-// import logo from "../../assets/logo/Logo.png";
 import emora from "../../assets/logo/EmoraNew.png";
-import { LogOutOutline } from 'react-ionicons'
+import {LogOutOutline} from 'react-ionicons'
+
 const NavigationPanel = (props) => {
     const location = useLocation();
     const currentPath = location.pathname;
@@ -41,6 +41,12 @@ const NavigationPanel = (props) => {
             transform: "rotate(180deg)",
         },
     }));
+
+    function handleSignOutClick() {
+        localStorage.removeItem("loggedUserToken");
+        window.location.reload(true);
+    }
+
     return (
         <>
             <div className="side-bar">
@@ -82,7 +88,7 @@ const NavigationPanel = (props) => {
                     ))}
                 </div>
             </div>
-            <Link to="/signIn" style={{textDecoration: "none"}}>
+            <span style={{textDecoration: "none", cursor: "pointer"}} onClick={handleSignOutClick}>
 
                 <span className="sign-out-btn">
                     <LogOutOutline
@@ -93,7 +99,7 @@ const NavigationPanel = (props) => {
                     <br/>
                     Sign Out</span>
 
-            </Link>
+            </span>
         </>
     );
 }
