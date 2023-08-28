@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TimetableRecordDto {
-    private long id;
+    private String id;
     private Day day;
     private String fromTime;
     private String toTime;
