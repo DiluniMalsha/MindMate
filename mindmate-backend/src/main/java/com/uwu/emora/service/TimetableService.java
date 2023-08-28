@@ -12,7 +12,9 @@ public interface TimetableService {
 
     void updateTimetableRecord(TimetableRecordDto timeTableRecordDto);
 
-    void deleteTimetableRecord(long id);
+    void deleteTimetableRecord(String id);
 
-    List<TimetableRecordDto> getTimetableRecordsForDay(Day day,long id);
+    List<TimetableRecordDto> getTimetableRecordsForDay(Day day,long childId);
+
+    void sendTimetableReminder(String reminderId);
 }

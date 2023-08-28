@@ -16,8 +16,7 @@ import javax.persistence.*;
 public class Timetable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     @Enumerated(EnumType.STRING)
     private Day day;

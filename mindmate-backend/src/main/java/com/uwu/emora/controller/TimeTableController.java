@@ -34,15 +34,15 @@ public class TimeTableController {
 
     //    Delete timetable records
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity deleteTimetableRecord(@PathVariable("id") long id) {
+    public ResponseEntity deleteTimetableRecord(@PathVariable("id") String id) {
         timetableService.deleteTimetableRecord(id);
         return ResponseEntity.ok(new CommonResponse<>(true, "Timetable Record Deleted Successfully"));
     }
 
     //    View timetable
-    @GetMapping(value = "/{day}/{id}")
-    public ResponseEntity getTimetableRecordsForDay(@PathVariable("day") Day day,@PathVariable("id") long id) {
-        List<TimetableRecordDto> timetableRecordsForDay = timetableService.getTimetableRecordsForDay(day,id);
+    @GetMapping(value = "/{day}/{childId}")
+    public ResponseEntity getTimetableRecordsForDay(@PathVariable("day") Day day,@PathVariable("childId") long childId) {
+        List<TimetableRecordDto> timetableRecordsForDay = timetableService.getTimetableRecordsForDay(day,childId);
         return ResponseEntity.ok(new CommonResponse<>(true, timetableRecordsForDay));
     }
 

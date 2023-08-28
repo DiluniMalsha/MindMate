@@ -3,7 +3,6 @@ package com.uwu.emora.service.impl;
 import com.uwu.emora.dto.scheduler.OneTimeSchedulerDto;
 import com.uwu.emora.entity.Child;
 import com.uwu.emora.entity.Scheduler;
-import com.uwu.emora.enums.ReminderType;
 import com.uwu.emora.exception.CustomServiceException;
 import com.uwu.emora.quartz.ReminderScheduler;
 import com.uwu.emora.repository.ChildRepository;
@@ -58,7 +57,7 @@ public class SchedulerServiceImpl implements SchedulerService {
             }
         }
 
-        reminderScheduler.schedule(ReminderType.ONETIME, reminderId, dateTime);
+        reminderScheduler.schedule(reminderId, dateTime);
 
         //save to database
         Scheduler scheduler = new Scheduler();
@@ -120,7 +119,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
         if (scheduler.getRemindTime().compareTo(remindDateTime) != 0) {
             reminderScheduler.deleteSchedule(scheduler.getId());
-            reminderScheduler.schedule(ReminderType.ONETIME, scheduler.getId(), zonedRemindDateTime);
+            reminderScheduler.schedule(scheduler.getId(), zonedRemindDateTime);
         }
 
         //Update database
