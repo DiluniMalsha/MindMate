@@ -11,7 +11,7 @@ import {updateParentDetails} from "../../repository/perantRepository";
 import {updateParent} from "../../store/slices/parentSlice"
 import {updateChild} from "../../store/slices/childSlice"
 import {useDispatch} from "react-redux";
-import {getChildDetails, updateChildDetails} from "../../repository/childRepository";
+import {updateChildDetails} from "../../repository/childRepository";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',

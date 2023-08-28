@@ -8,8 +8,8 @@ const updateParentDetails = (Details) => {
     return Repository.put("/parent",Details)
 }
 
-const updateParentPassword = (id) => {
-    return Repository.post("/parent/"+id)
+const updateParentPassword = (password) => {
+    return Repository.put("/parent/password/change",password)
 }
 
 export {
