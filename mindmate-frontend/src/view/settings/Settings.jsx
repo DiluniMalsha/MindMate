@@ -50,7 +50,7 @@ const Settings = (props) => {
     })
 
     useEffect(() => {
-        getChildDetails(1)
+        getChildDetails(1,)
             .then((res) => {
                 dispatcher(addOneChild({...res.data.body}))
                 console.log(res.data.body)

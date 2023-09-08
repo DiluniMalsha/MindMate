@@ -84,7 +84,14 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
                     from: 1690554600000,
                     to: 1690561800000,
                     remindTime: 1690551000000
+                },
+                {
+                    note: 'Special Dinner',
+                    from: 1690554600000,
+                    to: 1690561800000,
+                    remindTime: 1690551000000
                 }
+
             ]
         },
         {
@@ -141,69 +148,69 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
                     <Box sx={{flexGrow: 1}}>
                         <Grid container spacing={{xs: 1, sm: 2, md: 2}}>
                             {eventsAvailable &&
-                                <>
-                                    {events.map((e) => (
-                                        <Grid item xs={12} lg={12}>
-                                            <Item
-                                                sx={{
-                                                    textAlign: "left",
-                                                    marginBottom: "0",
-                                                    fontSize: "20px",
-                                                    bottom: "0",
-                                                }}
-                                            >
-                                                <div className="item-text-align">
-                                                    <div className="row w-100">
-                                                        <div className="col-xl-10 col-9">
-                                                            <div>{e.note}</div>
-                                                            <div
-                                                                className="eventTime">From {getTimeString(e.from)} to {getTimeString(e.to)}</div>
-                                                            <div className="eventRemindTime">Remind Earlier
-                                                                At {getTimeString(e.remindTime)}</div>
-                                                        </div>
-                                                        <div className="col-xl-1 col-1 "
-                                                             style={{cursor: "pointer", paddingRight: '10px'}}>
-                                                            <CreateOutline
-                                                                color={"#a3a3a3"}
-                                                                height="30px"
-                                                                width="30px"
-                                                                onClick={handlePopUp}
-                                                                className="icon-size"
-                                                            />
-                                                        </div>
-                                                        <div className="col-1 deleteIcon" style={{cursor: "pointer"}}>
-                                                            <TrashOutline
-                                                                onClick={handleDeleteRow}
-                                                                color={"#ff0000"}
-                                                                height="30px"
-                                                                width="30px"
-                                                                className="icon-size"
-                                                            />
-                                                        </div>
+                            <>
+                                {events.map((e) => (
+                                    <Grid item xs={12} lg={12}>
+                                        <Item
+                                            sx={{
+                                                textAlign: "left",
+                                                marginBottom: "0",
+                                                fontSize: "20px",
+                                                bottom: "0",
+                                            }}
+                                        >
+                                            <div className="item-text-align">
+                                                <div className="row w-100">
+                                                    <div className="col-xl-10 col-9">
+                                                        <div>{e.note}</div>
+                                                        <div
+                                                            className="eventTime">From {getTimeString(e.from)} to {getTimeString(e.to)}</div>
+                                                        <div className="eventRemindTime">Remind Earlier
+                                                            At {getTimeString(e.remindTime)}</div>
+                                                    </div>
+                                                    <div className="col-xl-1 col-1 "
+                                                         style={{cursor: "pointer", paddingRight: '10px'}}>
+                                                        <CreateOutline
+                                                            color={"#a3a3a3"}
+                                                            height="30px"
+                                                            width="30px"
+                                                            onClick={handlePopUp}
+                                                            className="icon-size"
+                                                        />
+                                                    </div>
+                                                    <div className="col-1 deleteIcon" style={{cursor: "pointer"}}>
+                                                        <TrashOutline
+                                                            onClick={handleDeleteRow}
+                                                            color={"#ff0000"}
+                                                            height="30px"
+                                                            width="30px"
+                                                            className="icon-size"
+                                                        />
                                                     </div>
                                                 </div>
-                                            </Item>
-                                        </Grid>
-                                    ))}
-                                </>
+                                            </div>
+                                        </Item>
+                                    </Grid>
+                                ))}
+                            </>
                             }
                             {!eventsAvailable &&
-                                <Grid item xs={12} lg={12}>
-                                    <Item
-                                        sx={{
-                                            textAlign: "left",
-                                            marginBottom: "0",
-                                            fontSize: "20px",
-                                            bottom: "0",
-                                        }}
-                                    >
-                                        <div className="item-text-align">
-                                            <div className="row w-100">
-                                                <div className="col-xl-12 col-12">No Events Available</div>
-                                            </div>
+                            <Grid item xs={12} lg={12}>
+                                <Item
+                                    sx={{
+                                        textAlign: "left",
+                                        marginBottom: "0",
+                                        fontSize: "20px",
+                                        bottom: "0",
+                                    }}
+                                >
+                                    <div className="item-text-align">
+                                        <div className="row w-100">
+                                            <div className="col-xl-12 col-12">No Events Available</div>
                                         </div>
-                                    </Item>
-                                </Grid>
+                                    </div>
+                                </Item>
+                            </Grid>
                             }
                         </Grid>
 
