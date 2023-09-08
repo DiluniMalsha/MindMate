@@ -6,27 +6,64 @@ import {
     MDBTabsLink,
     MDBTabsPane,
 } from "mdb-react-ui-kit";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./DailyTimetable.css";
 import CustomButton from "../button/CustomButton";
 import TimetableRecode from "./TimetableRecode";
 import AddNewRecord from "../addNewRecord/AddNewRecord";
+import {getTimetableRecordsForDay} from "../../repository/timeTableRepository"
+import {useDispatch, useSelector} from "react-redux";
+import {
+    addManyDailyTimeTable,
+    selectAllDailyTimeTables,
+} from "../../store/slices/dailyTimeTableSlice"
 
 const DailyTimetable = (props) => {
     const [justifyActive, setJustifyActive] = useState("tab1");
+    let [day, setDay] = useState('MON')
+    const [popupVisible, setPopupVisible] = useState(false);
+    const dispatcher = useDispatch()
+    const taskList = useSelector(selectAllDailyTimeTables)
 
     const handleJustifyClick = (value) => {
         if (value === justifyActive) {
             return;
-        }
 
+        }
         setJustifyActive(value);
     };
 
-    const [popupVisible, setPopupVisible] = useState(false);
     const handlePopUp = (value) => {
         setPopupVisible(!popupVisible);
     };
+
+    useEffect(() => {
+        getTimetableRecordsForDay(day, 1)
+            .then((res) => {
+                dispatcher(addManyDailyTimeTable(res.data.body))
+            })
+            .catch(err => console.log(err))
+    }, [day, dispatcher])
+
+    function getTaskList(days) {
+        return taskList.slice(0, taskList.length).map((items) => {
+            const {fromTime, toTime, task, day, id} = items
+            console.log(items)
+            if (day === days) {
+                return (
+                    <TimetableRecode
+                        day={day}
+                        startTime={fromTime}
+                        endTime={toTime}
+                        description={task}
+                        id = {id}
+                    />
+                );
+            }
+
+        });
+    }
+
     return (
         <div className="align-popUp">
             <div className="mt-4">
@@ -50,7 +87,7 @@ const DailyTimetable = (props) => {
                         <MDBTabsItem>
                             <div className="days">
                                 <MDBTabsLink
-                                    onClick={() => handleJustifyClick("tab1")}
+                                    onClick={() => handleJustifyClick("tab1", setDay("MON"))}
                                     active={justifyActive === "tab1"}
                                     className="selector-btn pre-selection-btn day spe-day"
                                 >
@@ -61,7 +98,7 @@ const DailyTimetable = (props) => {
                         <MDBTabsItem>
                             <div className="days">
                                 <MDBTabsLink
-                                    onClick={() => handleJustifyClick("tab2")}
+                                    onClick={() => handleJustifyClick("tab2", setDay("TUE"))}
                                     active={justifyActive === "tab2"}
                                     className="selector-btn pre-selection-btn pre-btn-bord day"
                                 >
@@ -72,7 +109,7 @@ const DailyTimetable = (props) => {
                         <MDBTabsItem>
                             <div className="days">
                                 <MDBTabsLink
-                                    onClick={() => handleJustifyClick("tab3")}
+                                    onClick={() => handleJustifyClick("tab3", setDay("WED"))}
                                     active={justifyActive === "tab3"}
                                     className="selector-btn pre-selection-btn pre-btn-bord day spe-day"
                                 >
@@ -83,7 +120,7 @@ const DailyTimetable = (props) => {
                         <MDBTabsItem>
                             <div className="days">
                                 <MDBTabsLink
-                                    onClick={() => handleJustifyClick("tab4")}
+                                    onClick={() => handleJustifyClick("tab4", setDay("THU"))}
                                     active={justifyActive === "tab4"}
                                     className="selector-btn pre-selection-btn pre-btn-bord day"
                                 >
@@ -94,7 +131,7 @@ const DailyTimetable = (props) => {
                         <MDBTabsItem>
                             <div className="days">
                                 <MDBTabsLink
-                                    onClick={() => handleJustifyClick("tab5")}
+                                    onClick={() => handleJustifyClick("tab5", setDay("FRI"))}
                                     active={justifyActive === "tab5"}
                                     className="selector-btn pre-selection-btn pre-btn-bord day"
                                 >
@@ -105,7 +142,7 @@ const DailyTimetable = (props) => {
                         <MDBTabsItem>
                             <div className="days">
                                 <MDBTabsLink
-                                    onClick={() => handleJustifyClick("tab6")}
+                                    onClick={() => handleJustifyClick("tab6", setDay("SAT"))}
                                     active={justifyActive === "tab6"}
                                     className="selector-btn pre-selection-btn pre-btn-bord day"
                                 >
@@ -116,7 +153,7 @@ const DailyTimetable = (props) => {
                         <MDBTabsItem>
                             <div className="days">
                                 <MDBTabsLink
-                                    onClick={() => handleJustifyClick("tab7")}
+                                    onClick={() => handleJustifyClick("tab7", setDay("SUN"))}
                                     active={justifyActive === "tab7"}
                                     className="selector-btn pre-selection-btn parant-btn day"
                                 >
@@ -136,116 +173,68 @@ const DailyTimetable = (props) => {
                             + Add New Record
                         </CustomButton>
                     </MDBTabs>
+
                     <MDBTabsContent>
                         <MDBTabsPane
                             show={justifyActive === "tab1"}
                             className="center-title"
                         >
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
-                        </MDBTabsPane>
+                            {
+                                getTaskList("MON")
+                            }
+                        < /MDBTabsPane>
+
                         <MDBTabsPane
                             show={justifyActive === "tab2"}
                             className="center-title"
                         >
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
+                            {
+                                getTaskList("TUE")
+                            }
+
                         </MDBTabsPane>
+
                         <MDBTabsPane
                             show={justifyActive === "tab3"}
                             className="center-title"
                         >
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
+                            {
+                                getTaskList("WED")
+                            }
                         </MDBTabsPane>
+
+
                         <MDBTabsPane
                             show={justifyActive === "tab4"}
                             className="center-title"
                         >
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
+                            {
+                                getTaskList("THU")
+                            }
                         </MDBTabsPane>
                         <MDBTabsPane
                             show={justifyActive === "tab5"}
                             className="center-title"
                         >
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
+                            {
+                                getTaskList("FRI")
+                            }
                         </MDBTabsPane>
                         <MDBTabsPane
                             show={justifyActive === "tab6"}
                             className="center-title"
                         >
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
+                            {
+                                getTaskList("SAT")
+                            }
                         </MDBTabsPane>
                         <MDBTabsPane
                             show={justifyActive === "tab7"}
                             className="center-title"
                         >
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
-                            <TimetableRecode
-                                startTime="08.00 a.m"
-                                endTime="10.00 a.m"
-                                description="Reading Books"
-                            />
+                            {
+                                getTaskList("SUN")
+                            }
                         </MDBTabsPane>
                     </MDBTabsContent>
                 </MDBContainer>
@@ -255,6 +244,7 @@ const DailyTimetable = (props) => {
                     title="Add New Timetable Record"
                     swalTitle="Record has been added successfully!"
                     id="search-student-div"
+                    day="MON"
                     setPopupVisible={setPopupVisible}
                 />
             )}
