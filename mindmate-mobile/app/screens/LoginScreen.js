@@ -19,10 +19,7 @@ function LoginScreen({ navigation }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
-  const onChangeUsername = (text) => setUserName(text);
-  const onChangePassword = (text) => setPassword(text);
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = () => {
     login(username, password);
   };
 
@@ -40,7 +37,7 @@ function LoginScreen({ navigation }) {
             autoCorrect={false}
             textContentType={"name"}
             value={username}
-            onChangeText={onChangeUsername}
+            onChangeText={(text) => setUserName(text)}
           ></TextInput>
           <Text style={styles.signInFormText}>Password</Text>
           <TextInput
@@ -51,7 +48,7 @@ function LoginScreen({ navigation }) {
             secureTextEntry={true}
             textContentType={"password"}
             value={password}
-            onChangeText={onChangePassword}
+            onChangeText={(text) => setPassword(text)}
           ></TextInput>
           <TouchableOpacity
             style={styles.forgotPassword}

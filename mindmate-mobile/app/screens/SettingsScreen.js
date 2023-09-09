@@ -9,6 +9,8 @@ import ChildProfileComponent from "../components/ChildProfileComponent";
 import { getParentDetails } from "../repository/ParentRepository";
 import { useDispatch, useSelector } from "react-redux";
 import { addParent } from "../store/slices/parentSlice";
+import { getChildDetails } from "../repository/ChildRepository";
+import { addChild } from "../store/slices/childSlice";
 
 const ChildProfileRoute = () => <ChildProfileComponent />;
 
@@ -29,6 +31,12 @@ function SettingsScreen(props) {
     getParentDetails(1)
       .then((res) => {
         dispatcher(addParent({ ...res.data.body }));
+      })
+      .catch((err) => console.log(err));
+
+    getChildDetails(1)
+      .then((res) => {
+        dispatcher(addChild({ ...res.data.body }));
       })
       .catch((err) => console.log(err));
   }, []);

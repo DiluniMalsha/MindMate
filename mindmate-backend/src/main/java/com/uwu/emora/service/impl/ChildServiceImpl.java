@@ -39,6 +39,7 @@ public class ChildServiceImpl implements ChildService {
         if (optionalChild.isPresent()) {
             Child child = optionalChild.get();
             ChildDto childDto = new ChildDto();
+            childDto.setId(child.getId());
             childDto.setFirstName(child.getFirstName());
             childDto.setLastName(child.getLastName());
             childDto.setEmergencyContactNumber(child.getEmergencyContactNumber());

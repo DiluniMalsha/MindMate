@@ -6,15 +6,24 @@ import {
   StyleSheet,
   ScrollView,
   TouchableHighlight,
+  Alert,
+  DevSettings,
 } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
 import colors from "../config/colors";
 import { AuthContext } from "../context/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
-import { selectParentById } from "../store/slices/parentSlice";
+import {
+  addParent,
+  selectParentById,
+  updateParent,
+} from "../store/slices/parentSlice";
+import { updateParentDetails } from "../repository/ParentRepository";
 
 function UserProfileComponent() {
+  const dispatcher = useDispatch();
+
   const parent = useSelector((state) => selectParentById(state, 1));
 
   const { logout } = useContext(AuthContext);
@@ -27,19 +36,80 @@ function UserProfileComponent() {
   const [age, setAge] = useState("");
   const [relationship, setRelationship] = useState("");
 
-  console.log(parent);
-
   useEffect(() => {
     if (parent) {
-      setFirstName(parent.firstName);
-      setLastName(parent.lastName);
-      setAddress(parent.address);
-      setEmergencyContactNumber(parent.emergencyContactNumber);
-      setGender(parent.gender);
-      setAge(parent.age);
-      setRelationship(parent.relationship);
+      refresh(parent);
     }
   }, [parent]);
+
+  const refresh = (parent) => {
+    setFirstName(parent.firstName);
+    setLastName(parent.lastName);
+    setAddress(parent.address);
+    setEmergencyContactNumber(parent.emergencyContactNumber);
+    setGender(parent.gender);
+    setAge(parent.age);
+    setRelationship(parent.relationship);
+  };
+
+  const sendUpdateRequest = async (e) => {
+    const parentDetails = {
+      id: parent.id,
+      firstName: firstName,
+      lastName: lastName,
+      address: address,
+      emergencyContactNumber: emergencyContactNumber,
+      gender: gender,
+      age: age,
+      relationship: relationship,
+    };
+
+    updateParentDetails(parentDetails)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          if (res.data.success) {
+            dispatcher(updateParent(parentDetails));
+            Alert.alert("Success", res.data.message, [
+              {
+                text: "Ok",
+                onPress: () => refresh(parentDetails),
+                style: "default",
+              },
+            ]);
+          } else {
+            Alert.alert("Error", res.data.message, [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel",
+              },
+            ]);
+          }
+        } else {
+          Alert.alert("Error", "Something Went Wrong!", [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel",
+            },
+          ]);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleParentUpdateSubmit = async (e) => {
+    Alert.alert("Are You Sure?", "Do you want to update thr parent details?", [
+      {
+        text: "Yes",
+        onPress: () => sendUpdateRequest(),
+        style: "cancel",
+      },
+      { text: "No", onPress: () => refresh(parent) },
+    ]);
+  };
+
   return (
     <ScrollView style={styles.scrollView}>
       <View>
@@ -144,7 +214,7 @@ function UserProfileComponent() {
           </View>
           <TouchableHighlight
             style={styles.profileButton}
-            onPress={() => console.log("Update Details Button Pressed")}
+            onPress={handleParentUpdateSubmit}
           >
             <Text style={styles.profileButtonText}>Update Details</Text>
           </TouchableHighlight>

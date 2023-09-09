@@ -19,23 +19,3 @@ export const { selectById: selectParentById } = parentState.getSelectors(
   (store) => store.parent
 );
 export default parentSlice.reducer;
-
-// import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-
-// const parentState = createEntityAdapter({ selectId: (parent) => parent.id });
-
-// const initialState = parentState.getInitialState();
-
-// export const parentSlice = createSlice({
-//   name: "parent",
-//   initialState,
-//   reducers: {
-//     setParent: parentState.setOne,
-//   },
-// });
-
-// export const { setParent } = parentSlice.actions;
-// export const { selectById: selectByIdParent } = parentState.getSelectors(
-//   (store) => store.parent
-// );
-// export default parentSlice.reducer;

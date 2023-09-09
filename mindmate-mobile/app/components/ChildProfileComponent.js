@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,23 +7,98 @@ import {
   ScrollView,
   TouchableHighlight,
   Dimensions,
-  useWindowDimensions,
   Image,
+  Alert,
 } from "react-native";
-
 import { TabBar, TabView } from "react-native-tab-view";
-
 import { Picker } from "@react-native-picker/picker";
-
 import MoodPreferencesComponent from "../components/MoodPreferencesComponent";
-
 import colors from "../config/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { selectChildById, updateChild } from "../store/slices/childSlice";
+import { updateChildDetails } from "../repository/ChildRepository";
 
 function ChildProfileComponent(props) {
-  const [selectedGender, setSelectedGender] = useState();
+  const dispatcher = useDispatch();
+  const child = useSelector((state) => selectChildById(state, 1));
 
-  //for preferences tab view
-  const layout = useWindowDimensions();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [emergencyContactNumber, setEmergencyContactNumber] = useState("");
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
+
+  useEffect(() => {
+    if (child) {
+      refresh(child);
+    }
+  }, [child]);
+
+  const refresh = (child) => {
+    setFirstName(child.firstName);
+    setLastName(child.lastName);
+    setAddress(child.address);
+    setEmergencyContactNumber(child.emergencyContactNumber);
+    setGender(child.gender);
+    setAge(child.age);
+  };
+
+  const sendUpdateRequest = async (e) => {
+    const childDetails = {
+      id: child.id,
+      firstName: firstName,
+      lastName: lastName,
+      address: address,
+      emergencyContactNumber: emergencyContactNumber,
+      gender: gender,
+      age: age,
+    };
+
+    updateChildDetails(childDetails)
+      .then((res) => {
+        if (res.status === 200) {
+          if (res.data.success) {
+            dispatcher(updateChild(childDetails));
+            Alert.alert("Success", res.data.message, [
+              {
+                text: "Ok",
+                onPress: () => refresh(childDetails),
+                style: "default",
+              },
+            ]);
+          } else {
+            Alert.alert("Error", res.data.message, [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel",
+              },
+            ]);
+          }
+        } else {
+          Alert.alert("Error", "Something Went Wrong!", [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel",
+            },
+          ]);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleChildUpdateSubmit = async (e) => {
+    Alert.alert("Are You Sure?", "Do you want to update the child details?", [
+      {
+        text: "Yes",
+        onPress: () => sendUpdateRequest(),
+        style: "cancel",
+      },
+      { text: "No", onPress: () => refresh(child) },
+    ]);
+  };
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
@@ -72,7 +147,9 @@ function ChildProfileComponent(props) {
     <ScrollView style={styles.scrollView}>
       <View>
         <View style={styles.profile}>
-          <Text style={styles.profileTitle}>Mihasa's Profile</Text>
+          <Text style={styles.profileTitle}>
+            {child === undefined ? "Child" : firstName}'s Profile
+          </Text>
           <View style={styles.profileForm}>
             <View style={styles.row}>
               <View style={styles.formFieldHalf}>
@@ -83,6 +160,8 @@ function ChildProfileComponent(props) {
                   autoCapitalize={"none"}
                   autoCorrect={false}
                   textContentType={"name"}
+                  value={firstName}
+                  onChangeText={(text) => setFirstName(text)}
                 ></TextInput>
               </View>
 
@@ -94,6 +173,8 @@ function ChildProfileComponent(props) {
                   autoCapitalize={"none"}
                   autoCorrect={false}
                   textContentType={"name"}
+                  value={lastName}
+                  onChangeText={(text) => setLastName(text)}
                 ></TextInput>
               </View>
             </View>
@@ -106,6 +187,8 @@ function ChildProfileComponent(props) {
                 autoCapitalize={"none"}
                 autoCorrect={false}
                 textContentType={"name"}
+                value={address}
+                onChangeText={(text) => setAddress(text)}
               ></TextInput>
             </View>
 
@@ -117,6 +200,8 @@ function ChildProfileComponent(props) {
                 autoCapitalize={"none"}
                 autoCorrect={false}
                 textContentType={"name"}
+                value={emergencyContactNumber}
+                onChangeText={(text) => setEmergencyContactNumber(text)}
               ></TextInput>
             </View>
 
@@ -125,13 +210,13 @@ function ChildProfileComponent(props) {
                 <Text style={styles.label}>Gender</Text>
                 <View style={styles.formPicker}>
                   <Picker
-                    selectedValue={selectedGender}
+                    selectedValue={gender}
                     onValueChange={(itemValue, itemIndex) =>
-                      setSelectedGender(itemValue)
+                      setGender(itemValue)
                     }
                   >
-                    <Picker.Item label="Male" value="Male" />
-                    <Picker.Item label="Female" value="Female" />
+                    <Picker.Item label="Male" value="MALE" />
+                    <Picker.Item label="Female" value="FEMALE" />
                   </Picker>
                 </View>
               </View>
@@ -143,23 +228,38 @@ function ChildProfileComponent(props) {
                   autoCapitalize={"none"}
                   autoCorrect={false}
                   keyboardType="numeric"
+                  value={age.toString()}
+                  onChangeText={(text) => setAge(text)}
                 ></TextInput>
               </View>
             </View>
           </View>
           <TouchableHighlight
             style={styles.updateDetailsButton}
-            onPress={() => console.log("Update Details Button Pressed")}
+            onPress={handleChildUpdateSubmit}
           >
             <Text style={styles.updateDetailsButtonText}>Update Details</Text>
           </TouchableHighlight>
         </View>
 
         <View style={styles.preferences}>
-          <Text style={styles.preferencesTitle}>Her Preferences</Text>
+          <Text style={styles.preferencesTitle}>
+            {child === undefined
+              ? "Child"
+              : gender === "FEMALE"
+              ? "Her "
+              : "His "}
+            Preferences
+          </Text>
           <Text style={styles.preferencesDescription}>
-            We need some resources to use for Mihasa when she is in different
-            moods
+            We need some resources to use for{" "}
+            {child === undefined ? "Child" : firstName} when
+            {child === undefined
+              ? "Child"
+              : gender === "FEMALE"
+              ? "she "
+              : "he "}
+            is in different moods
           </Text>
           <TabView
             style={styles.emotionsTab}

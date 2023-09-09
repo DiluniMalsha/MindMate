@@ -1,15 +1,13 @@
 package com.uwu.emora.dto.child;
 
 import com.uwu.emora.enums.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ChildDto {
     private long id;
     private String firstName;

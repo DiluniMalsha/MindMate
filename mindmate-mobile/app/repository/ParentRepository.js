@@ -5,11 +5,11 @@ const getParentDetails = (id) => {
 };
 
 const updateParentDetails = (details) => {
-  return Repository.get("/parent/", details);
+  return Repository.put("/parent/", details);
 };
 
 const changePassword = (passwordDetails) => {
-  return Repository.get("/parent/", passwordDetails);
+  return Repository.put("/parent/password/change", passwordDetails);
 };
 
-export { getParentDetails };
+export { getParentDetails, updateParentDetails, changePassword };

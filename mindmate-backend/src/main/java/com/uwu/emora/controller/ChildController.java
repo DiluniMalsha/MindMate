@@ -29,6 +29,7 @@ public class ChildController {
     @GetMapping(value = "/{id}")
     public ResponseEntity getChildDetails(@PathVariable("id") long id) {
         ChildDto childDetails = childService.getChildDetails(id);
+        System.out.println(childDetails);
         return ResponseEntity.ok(new CommonResponse<>(true, childDetails));
     }
 }

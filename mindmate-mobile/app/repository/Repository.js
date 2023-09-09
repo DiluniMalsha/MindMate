@@ -25,4 +25,18 @@ Repository.interceptors.request.use(
   }
 );
 
+// Repository.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     if (error.response.status === 401) {
+//       console.log("401 error gott");
+//       AsyncStorage.removeItem("userToken");
+//       //place your reentry code
+//     }
+//     return error;
+//   }
+// );
+
 export default Repository;
