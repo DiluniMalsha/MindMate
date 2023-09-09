@@ -1,30 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Dimensions,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableHighlight,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-
 import colors from "../config/colors";
 import { TabBar, TabView } from "react-native-tab-view";
 import TimeTableDayViewComponent from "./TimeTableDayViewComponent";
 import { Modal } from "react-native";
-import { Alert } from "react-native";
-import { Pressable } from "react-native";
 import { TextInput } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { Button } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import {
+  addTimetableRecord,
+  getTimetableRecordForDay,
+  updateTimetableRecord,
+} from "../repository/TimetableRepository";
+import { useFocusEffect } from "@react-navigation/native";
 
-function DailyTimetableComponent(props) {
+function DailyTimetableComponent() {
   const [timeTableAdded, setTimeTableAdded] = useState(true);
   const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const [routes] = useState([
     { key: "mon", title: "MON", color: "#D93250" },
     { key: "tue", title: "TUE", color: "#4D308C" },
     { key: "wed", title: "WED", color: "#1C71A6" },
@@ -35,19 +37,32 @@ function DailyTimetableComponent(props) {
   ]);
 
   const renderScene = ({ route }) => {
-    return <TimeTableDayViewComponent day={route.title} color={route.color} />;
+    return (
+      <TimeTableDayViewComponent
+        day={route.title}
+        color={route.color}
+        setModalVisible={setModalVisible}
+        setSelectedDay={setSelectedDay}
+        setFromTime={setFromTime}
+        setToTime={setToTime}
+        setTask={setTask}
+        setIsUpdate={setIsUpdate}
+        setId={setId}
+      />
+    );
   };
+
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [id, setId] = useState("");
   const [selectedDay, setSelectedDay] = useState();
-
-  const [tabViewDayColor, setTabViewDayColor] = useState("red");
-
-  const [fromTime, setFromTime] = useState(new Date(1598051730000));
-  const [toTime, setToTime] = useState(new Date(1598051730000));
+  const [fromTime, setFromTime] = useState(new Date());
+  const [toTime, setToTime] = useState(new Date());
   const [fromShow, setFromShow] = useState(false);
   const [toShow, setToShow] = useState(false);
+  const [task, setTask] = useState("");
 
   const fromTimeOnChange = (event, selected) => {
     console.log(selected);
@@ -69,12 +84,114 @@ function DailyTimetableComponent(props) {
     setToShow(true);
   };
 
+  const refreshModal = () => {
+    setIsUpdate(false);
+    setSelectedDay("MON");
+    setToTime(new Date());
+    setFromTime(new Date());
+    setTask("");
+  };
+
+  const getTimeStringFromDate = (date) => {
+    const timeFormatter = new Intl.DateTimeFormat("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+    const timeString = timeFormatter.format(date);
+    return timeString;
+  };
+
+  const sendRequest = async (e) => {
+    const timetableRecord = {
+      id: id,
+      day: selectedDay,
+      fromTime: getTimeStringFromDate(fromTime),
+      toTime: getTimeStringFromDate(toTime),
+      task: task,
+      childId: 1,
+    };
+
+    if (isUpdate) {
+      updateTimetableRecord(timetableRecord)
+        .then((res) => {
+          handleResponse(res);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      addTimetableRecord(timetableRecord)
+        .then((res) => {
+          console.log(res);
+          handleResponse(res);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const handleResponse = (res) => {
+    if (res.status === 200) {
+      if (res.data.success) {
+        // dispatcher(updateParent(parentDetails));
+        Alert.alert("Success", res.data.message, [
+          {
+            text: "Ok",
+            onPress: () => {
+              setModalVisible(!modalVisible);
+              refreshModal();
+            },
+            style: "default",
+          },
+        ]);
+      } else {
+        Alert.alert("Error", res.data.message, [
+          {
+            text: "Ok",
+            onPress: () => {
+              setModalVisible(!modalVisible);
+              refreshModal();
+            },
+            style: "cancel",
+          },
+        ]);
+      }
+    } else {
+      Alert.alert("Error", "Something Went Wrong!", [
+        {
+          text: "Cancel",
+          onPress: () => {
+            setModalVisible(!modalVisible);
+            refreshModal();
+          },
+          style: "cancel",
+        },
+      ]);
+    }
+  };
+
+  const handleRecordSubmit = async (e) => {
+    Alert.alert(
+      "Are You Sure?",
+      "Do you want to proceed with the time table change?",
+      [
+        {
+          text: "Yes",
+          onPress: () => sendRequest(),
+          style: "cancel",
+        },
+        { text: "No", onPress: () => refreshModal() },
+      ]
+    );
+  };
+
   if (timeTableAdded) {
     return (
       <View style={styles.container}>
         <TouchableHighlight
           style={styles.addNewButton}
-          onPress={() => setModalVisible(true)}
+          onPress={() => {
+            refreshModal();
+            setModalVisible(true);
+          }}
         >
           <Text style={styles.addNewButtonText}>Add New Record</Text>
         </TouchableHighlight>
@@ -118,9 +235,11 @@ function DailyTimetableComponent(props) {
             <View style={styles.modelBackground} />
             <View style={styles.modalView}>
               <View>
-                <Text style={styles.formTitle}>Add New Time Table Record</Text>
+                <Text style={styles.formTitle}>
+                  {isUpdate ? "Update " : "Add New "}Time Table Record
+                </Text>
                 <View style={styles.formFieldFull}>
-                  <Text style={styles.label}>Address</Text>
+                  <Text style={styles.label}>Day</Text>
                   <View style={styles.formPicker}>
                     <Picker
                       selectedValue={selectedDay}
@@ -195,21 +314,29 @@ function DailyTimetableComponent(props) {
                     autoCapitalize={"none"}
                     autoCorrect={false}
                     textContentType={"name"}
+                    value={task}
+                    onChangeText={(text) => setTask(text)}
                   ></TextInput>
                 </View>
               </View>
               <View style={styles.modalButtonBar}>
                 <TouchableHighlight
-                  style={styles.modalAddButton}
-                  onPress={() => console.log("Add Button Pressed")}
-                >
-                  <Text style={styles.modalButtonText}>Add</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
                   style={styles.modalCancelButton}
-                  onPress={() => setModalVisible(!modalVisible)}
+                  onPress={() => {
+                    refreshModal();
+                    setModalVisible(!modalVisible);
+                  }}
                 >
                   <Text style={styles.modalButtonText}>Cancel</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                  style={styles.modalAddButton}
+                  onPress={handleRecordSubmit}
+                >
+                  <Text style={styles.modalButtonText}>
+                    {isUpdate ? "Update" : "Add"}
+                  </Text>
                 </TouchableHighlight>
               </View>
             </View>

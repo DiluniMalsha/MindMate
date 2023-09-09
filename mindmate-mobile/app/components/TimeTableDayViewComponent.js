@@ -1,61 +1,175 @@
-import React from "react";
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+  Alert,
+} from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Dimensions } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import colors from "../config/colors";
-function TimeTableDayViewComponent({ day }) {
-  const tasks = [
-    {
-      id: 1,
-      from: "08:00 AM",
-      to: "10:00 AM",
-      task: "Reading Books",
-    },
-    {
-      id: 2,
-      from: "08:00 AM",
-      to: "10:00 AM",
-      task: "Reading Books",
-    },
-    {
-      id: 3,
-      from: "08:00 AM",
-      to: "10:00 AM",
-      task: "Reading Books",
-    },
-    {
-      id: 4,
-      from: "08:00 AM",
-      to: "10:00 AM",
-      task: "Reading Books",
-    },
-    {
-      id: 5,
-      from: "08:00 AM",
-      to: "10:00 AM",
-      task: "Reading Books",
-    },
-  ];
+import {
+  deleteTimetableRecord,
+  getTimetableRecordForDay,
+} from "../repository/TimetableRepository";
+import { useFocusEffect } from "@react-navigation/native";
+function TimeTableDayViewComponent({
+  day,
+  setModalVisible,
+  setSelectedDay,
+  setFromTime,
+  setToTime,
+  setTask,
+  setIsUpdate,
+  setId,
+}) {
+  const [tasks, setTasks] = useState([]);
 
-  const editRecord = (id) => {
-    console.log("Edit Record " + id);
+  useFocusEffect(
+    React.useCallback(() => {
+      let isActive = true;
+      getTasks();
+      console.log("Get Tasks");
+      return () => {
+        isActive = false;
+      };
+    }, [day])
+  );
+
+  const getTasks = () => {
+    getTimetableRecordForDay(day, 1)
+      .then((res) => {
+        setTasks(res.data.body);
+      })
+      .catch((err) => console.log(err));
+  };
+  // useEffect(() => {
+  //   setTasks([
+  //     {
+  //       id: 1,
+  //       from: "08:00 AM",
+  //       to: "10:00 AM",
+  //       task: "Reading Books",
+  //     },
+  //     {
+  //       id: 2,
+  //       from: "08:00 AM",
+  //       to: "10:00 AM",
+  //       task: "Reading Books",
+  //     },
+  //     {
+  //       id: 3,
+  //       from: "08:00 AM",
+  //       to: "10:00 AM",
+  //       task: "Reading Books",
+  //     },
+  //     {
+  //       id: 4,
+  //       from: "08:00 AM",
+  //       to: "10:00 AM",
+  //       task: "Reading Books",
+  //     },
+  //     {
+  //       id: 5,
+  //       from: "08:00 AM",
+  //       to: "10:00 AM",
+  //       task: "Reading Books",
+  //     },
+  //   ]);
+  // }, []);
+
+  const getGMTTime = (timeString) => {
+    const [time, ampm] = timeString.split(" ");
+    const [hourString, minuteString] = time.split(":");
+    const hour = parseInt(hourString, 10);
+    const minute = parseInt(minuteString, 10);
+    const gmtTime = new Date();
+    gmtTime.setHours(ampm === "PM" ? hour + 12 : hour, minute, 0, 0);
+    return gmtTime;
   };
 
-  const deleteRecord = (id) => {
-    console.log("Delete Record " + id);
+  const editRecord = (id, day, fromTime, toTime, task) => {
+    setModalVisible(true);
+    setSelectedDay(day);
+    setFromTime(getGMTTime(fromTime));
+    setToTime(getGMTTime(toTime));
+    setTask(task);
+    setIsUpdate(true);
+    setId(id);
   };
 
+  const sendRequest = async (id) => {
+    deleteTimetableRecord(id)
+      .then((res) => {
+        if (res.status === 200) {
+          if (res.data.success) {
+            // dispatcher(updateParent(parentDetails));
+            Alert.alert("Success", res.data.message, [
+              {
+                text: "Ok",
+                onPress: () => {
+                  getTasks();
+                  console.log("Record Deleted");
+                },
+                style: "default",
+              },
+            ]);
+          } else {
+            Alert.alert("Error", res.data.message, [
+              {
+                text: "Ok",
+                onPress: () => {
+                  console.log("Record Delete Failed");
+                },
+                style: "cancel",
+              },
+            ]);
+          }
+        } else {
+          Alert.alert("Error", "Something Went Wrong!", [
+            {
+              text: "Cancel",
+              onPress: () => {
+                console.log("Record Delete Failed");
+              },
+              style: "cancel",
+            },
+          ]);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const deleteRecord = async (id) => {
+    Alert.alert(
+      "Are You Sure?",
+      "Do you want to delete the time table record?",
+      [
+        {
+          text: "Yes",
+          onPress: () => sendRequest(id),
+          style: "cancel",
+        },
+        {
+          text: "No",
+          onPress: () => console.log("Don't want to delete"),
+          style: "cancel",
+        },
+      ]
+    );
+  };
   return (
     <SwipeListView
       data={tasks}
       renderItem={(data, rowMap) => (
         <View style={styles.container}>
           <View style={styles.time}>
-            <Text style={styles.timeText}>{data.item.from}</Text>
+            <Text style={styles.timeText}>{data.item.fromTime}</Text>
             <Text style={styles.timeText}>to</Text>
-            <Text style={styles.timeText}>{data.item.to}</Text>
+            <Text style={styles.timeText}>{data.item.toTime}</Text>
           </View>
           <View style={styles.task}>
             <Text style={styles.taskText}>{data.item.task}</Text>
@@ -65,7 +179,15 @@ function TimeTableDayViewComponent({ day }) {
       renderHiddenItem={(data, rowMap) => (
         <View style={styles.rowBack}>
           <TouchableHighlight
-            onPress={() => editRecord(data.item.id)}
+            onPress={() =>
+              editRecord(
+                data.item.id,
+                data.item.day,
+                data.item.fromTime,
+                data.item.toTime,
+                data.item.task
+              )
+            }
             style={[styles.backRightButton, styles.backRightButtonLeft]}
           >
             <Ionicons name="create-outline" size={20} color="white" />

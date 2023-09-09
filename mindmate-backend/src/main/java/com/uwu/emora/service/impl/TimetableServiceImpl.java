@@ -47,7 +47,7 @@ public class TimetableServiceImpl implements TimetableService {
                 }
             }
 
-            DateTimeFormatter parser = DateTimeFormatter.ofPattern("hh:mm a");
+            DateTimeFormatter parser = DateTimeFormatter.ofPattern("h:mm a");
             LocalTime localTime = LocalTime.parse(timeTableRecordDto.getFromTime(), parser);
             localTime = localTime.minusMinutes(5);
             int hour = localTime.getHour();
