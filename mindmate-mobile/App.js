@@ -1,8 +1,8 @@
 import { useFonts } from "expo-font";
-import WelcomeScreen from "./app/screens/WelcomeScreen";
-import LoginScreen from "./app/screens/LoginScreen";
-import EmotionTrackerScreen from "./app/screens/EmotionTrackerScreen";
-import Navigator from "./app/screens/Navigator";
+import { AuthProvider } from "./app/context/AuthContext";
+import MainNavigator from "./app/navigation/MainNavigator";
+import { store } from "./app/store/store";
+import { Provider } from "react-redux";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -15,7 +15,14 @@ export default function App() {
   if (!loaded) {
     return null;
   }
-  return <Navigator />;
+
+  return (
+    <Provider store={store}>
+      <AuthProvider>
+        <MainNavigator />
+      </AuthProvider>
+    </Provider>
+  );
 }
 
 //rsf - basic react native

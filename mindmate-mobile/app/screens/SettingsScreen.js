@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView, Text, StyleSheet, Dimensions } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
 
@@ -6,6 +6,9 @@ import colors from "../config/colors";
 import ChangePasswordComponent from "../components/ChangePasswordComponent";
 import UserProfileComponent from "../components/UserProfileComponent";
 import ChildProfileComponent from "../components/ChildProfileComponent";
+import { getParentDetails } from "../repository/ParentRepository";
+import { useDispatch, useSelector } from "react-redux";
+import { addParent } from "../store/slices/parentSlice";
 
 const ChildProfileRoute = () => <ChildProfileComponent />;
 
@@ -19,6 +22,16 @@ function SettingsScreen(props) {
     { key: "second", title: "My Profile" },
     { key: "third", title: "Change Password" },
   ]);
+
+  const dispatcher = useDispatch();
+
+  useEffect(() => {
+    getParentDetails(1)
+      .then((res) => {
+        dispatcher(addParent({ ...res.data.body }));
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const renderScene = ({ route }) => {
     switch (route.key) {

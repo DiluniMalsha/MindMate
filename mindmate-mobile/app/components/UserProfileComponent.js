@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,10 +10,36 @@ import {
 
 import { Picker } from "@react-native-picker/picker";
 import colors from "../config/colors";
+import { AuthContext } from "../context/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { selectParentById } from "../store/slices/parentSlice";
 
-function UserProfileComponent(props) {
-  const [selectedGender, setSelectedGender] = useState();
+function UserProfileComponent() {
+  const parent = useSelector((state) => selectParentById(state, 1));
 
+  const { logout } = useContext(AuthContext);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [emergencyContactNumber, setEmergencyContactNumber] = useState("");
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
+  const [relationship, setRelationship] = useState("");
+
+  console.log(parent);
+
+  useEffect(() => {
+    if (parent) {
+      setFirstName(parent.firstName);
+      setLastName(parent.lastName);
+      setAddress(parent.address);
+      setEmergencyContactNumber(parent.emergencyContactNumber);
+      setGender(parent.gender);
+      setAge(parent.age);
+      setRelationship(parent.relationship);
+    }
+  }, [parent]);
   return (
     <ScrollView style={styles.scrollView}>
       <View>
@@ -29,6 +55,8 @@ function UserProfileComponent(props) {
                   autoCapitalize={"none"}
                   autoCorrect={false}
                   textContentType={"name"}
+                  value={firstName}
+                  onChangeText={(text) => setFirstName(text)}
                 ></TextInput>
               </View>
 
@@ -40,6 +68,8 @@ function UserProfileComponent(props) {
                   autoCapitalize={"none"}
                   autoCorrect={false}
                   textContentType={"name"}
+                  value={lastName}
+                  onChangeText={(text) => setLastName(text)}
                 ></TextInput>
               </View>
             </View>
@@ -52,6 +82,8 @@ function UserProfileComponent(props) {
                 autoCapitalize={"none"}
                 autoCorrect={false}
                 textContentType={"name"}
+                value={address}
+                onChangeText={(text) => setAddress(text)}
               ></TextInput>
             </View>
 
@@ -63,6 +95,8 @@ function UserProfileComponent(props) {
                 autoCapitalize={"none"}
                 autoCorrect={false}
                 textContentType={"name"}
+                value={emergencyContactNumber}
+                onChangeText={(text) => setEmergencyContactNumber(text)}
               ></TextInput>
             </View>
 
@@ -71,13 +105,13 @@ function UserProfileComponent(props) {
                 <Text style={styles.label}>Gender</Text>
                 <View style={styles.formPicker}>
                   <Picker
-                    selectedValue={selectedGender}
+                    selectedValue={gender}
                     onValueChange={(itemValue, itemIndex) =>
-                      setSelectedGender(itemValue)
+                      setGender(itemValue)
                     }
                   >
-                    <Picker.Item label="Male" value="Male" />
-                    <Picker.Item label="Female" value="Female" />
+                    <Picker.Item label="Male" value="MALE" />
+                    <Picker.Item label="Female" value="FEMALE" />
                   </Picker>
                 </View>
               </View>
@@ -89,6 +123,8 @@ function UserProfileComponent(props) {
                   autoCapitalize={"none"}
                   autoCorrect={false}
                   keyboardType="numeric"
+                  value={age + ""}
+                  onChangeText={(text) => setAge(text)}
                 ></TextInput>
               </View>
             </View>
@@ -101,6 +137,8 @@ function UserProfileComponent(props) {
                 autoCapitalize={"none"}
                 autoCorrect={false}
                 textContentType={"name"}
+                value={relationship}
+                onChangeText={(text) => setRelationship(text)}
               ></TextInput>
             </View>
           </View>
@@ -112,7 +150,9 @@ function UserProfileComponent(props) {
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.signOutButton}
-            onPress={() => console.log("Sign Out Button Pressed")}
+            onPress={() => {
+              logout();
+            }}
           >
             <Text style={styles.profileButtonText}>Sign Out</Text>
           </TouchableHighlight>

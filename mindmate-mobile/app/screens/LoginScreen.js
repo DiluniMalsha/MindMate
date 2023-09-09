@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,10 +9,23 @@ import {
   SafeAreaView,
   TextInput,
 } from "react-native";
+import { AuthContext } from "../context/AuthContext";
 
 import colors from "../config/colors";
 
-function LoginScreen(props) {
+function LoginScreen({ navigation }) {
+  const { login } = useContext(AuthContext);
+
+  const [username, setUserName] = useState();
+  const [password, setPassword] = useState();
+
+  const onChangeUsername = (text) => setUserName(text);
+  const onChangePassword = (text) => setPassword(text);
+
+  const handleSubmit = async (e) => {
+    login(username, password);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Image style={styles.logo} source={require("../assets/logo.png")} />
@@ -26,6 +39,8 @@ function LoginScreen(props) {
             autoCapitalize={"none"}
             autoCorrect={false}
             textContentType={"name"}
+            value={username}
+            onChangeText={onChangeUsername}
           ></TextInput>
           <Text style={styles.signInFormText}>Password</Text>
           <TextInput
@@ -35,6 +50,8 @@ function LoginScreen(props) {
             autoCorrect={false}
             secureTextEntry={true}
             textContentType={"password"}
+            value={password}
+            onChangeText={onChangePassword}
           ></TextInput>
           <TouchableOpacity
             style={styles.forgotPassword}
@@ -43,10 +60,7 @@ function LoginScreen(props) {
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
-        <TouchableHighlight
-          style={styles.signInButton}
-          onPress={() => console.log("Sign In Button Pressed")}
-        >
+        <TouchableHighlight style={styles.signInButton} onPress={handleSubmit}>
           <Text style={styles.signInButtonText}>Sign In</Text>
         </TouchableHighlight>
       </View>
@@ -113,7 +127,7 @@ const styles = StyleSheet.create({
   },
   signInButton: {
     width: "50%",
-    height: "5%",
+    height: 56,
     marginTop: "5%",
     marginBottom: "5%",
     borderRadius: 25,

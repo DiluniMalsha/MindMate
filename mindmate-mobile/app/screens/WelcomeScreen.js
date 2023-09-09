@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,24 +6,43 @@ import {
   View,
   TouchableHighlight,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import colors from "../config/colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+async function getIsSignedIn() {
+  const userToken = await AsyncStorage.getItem("rfwef");
+  return userToken !== null;
+}
 
 function WelcomeScreen(props) {
-  return (
-    <View style={styles.container}>
-      <Image style={styles.logo} source={require("../assets/logo.png")} />
-      <Text style={styles.welcomeMessage}>Welcome Back</Text>
-      <Image style={styles.robot} source={require("../assets/robot.png")} />
-      <TouchableHighlight
-        style={styles.getStartedButton}
-        onPress={() => console.log("Get Started Button Pressed")}
-      >
-        <Text style={styles.getStartedButtonText}>Get Started</Text>
-      </TouchableHighlight>
-    </View>
-  );
+  const navigation = useNavigation();
+  const [timePassed, setTimePassed] = useState(false);
+
+  setTimeout(function () {
+    setTimePassed(true);
+  }, 1000);
+
+  if (!timePassed) {
+    return (
+      <View style={styles.container}>
+        <Image style={styles.logo} source={require("../assets/logo.png")} />
+        <Text style={styles.welcomeMessage}>Welcome Back</Text>
+        <Image style={styles.robot} source={require("../assets/robot.png")} />
+        {/* <TouchableHighlight
+          style={styles.getStartedButton}
+          onPress={() => console.log("Get Started Button Pressed")}
+        >
+          <Text style={styles.getStartedButtonText}>Get Started</Text>
+        </TouchableHighlight> */}
+      </View>
+    );
+  }
+
+  navigation.navigate("Login");
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
