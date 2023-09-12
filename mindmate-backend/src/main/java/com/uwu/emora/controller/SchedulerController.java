@@ -24,6 +24,13 @@ public class SchedulerController {
     }
 
     //   View calendar with scheduled tasks
+    @GetMapping(value = "/tasks/web/{childId}")
+    public ResponseEntity getScheduledTasksForWeb(@PathVariable("childId") long childId) {
+        List<> tasks = schedulerService.getScheduledTasksForWeb(childId);
+        return ResponseEntity.ok(new CommonResponse<>(true, tasks));
+    }
+
+    //   View calendar with scheduled tasks
     @GetMapping(value = "/tasks/{childId}")
     public ResponseEntity getScheduledTasks(@PathVariable("childId") long childId) {
         List<OneTimeSchedulerDto> tasks = schedulerService.getScheduledTasks(childId);
