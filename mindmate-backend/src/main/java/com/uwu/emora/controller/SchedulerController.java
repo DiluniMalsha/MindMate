@@ -2,6 +2,7 @@ package com.uwu.emora.controller;
 
 import com.uwu.emora.dto.CommonResponse;
 import com.uwu.emora.dto.scheduler.OneTimeSchedulerDto;
+import com.uwu.emora.dto.scheduler.ScheduledEventDetailsDto;
 import com.uwu.emora.service.SchedulerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +25,10 @@ public class SchedulerController {
         return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Added Successfully"));
     }
 
-    //   View calendar with scheduled tasks
+    //   View calendar with scheduled tasks (web)
     @GetMapping(value = "/tasks/web/{childId}")
     public ResponseEntity getScheduledTasksForWeb(@PathVariable("childId") long childId) {
-        List<> tasks = schedulerService.getScheduledTasksForWeb(childId);
+        List<ScheduledEventDetailsDto> tasks = schedulerService.getScheduledTasksForWeb(childId);
         return ResponseEntity.ok(new CommonResponse<>(true, tasks));
     }
 

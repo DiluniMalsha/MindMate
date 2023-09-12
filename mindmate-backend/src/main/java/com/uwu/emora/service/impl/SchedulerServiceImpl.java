@@ -1,6 +1,8 @@
 package com.uwu.emora.service.impl;
 
 import com.uwu.emora.dto.scheduler.OneTimeSchedulerDto;
+import com.uwu.emora.dto.scheduler.ScheduledEventDetailsDto;
+import com.uwu.emora.dto.scheduler.SingleScheduledEventDto;
 import com.uwu.emora.entity.Child;
 import com.uwu.emora.entity.Scheduler;
 import com.uwu.emora.exception.CustomServiceException;
@@ -16,10 +18,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,23 +34,15 @@ public class SchedulerServiceImpl implements SchedulerService {
 
         Child child = childRepository.findById(childId).orElseThrow(() -> new CustomServiceException("Child not found"));
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-        String fromTimeStr = dto.getDate() + " " + dto.getRemindTime();
-        LocalDateTime fromDateTime = LocalDateTime.parse(fromTimeStr, formatter);
-
-        String toTimeStr = dto.getDate() + " " + dto.getRemindTime();
-        LocalDateTime todDateTime = LocalDateTime.parse(toTimeStr, formatter);
-
-        String remindTimeStr = dto.getDate() + " " + dto.getRemindTime();
-        LocalDateTime remindDateTime = LocalDateTime.parse(remindTimeStr, formatter);
+        LocalDateTime fromDateTime = getDateTimeFromString(dto.getDate() + " " + dto.getFromTime(), "yyyy-MM-dd HH:mm:ss");
+        LocalDateTime toDateTime = getDateTimeFromString(dto.getDate() + " " + dto.getToTime(), "yyyy-MM-dd HH:mm:ss");
+        LocalDateTime remindDateTime = getDateTimeFromString(dto.getDate() + " " + dto.getRemindTime(), "yyyy-MM-dd HH:mm:ss");
 
         TimeZone timeZone = TimeZone.getTimeZone("Asia/Kolkata");
         ZoneId zoneId = timeZone.toZoneId();
         ZonedDateTime dateTime = ZonedDateTime.of(remindDateTime, zoneId);
 
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(dto.getDate(), formatter);
+        LocalDate date = getDateFromString(dto.getDate(), "yyyy-MM-dd");
 
         String reminderId = UUID.randomUUID().toString();
         List<String> allIDs = schedulerRepository.getAllIDs();
@@ -74,7 +65,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         scheduler.setRemindTime(remindDateTime);
         scheduler.setChild(child);
         scheduler.setFromTime(fromDateTime);
-        scheduler.setToTime(todDateTime);
+        scheduler.setToTime(toDateTime);
         schedulerRepository.save(scheduler);
     }
 
@@ -119,12 +110,11 @@ public class SchedulerServiceImpl implements SchedulerService {
         Child child = childRepository.findById(childId).orElseThrow(() -> new CustomServiceException("Child not found"));
         Scheduler scheduler = schedulerRepository.findById(dto.getId()).orElseThrow(() -> new CustomServiceException("One Time Scheduler Not Found!"));
 
-        String str = dto.getDate() + " " + dto.getRemindTime();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime remindDateTime = LocalDateTime.parse(str, formatter);
+        LocalDateTime fromDateTime = getDateTimeFromString(dto.getDate() + " " + dto.getFromTime(), "yyyy-MM-dd HH:mm:ss");
+        LocalDateTime toDateTime = getDateTimeFromString(dto.getDate() + " " + dto.getToTime(), "yyyy-MM-dd HH:mm:ss");
+        LocalDateTime remindDateTime = getDateTimeFromString(dto.getDate() + " " + dto.getRemindTime(), "yyyy-MM-dd HH:mm:ss");
 
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(dto.getDate(), formatter);
+        LocalDate date = getDateFromString(dto.getDate(), "yyyy-MM-dd");
 
         TimeZone timeZone = TimeZone.getTimeZone("Asia/Kolkata");
         ZoneId zoneId = timeZone.toZoneId();
@@ -140,7 +130,21 @@ public class SchedulerServiceImpl implements SchedulerService {
         scheduler.setDate(date);
         scheduler.setRemindTime(remindDateTime);
         scheduler.setChild(child);
+        scheduler.setFromTime(fromDateTime);
+        scheduler.setToTime(toDateTime);
         schedulerRepository.save(scheduler);
+    }
+
+    public LocalDateTime getDateTimeFromString(String str, String formatString) {
+        //yyyy-MM-dd HH:mm:ss
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatString);
+        return LocalDateTime.parse(str, formatter);
+    }
+
+    public LocalDate getDateFromString(String str, String formatString) {
+        //yyyy-MM-dd
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatString);
+        return LocalDate.parse(str, formatter);
     }
 
     @Override
@@ -152,5 +156,36 @@ public class SchedulerServiceImpl implements SchedulerService {
 
         //Update database
         schedulerRepository.delete(scheduler);
+    }
+
+    @Override
+    public List<ScheduledEventDetailsDto> getScheduledTasksForWeb(long childId) {
+        Child child = childRepository.findById(childId).orElseThrow(() -> new CustomServiceException("Child not found"));
+        List<Scheduler> tasks = schedulerRepository.findAllByChildOrderByDateAsc(child);
+
+        List<ScheduledEventDetailsDto> eventDetails = new ArrayList<>();
+
+        if (tasks != null && tasks.size() > 0) {
+            ScheduledEventDetailsDto singleDay = new ScheduledEventDetailsDto();
+            LocalDate date = tasks.get(0).getDate();
+            singleDay.setDate(date);
+
+            for (Scheduler t : tasks) {
+                if (!t.getDate().equals(date)) {
+                    date = t.getDate();
+                    eventDetails.add(singleDay);
+                    singleDay = new ScheduledEventDetailsDto();
+                    singleDay.setDate(date);
+                }
+                singleDay.setEvent(new SingleScheduledEventDto(
+                        t.getId(),
+                        t.getNote(),
+                        t.getFromTime(),
+                        t.getToTime(),
+                        t.getRemindTime()));
+            }
+            eventDetails.add(singleDay);
+        }
+        return eventDetails;
     }
 }
