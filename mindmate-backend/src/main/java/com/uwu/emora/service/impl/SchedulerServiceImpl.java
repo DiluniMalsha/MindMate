@@ -35,16 +35,23 @@ public class SchedulerServiceImpl implements SchedulerService {
 
         Child child = childRepository.findById(childId).orElseThrow(() -> new CustomServiceException("Child not found"));
 
-        String str = dto.getDate() + " " + dto.getRemindTime();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime remindDateTime = LocalDateTime.parse(str, formatter);
 
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(dto.getDate(), formatter);
+        String fromTimeStr = dto.getDate() + " " + dto.getRemindTime();
+        LocalDateTime fromDateTime = LocalDateTime.parse(fromTimeStr, formatter);
+
+        String toTimeStr = dto.getDate() + " " + dto.getRemindTime();
+        LocalDateTime todDateTime = LocalDateTime.parse(toTimeStr, formatter);
+
+        String remindTimeStr = dto.getDate() + " " + dto.getRemindTime();
+        LocalDateTime remindDateTime = LocalDateTime.parse(remindTimeStr, formatter);
 
         TimeZone timeZone = TimeZone.getTimeZone("Asia/Kolkata");
         ZoneId zoneId = timeZone.toZoneId();
         ZonedDateTime dateTime = ZonedDateTime.of(remindDateTime, zoneId);
+
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dto.getDate(), formatter);
 
         String reminderId = UUID.randomUUID().toString();
         List<String> allIDs = schedulerRepository.getAllIDs();
@@ -66,6 +73,8 @@ public class SchedulerServiceImpl implements SchedulerService {
         scheduler.setDate(date);
         scheduler.setRemindTime(remindDateTime);
         scheduler.setChild(child);
+        scheduler.setFromTime(fromDateTime);
+        scheduler.setToTime(todDateTime);
         schedulerRepository.save(scheduler);
     }
 
@@ -98,7 +107,11 @@ public class SchedulerServiceImpl implements SchedulerService {
                 new OneTimeSchedulerDto(s.getId(),
                         s.getDate().toString(),
                         s.getNote(),
-                        s.getRemindTime().toString())).collect(Collectors.toList());
+                        s.getRemindTime().toString(),
+                        s.getFromTime().toString(),
+                        s.getToTime().toString()
+                )).collect(Collectors.toList());
+
     }
 
     @Override

@@ -22,6 +22,8 @@ public class Scheduler {
     private LocalDate date;
     private String note;
     private LocalDateTime remindTime;
+    private LocalDateTime fromTime;
+    private LocalDateTime toTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)

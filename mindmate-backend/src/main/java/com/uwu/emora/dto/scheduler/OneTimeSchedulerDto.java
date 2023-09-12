@@ -15,4 +15,6 @@ public class OneTimeSchedulerDto {
     private String date;
     private String note;
     private String remindTime;
+    private String fromTime;
+    private String toTime;
 }
