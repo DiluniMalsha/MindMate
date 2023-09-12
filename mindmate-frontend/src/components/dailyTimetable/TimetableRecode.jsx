@@ -123,7 +123,7 @@ const TimetableRecode = ({startTime, endTime, description, id, day}) => {
                     ids={id}
                 />
             )}
-            {console.log(day, startTime,endTime, description,id)}
+            {/*{console.log(day, startTime,endTime, description,id)}*/}
         </div>
     );
 }

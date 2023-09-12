@@ -9,8 +9,8 @@ import Password from "./Password";
 import Swal from "sweetalert2"
 import {updateParentDetails} from "../../repository/perantRepository";
 import {updateParent} from "../../store/slices/parentSlice"
-import {updateChild} from "../../store/slices/childSlice"
-import {useDispatch} from "react-redux";
+import {selectByIdChild, updateChild} from "../../store/slices/childSlice"
+import {useDispatch, useSelector} from "react-redux";
 import {updateChildDetails} from "../../repository/childRepository";
 
 const Item = styled(Paper)(({theme}) => ({
@@ -41,6 +41,8 @@ const FormComponent = (props) => {
     const [age, setAge] = useState(props.age);
     const [relationship, setRelationship] = useState(props.relationship);
     const dispatcher = useDispatch()
+    const child = useSelector((state) => selectByIdChild(state, 1))
+
 
     const handleChange = (event) => {
         setGender(event.target.value);
@@ -90,14 +92,17 @@ const FormComponent = (props) => {
             confirmButtonText: 'Save',
             denyButtonText: `Don't save`,
         }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
+            /* Read more about
+             isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 if (props.type === 'child') {
                     updateChildDetails(childDetails).then((res) => {
                         if (res.status === 200) {
                             console.log("pass");
-                            dispatcher(updateChild({...res.data}));
-                            window.location.reload(true);
+                            dispatcher(updateChild(childDetails));
+
+                            // window.location.reload(true);
+                            console.log(child.firstName)
                         } else {
                             Swal.fire(
                                 'Failed',
@@ -116,14 +121,19 @@ const FormComponent = (props) => {
                         if (res.status === 200) {
                             console.log("pass")
                             dispatcher(updateParent({...res.data}));
-                            window.location.reload(true);
+                            // window.location.reload(true);
                         } else {
                             Swal.fire(
                                 'Failed',
                                 'error'
                             )
                         }
-                    });
+                    })
+                    Swal.fire('Update Successful!', 'Updated data', 'success').then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload(true);
+                        }
+                    })
                 }
             } else if (result.isDenied) {
                 Swal.fire('Changes are not Update', '', 'info')
@@ -143,7 +153,6 @@ const FormComponent = (props) => {
                         <br/>
                         <CustomInput
                             type="text"
-                            // placeholder={}
                             value={firstName}
                             size="20"
                             radius="8"
