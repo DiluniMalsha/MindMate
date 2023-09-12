@@ -1,12 +1,13 @@
 import Grid from "@mui/material/Grid";
 import CustomInput from "../inputField/InputField";
-import React from "react";
+import React, {useState} from "react";
 import {styled} from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import "./FormComponent.css";
 import CustomButton from "../button/CustomButton";
 import Swal from "sweetalert2";
-
+import {updateParentPassword} from "../../repository/perantRepository";
+// import {useDispatch} from "react-redux";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
@@ -17,27 +18,77 @@ const Item = styled(Paper)(({theme}) => ({
 }));
 
 
-const Password = ({title,
+const Password = ({
+                      title,
                   }) => {
+
+    const [currentPassword, setCurrentPassword] = useState();
+    const [newPassword, setNewPassword] = useState();
+    const [reNewPassword, setReNewPassword] = useState();
+    // const dispatcher = useDispatch()
+
+    const handleNewPasswordChange = event => {
+        setNewPassword(event.target.value);
+    };
+    const handleReNewPasswordChange = event => {
+        setReNewPassword(event.target.value);
+    };
+    const handleChangePassword = event => {
+        setCurrentPassword(event.target.value);
+    };
+
+    const passwordDetails = {
+        id: 1,
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+    }
     const handleUpdatePassword = (event) => {
-        Swal.fire({
-            title: 'Do you want to save the changes?',
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: 'Save',
-            denyButtonText: `Don't save`,
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                Swal.fire('Password Changed Successful!', '', 'success').then((result) => {
+        if (newPassword != null) {
+            console.log("update password")
+        }
+        if (newPassword != null || reNewPassword != null || currentPassword != null) {
+            console.log(setNewPassword)
+            if (newPassword === reNewPassword) {
+                Swal.fire({
+                    title: 'Do you want to save the changes?',
+                    icon: 'question',
+                    // showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Save',
+                    // denyButtonText: `Don't save`,
+                }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.reload(true);
+                        updateParentPassword(passwordDetails).then((res) => {
+                            if (res.status === 200) {
+                                console.log(res.data)
+                                console.log("pass")
+                                // dispatcher(updatePassword({...res.data}));
+                                if (res.data.success === true) {
+                                    Swal.fire('Success', res.data.message, 'success').then((result) => {
+                                        if (result.isConfirmed) {
+                                            localStorage.removeItem("loggedUserToken");
+                                            window.location.reload(true);
+                                        }
+                                    })
+                                } else {
+                                    Swal.fire('Error', res.data.message, 'error').then((result) => {
+                                    })
+                                }
+                            } else {
+                                Swal.fire('Error', "Something Went Wrong", 'error').then((result) => {
+                                    if (result.isConfirmed) {
+                                    }
+                                })
+                            }
+                        })
+                    } else if (result.isDenied) {
+                        Swal.fire('Changes are not save', '', 'info')
                     }
                 })
-            } else if (result.isDenied) {
-                Swal.fire('Changes are not save', '', 'info')
+            } else {
+                console.log("re-enter-password")
             }
-        })
+        }
     };
     return (
         <>
@@ -53,6 +104,9 @@ const Password = ({title,
                         radius="10"
                         width="100%"
                         fontSize='18'
+                        id="currentPassword"
+                        onchange={handleChangePassword}
+                        required="required"
                     />
                 </Item>
             </Grid>
@@ -66,6 +120,9 @@ const Password = ({title,
                         radius="8"
                         width="100%"
                         fontSize='18'
+                        value={newPassword}
+                        onchange={handleNewPasswordChange}
+                        required="required"
                     />
                 </Item>
             </Grid>
@@ -79,6 +136,9 @@ const Password = ({title,
                         radius="8"
                         width="100%"
                         fontSize='18'
+                        value={reNewPassword}
+                        onchange={handleReNewPasswordChange}
+                        required="required"
                     />
                 </Item>
             </Grid>

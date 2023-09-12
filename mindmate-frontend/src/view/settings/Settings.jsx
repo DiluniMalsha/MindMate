@@ -14,13 +14,17 @@ import Password from "../../components/form/Password";
 import {SettingsOutline} from "react-ionicons";
 import HeadingTitle from "../../components/title/HeadingTitle";
 import {getParentDetails} from "../../repository/perantRepository";
+import {getChildDetails} from "../../repository/childRepository";
 import {addOneParent, selectByIdParent} from "../../store/slices/parentSlice";
 import {useDispatch, useSelector} from "react-redux";
+import {addOneChild, selectByIdChild} from "../../store/slices/childSlice";
 
 const Settings = (props) => {
     const [justifyActive, setJustifyActive] = useState("tab1");
     const parent = useSelector((state) => selectByIdParent(state, 1))
+    const child = useSelector((state) => selectByIdChild(state, 1))
     const dispatcher = useDispatch()
+
     const handleJustifyClick = (value) => {
         if (value === justifyActive) {
             return;
@@ -40,6 +44,15 @@ const Settings = (props) => {
         getParentDetails(1)
             .then((res) => {
                 dispatcher(addOneParent({...res.data.body}))
+                console.log(res.data.body)
+            })
+            .catch(err => console.log(err))
+    })
+
+    useEffect(() => {
+        getChildDetails(1,)
+            .then((res) => {
+                dispatcher(addOneChild({...res.data.body}))
                 console.log(res.data.body)
             })
             .catch(err => console.log(err))
@@ -90,16 +103,21 @@ const Settings = (props) => {
                                 >
                                     <div className="row ">
                                         <div className="col child-settings-sections">
-                                            <FormComponent
-                                                title="Mihasa's Profile"
-                                                firstname="Mihasa"
-                                                lastname='Layuni'
-                                                address='No. 64/5, Kuruduwaththa, Meepawala'
-                                                contactNo='94702312239'
-                                                age='12'
-                                                display='ture'
-                                                relDis='none'
-                                            />
+                                            {child != null ?
+                                                <FormComponent
+                                                    title="Mihasa's Profile"
+                                                    firstname={child?.firstName}
+                                                    lastname={child?.lastName}
+                                                    address={child?.address}
+                                                    contactNo={child?.emergencyContactNumber}
+                                                    age={child?.age}
+                                                    genders={child?.gender}
+                                                    display='ture'
+                                                    relDis='none'
+                                                    type='child'
+                                                />
+                                                : child}
+
                                         </div>
                                         <div className="col-md child-settings-sections" style={{width: '98%'}}>
                                             <Preferences/>
@@ -126,6 +144,7 @@ const Settings = (props) => {
                                                     genders={parent?.gender}
                                                     relDis='gride'
                                                     display='ture'
+                                                    type='parent'
                                                 />
                                                 : null}
 

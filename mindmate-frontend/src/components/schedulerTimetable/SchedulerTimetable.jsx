@@ -1,14 +1,17 @@
 import * as React from "react";
+import {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import {useState} from "react";
 import {styled} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Swal from "sweetalert2";
-import {CreateOutline, TrashOutline, AddCircleSharp} from "react-ionicons";
+import {AddCircleSharp, CreateOutline, TrashOutline} from "react-ionicons";
 import NewReminder from "../addReminder/NewReminder";
 import Calendar from "react-calendar";
 import "./SchedulerTimetable.css"
+import {getScheduledTasks} from "../../repository/schedulerRepository";
+import {addManyScheduler, selectAllScheduler} from "../../store/slices/schedulerSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
@@ -43,16 +46,14 @@ const handleDeleteRow = (event) => {
 const SchedulerTimetable = ({startTime, endTime, description}) => {
 
     const [popupVisible, setPopupVisible] = useState(false);
-
     const [title, setTitle] = useState('Reminder');
-
     const [btnName, setBtnName] = useState('Update');
-
     const [eventsAvailable, setEventsAvailable] = React.useState(false);
-
     const [events, setEvents] = React.useState([]);
-
     const [selectedDate, setSelectedDate] = useState(new Date());
+    // const scheduler = useSelector((state) => selectByIdScheduler(state, 1))
+    const schedulerList = useSelector(selectAllScheduler)
+    const dispatcher = useDispatch()
 
 // {/*---------------------------------------------------- button handle-----------------------------------------------*/}
     const handlePopUp = (value) => {
@@ -61,11 +62,38 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
         setBtnName('Update')
 
     }
+
     const handleWantAdded = (value) => {
         setPopupVisible(!popupVisible);
         setTitle('Add New Reminder')
         setBtnName('Add')
     }
+
+    //Connect redux store
+    useEffect(() => {
+        getScheduledTasks(1,)
+            .then((res) => {
+                dispatcher(addManyScheduler(res.data.body))
+                // console.log("data", res.data.body)
+            })
+            .catch(err => console.log(err))
+    })
+
+    // time convertor function
+    function gmt530ToTimestamp(gmt530TimeString) {
+        // Parse the GMT+05:30 time string into a JavaScript Date object
+        const date = new Date(gmt530TimeString);
+
+        // Adjust for the GMT+05:30 timezone offset (330 minutes ahead of UTC)
+        date.setMinutes(date.getMinutes() - 330);
+
+        // Use getTime() to obtain the Unix timestamp in milliseconds
+        const timestamp = date.getTime();
+
+        return timestamp;
+    }
+
+    // get schedulerList from redux store
 
 
     const markedDates = [
@@ -84,6 +112,24 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
                     from: 1690554600000,
                     to: 1690561800000,
                     remindTime: 1690551000000
+                },
+                {
+                    note: 'Special Dinner',
+                    from: 1690554600000,
+                    to: 1690561800000,
+                    remindTime: 1690551000000
+                }
+            ]
+        },
+        {
+            date: '2023-07-28',
+            timestamp: 1690482600000,
+            events: [
+                {
+                    note: 'Specialsss Dinner',
+                    from: 1690554600000,
+                    to: 1690561800000,
+                    remindTime: 1690551000000
                 }
             ]
         },
@@ -98,12 +144,55 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
                     remindTime: 1689294600000
                 }
             ]
+        },
+        {
+            date: '2023-09-10',
+            timestamp: 1694284200000,
+            events: [
+                {
+                    note: 'Road Trip',
+                    from: 1689512400000,
+                    to: 1689526800000,
+                    remindTime: 1689525000000
+                }
+            ]
         }
     ]
 
+    function getSchedulerList() {
+        // eslint-disable-next-line array-callback-return
+        schedulerList.slice(0, schedulerList.length).map((items) => {
+            const {date, fromTime, note, remindTime, toTime} = items
+            // console.log("items", items)
+            const [datePart] = date.split('T');
+            const fromTimeStamp = gmt530ToTimestamp(fromTime);
+            const toTimeStamp = gmt530ToTimestamp(toTime);
+            const remindTimeStamp = gmt530ToTimestamp(remindTime);
+            const timeStamp = gmt530ToTimestamp(date);
+
+
+            const details = {
+                date: datePart,
+                timeStamp: timeStamp,
+                note: note,
+                form: fromTimeStamp,
+                to: toTimeStamp,
+                reminderTime: remindTimeStamp,
+            }
+
+            console.log("log", details);
+
+        });
+    }
+
+    useEffect(() => {
+        getSchedulerList();
+        console.log();
+    })
     const handleDayChange = (value) => {
         setSelectedDate(value);
         console.log("handle day change");
+        console.log(value);
         if (markedDates.some(item => value.valueOf() === item.timestamp)) {
             setEventsAvailable(true);
             setEvents(markedDates.find(item => value.valueOf() === item.timestamp).events);
@@ -171,7 +260,8 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
                                                                 className="icon-size"
                                                             />
                                                         </div>
-                                                        <div className="col-1 deleteIcon" style={{cursor: "pointer"}}>
+                                                        <div className="col-1 deleteIcon"
+                                                             style={{cursor: "pointer"}}>
                                                             <TrashOutline
                                                                 onClick={handleDeleteRow}
                                                                 color={"#ff0000"}

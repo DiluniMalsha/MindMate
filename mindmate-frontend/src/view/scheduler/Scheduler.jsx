@@ -17,12 +17,12 @@ const Scheduler = (props) => {
     };
     // style={{marginTop:'5%'}}
     let icon = <CalendarOutline
-                color={'#4285f5'}
-                title={"Scheduler"}
-                height="20px"
-                width="20px"
-                style={{marginBottom: '5px'}}
-                />
+        color={'#4285f5'}
+        title={"Scheduler"}
+        height="20px"
+        width="20px"
+        style={{marginBottom: '5px'}}
+    />
     return (
         <section className="">
             <HeadingTitle title={'Scheduler'} icon={icon} ml={'70px'}/>
@@ -76,9 +76,7 @@ const Scheduler = (props) => {
                                     show={justifyActive === "tab2"}
                                     className="center-title"
                                 >
-                                    {/*<div className="row w-100 ">*/}
-                                        <SchedulerTimetable/>
-                                    {/*</div>*/}
+                                    <SchedulerTimetable/>
                                 </MDBTabsPane>
                             </MDBTabsContent>
                         </MDBContainer>
