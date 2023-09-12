@@ -41,7 +41,6 @@ public class SchedulerServiceImpl implements SchedulerService {
         TimeZone timeZone = TimeZone.getTimeZone("Asia/Kolkata");
         ZoneId zoneId = timeZone.toZoneId();
         ZonedDateTime dateTime = ZonedDateTime.of(remindDateTime, zoneId);
-
         LocalDate date = getDateFromString(dto.getDate(), "yyyy-MM-dd");
 
         String reminderId = UUID.randomUUID().toString();
@@ -180,12 +179,17 @@ public class SchedulerServiceImpl implements SchedulerService {
                 singleDay.setEvent(new SingleScheduledEventDto(
                         t.getId(),
                         t.getNote(),
-                        t.getFromTime(),
-                        t.getToTime(),
-                        t.getRemindTime()));
+                        getMillisecondsFromLocalDateTime(t.getFromTime()),
+                        getMillisecondsFromLocalDateTime(t.getToTime()),
+                        getMillisecondsFromLocalDateTime(t.getRemindTime())));
             }
             eventDetails.add(singleDay);
         }
         return eventDetails;
+    }
+
+    private long getMillisecondsFromLocalDateTime(LocalDateTime dateTime) {
+        ZonedDateTime zdt = ZonedDateTime.of(dateTime, ZoneId.systemDefault());
+        return zdt.toInstant().toEpochMilli();
     }
 }

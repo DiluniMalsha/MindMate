@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,7 +12,7 @@ import java.time.LocalDateTime;
 public class SingleScheduledEventDto {
     private String id;
     private String note;
-    private LocalDateTime from;
-    private LocalDateTime to;
-    private LocalDateTime remindTime;
+    private long from;
+    private long to;
+    private long remindTime;
 }

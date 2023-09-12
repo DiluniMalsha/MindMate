@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,14 @@ import java.util.List;
 @NoArgsConstructor
 public class ScheduledEventDetailsDto {
     private LocalDate date;
+    private long timestamp;
     private List<SingleScheduledEventDto> events;
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+        ZonedDateTime zdt = ZonedDateTime.of(date.atStartOfDay(), ZoneId.systemDefault());
+        setTimestamp(zdt.toInstant().toEpochMilli());
+    }
 
     public void setEvent(SingleScheduledEventDto event) {
         if (events == null) events = new ArrayList<>();
