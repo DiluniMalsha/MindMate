@@ -42,14 +42,15 @@ const DailyTimetable = (props) => {
             .then((res) => {
                 dispatcher(addManyDailyTimeTable(res.data.body))
             })
+
             .catch(err => console.log(err))
     }, [day, dispatcher])
+
 
     function getTaskList(days) {
         // eslint-disable-next-line array-callback-return
         return taskList.slice(0, taskList.length).map((items) => {
             const {fromTime, toTime, task, day, id} = items
-            // console.log(items)
             if (day === days) {
                 return (
                     <TimetableRecode

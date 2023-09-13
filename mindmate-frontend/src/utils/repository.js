@@ -3,7 +3,7 @@ import axios from "axios";
 
 const accessToken: string | null = localStorage.getItem("loggedUserToken");
 const Repository = axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "http://localhost:8080/api",
     headers:{
         'Content-Type': 'application/json',
         'Accept': 'application/json',

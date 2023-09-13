@@ -31,7 +31,7 @@ function SignInFrom(setToken) {
         const headers = {
             'Authorization': 'Basic cGFyZW50Og=='
         }
-        axios.post("http://localhost:8080/oauth/token", data, {headers})
+        axios.post("http://localhost:8080/api/oauth/token", data, {headers})
             .then((res) => {
                 localStorage.setItem("loggedUserToken", res.data.access_token);
                 window.location.replace("/")
