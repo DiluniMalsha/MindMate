@@ -44,7 +44,6 @@ const Settings = (props) => {
         getParentDetails(1)
             .then((res) => {
                 dispatcher(addOneParent({...res.data.body}))
-                console.log(res.data.body)
             })
             .catch(err => console.log(err))
     })
@@ -53,7 +52,6 @@ const Settings = (props) => {
         getChildDetails(1,)
             .then((res) => {
                 dispatcher(addOneChild({...res.data.body}))
-                console.log(res.data.body)
             })
             .catch(err => console.log(err))
     })

@@ -1,5 +1,5 @@
 import "./AddNewRecord.css";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Grid from "@mui/material/Grid";
 import CustomInput from "../inputField/InputField";
 import CustomButton from "../button/CustomButton";
@@ -62,10 +62,8 @@ const AddNewRecord = ({
         });
 
         return localTime;
-        // console.log("Local Time:", localTime);
     }
 
-    console.log(tasks)
     const taskDetails = {
         childId: 1,
         day: day,

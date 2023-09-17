@@ -1,11 +1,10 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import * as React from 'react';
 import {styled} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import {CreateOutline, TrashOutline} from 'react-ionicons'
-import updateRecord from "../addNewRecord/UpdateRecord";
 import Swal from "sweetalert2";
 import "./DailyTimetable.css"
 import {deleteTimeTableRecordForDay} from "../../repository/timeTableRepository";
@@ -29,7 +28,6 @@ const TimetableRecode = ({startTime, endTime, description, id, day}) => {
     const dispatcher = useDispatch()
 
     const handleDeleteRow = (event) => {
-        console.log(id)
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -123,7 +121,6 @@ const TimetableRecode = ({startTime, endTime, description, id, day}) => {
                     ids={id}
                 />
             )}
-            {/*{console.log(day, startTime,endTime, description,id)}*/}
         </div>
     );
 }
