@@ -2,6 +2,7 @@ package com.uwu.emora.service;
 
 import com.uwu.emora.dto.scheduler.OneTimeSchedulerDto;
 import com.uwu.emora.dto.scheduler.ScheduledEventDetailsDto;
+import com.uwu.emora.dto.scheduler.SingleScheduledEventDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface SchedulerService {
     void deleteScheduledTask(String reminderId, long childId);
 
     List<ScheduledEventDetailsDto> getScheduledTasksForWeb(long childId);
+
+    OneTimeSchedulerDto getUpcomingScheduledEvent(long childId);
 }

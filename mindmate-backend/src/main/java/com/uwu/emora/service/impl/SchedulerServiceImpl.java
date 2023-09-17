@@ -188,6 +188,18 @@ public class SchedulerServiceImpl implements SchedulerService {
         return eventDetails;
     }
 
+    @Override
+    public OneTimeSchedulerDto getUpcomingScheduledEvent(long childId) {
+        Scheduler schedulerById = schedulerRepository.getSchedulerById();
+        if (schedulerById == null) {
+            return null;
+        }
+        OneTimeSchedulerDto oneTimeSchedulerDto = new OneTimeSchedulerDto();
+        oneTimeSchedulerDto.setNote(schedulerById.getNote());
+        oneTimeSchedulerDto.setFromTime(schedulerById.getFromTime().toString());
+        return oneTimeSchedulerDto;
+    }
+
     private long getMillisecondsFromLocalDateTime(LocalDateTime dateTime) {
         ZonedDateTime zdt = ZonedDateTime.of(dateTime, ZoneId.systemDefault());
         return zdt.toInstant().toEpochMilli();

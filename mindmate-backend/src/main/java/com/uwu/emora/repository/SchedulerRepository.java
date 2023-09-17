@@ -15,4 +15,7 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, String> {
     List<String> getAllIDs();
 
     List<Scheduler> findAllByChildOrderByDateAsc(Child child);
+
+    @Query(value = " select * from scheduler where current_date=date(from_time) and time(from_time)>current_time limit 1;", nativeQuery = true)
+    Scheduler getSchedulerById();
 }
