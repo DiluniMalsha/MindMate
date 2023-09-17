@@ -10,6 +10,8 @@ import NewReminder from "../addReminder/NewReminder";
 import Calendar from "react-calendar";
 import "./SchedulerTimetable.css"
 import {deleteScheduledTasks, getScheduledTasks} from "../../repository/schedulerRepository";
+import AddNewReminder from "../addReminder/AddNewReminder";
+import {convert12HourTo24Hour, convertFullDate} from "../../function/function";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
@@ -18,7 +20,6 @@ const Item = styled(Paper)(({theme}) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
-    // color: theme.palette.text.secondary,
 }));
 
 const handleDeleteRow = (reminderId) => () => {
@@ -34,7 +35,6 @@ const handleDeleteRow = (reminderId) => () => {
         if (result.isConfirmed) {
             deleteScheduledTasks(1, reminderId)
                 .then((res) => {
-                    console.log(res)
                     if (res.status === 200) {
                         if (res.data.success) {
                             Swal.fire(
@@ -66,9 +66,10 @@ const handleDeleteRow = (reminderId) => () => {
     })
 };
 
-const SchedulerTimetable = ({startTime, endTime, description}) => {
+const SchedulerTimetable = (props) => {
 
     const [popupVisible, setPopupVisible] = useState(false);
+    const [popupVisibles, setPopupVisibles] = useState(false);
     const [title, setTitle] = useState('Reminder');
     const [btnName, setBtnName] = useState('Update');
     const [eventsAvailable, setEventsAvailable] = React.useState(false);
@@ -81,22 +82,23 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
     const [to, setTo] = useState("")
     const [reminderEarly, setReminderEarly] = useState("");
     const [selectDate, setSelectDate] = useState()
+    const [reminderId, setReminderId] = useState("");
 // {/*---------------------------------------------------- button handle-----------------------------------------------*/}
-    const handlePopUp = (date, note, from, to, remind) => () => {
+    const handlePopUp = (date, note, from, to, remind, reminderId) => () => {
         setPopupVisible(!popupVisible);
-        setTitle('Reminder');
+        setTitle('Reminder')
         setBtnName('Update')
         setDate(date)
         setNote(note)
         setFrom(from)
         setTo(to)
         setReminderEarly(remind)
+        setReminderId(reminderId)
     }
 
-    const handleWantAdded = (value) => {
-        setPopupVisible(!popupVisible);
-        setTitle('Add New Reminder')
-        setBtnName('Add')
+    const handleWantAdded = (d) => () => {
+        setPopupVisibles(!popupVisibles);
+        setDate(d)
     }
 
     //Connect redux store
@@ -104,7 +106,6 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
         getScheduledTasks(1,)
             .then((res) => {
                 setSchedulerLists(res.data.body)
-                console.log("scheduler list")
             })
             .catch(err => console.log(err))
     }, [setSchedulerLists,])
@@ -112,7 +113,7 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
     const handleDayChange = (value) => {
         setSelectedDate(value);
         if (schedulerList.some(item => value.valueOf() === item.timestamp)) {
-            setSelectDate((schedulerList.find(item => value.valueOf()=== item.timestamp)).date )
+            setSelectDate((schedulerList.find(item => value.valueOf() === item.timestamp)).date)
             setEventsAvailable(true);
             setEvents(schedulerList.find(item => value.valueOf() === item.timestamp).events);
         } else {
@@ -125,38 +126,6 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
         const time = new Date(t);
         return time.toLocaleTimeString();
     }
-
-    // function getTimestampToLocalDate(unixTimestamp) {
-    //     const date = new Date(unixTimestamp);
-    //
-    //     // Adjust the Date object to the GMT+5:30 timezone
-    //     const gmt530Offset = 330 * 60 * 1000; // 330 minutes (5 hours and 30 minutes) in milliseconds
-    //     const gmt530Date = new Date(date.getTime() + gmt530Offset);
-    //
-    //     // Extract the date and time components
-    //     const year = gmt530Date.getUTCFullYear();
-    //     const month = gmt530Date.getUTCMonth() + 1; // Month is 0-indexed, so add 1
-    //     const day = gmt530Date.getUTCDate();
-    //     const hours = gmt530Date.getUTCHours();
-    //     const minutes = gmt530Date.getUTCMinutes();
-    //     const seconds = gmt530Date.getUTCSeconds();
-    //
-    //     // Create a formatted date and time string
-    //     const formattedDateTime = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    //     return formattedDateTime;
-    // }
-
-    // function getFullDate(d) {
-    //     const dateString = "Tue Sep 12 2023 00:00:00 GMT+0530 (India Standard Time)";
-    //     const date = new Date(dateString);
-    //     const year = date.getFullYear();
-    //     const month = date.getMonth() + 1; // Months are zero-based (0 = January)
-    //     const day = date.getDate();
-    //
-    //     const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-    //     return formattedDate;
-    // }
-
 
     return (
         <div className="row w-100 ">
@@ -183,7 +152,7 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
                             {eventsAvailable &&
                                 <>
                                     {events.map((e) => (
-                                        <Grid item xs={12} lg={12}>
+                                        <Grid item xs={12} lg={12} key={e.id}>
                                             <Item
                                                 sx={{
                                                     textAlign: "left",
@@ -195,11 +164,15 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
                                                 <div className="item-text-align">
                                                     <div className="row w-100">
                                                         <div className="col-xl-10 col-9">
-                                                            <div>{e.note}</div>
+                                                            <div>
+                                                                <h5>
+                                                                    {e.note}
+                                                                </h5>
+                                                            </div>
                                                             <div
-                                                                className="eventTime">From {getTimeString(e.from)} to {getTimeString(e.to)}</div>
+                                                                className="eventTime">From {convert12HourTo24Hour(getTimeString(e.from))} to {convert12HourTo24Hour(getTimeString(e.to))}</div>
                                                             <div className="eventRemindTime">Remind Earlier
-                                                                At {getTimeString(e.remindTime)} date {e.date}</div>
+                                                                At {convert12HourTo24Hour(getTimeString(e.remindTime))} date {e.date}</div>
                                                         </div>
                                                         <div className="col-xl-1 col-1 "
                                                              style={{cursor: "pointer", paddingRight: '10px'}}>
@@ -207,14 +180,13 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
                                                                 color={"#a3a3a3"}
                                                                 height="30px"
                                                                 width="30px"
-                                                                onClick={handlePopUp(selectDate, e.note, getTimeString(e.from), getTimeString(e.to), getTimeString(e.remindTime))}
+                                                                onClick={handlePopUp(selectDate, e.note, getTimeString(e.from), getTimeString(e.to), getTimeString(e.remindTime), e.id)}
                                                                 className="icon-size"
                                                             />
                                                         </div>
                                                         <div className="col-1 deleteIcon"
                                                              style={{cursor: "pointer"}}>
                                                             <TrashOutline
-                                                                // onClick={handleDeleteRow(1, e.id)}
                                                                 onClick={handleDeleteRow(e.id)}
                                                                 color={"#ff0000"}
                                                                 height="30px"
@@ -258,7 +230,7 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
                                     color={'#1E5D88'}
                                     height="30px"
                                     width="30px"
-                                    onClick={handleWantAdded}
+                                    onClick={handleWantAdded(selectedDate)}
                                 />
                             </Grid>
                         </Grid>
@@ -275,7 +247,14 @@ const SchedulerTimetable = ({startTime, endTime, description}) => {
                             id="search-student-div"
                             title={title}
                             swalTitle="Reminder has been updated successfully!"
+                            reminderId={reminderId}
                             setPopupVisible={setPopupVisible}
+                        />
+                    )}
+                    {popupVisibles && (
+                        <AddNewReminder
+                            setPopupVisibles={setPopupVisibles}
+                            dates={convertFullDate(date)}
                         />
                     )}
                 </div>

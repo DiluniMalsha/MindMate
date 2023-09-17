@@ -6,6 +6,8 @@ import Paper from "@mui/material/Paper";
 import close from "../../assets/formImg/close.png";
 import Swal from "sweetalert2";
 import React, {useState} from "react";
+import {updateSchedulerTask} from "../../repository/schedulerRepository";
+import {convert12HourTo24Hour, convert12HourTo24HourwithSecond} from "../../function/function";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#ffffff" : "#ffffff",
@@ -18,15 +20,19 @@ const closePopUp = (setPopupVisible) => (event) => {
     setPopupVisible(false);
 };
 
-const handleAddData = (swalTitle) => (event) => {
-    Swal.fire("Updated!", swalTitle, "success").then((result) => {
-        if (result.isConfirmed) {
-            window.location.reload(true);
-        }
-        //     }
-    });
-};
-const NewReminder = ({dates, notes, from, to, reminderTime, setPopupVisible, swalTitle, buttonName, title}) => {
+
+const NewReminder = ({
+                         dates,
+                         notes,
+                         from,
+                         to,
+                         reminderTime,
+                         setPopupVisible,
+                         swalTitle,
+                         buttonName,
+                         title,
+                         reminderId
+                     }) => {
 
     const [date, setDate] = useState({dates}.dates);
     const [note, setNote] = useState({notes}.notes);
@@ -52,19 +58,39 @@ const NewReminder = ({dates, notes, from, to, reminderTime, setPopupVisible, swa
         setToTime(event.target.value)
     }
 
-    function convert12HourTo24Hour(time12h) {
-        const [time, period] = time12h.split(' ');
-        const [hours, minutes] = time.split(':');
-        let hours24h = parseInt(hours, 10);
-        if (period === 'PM' && hours24h !== 12) {
-            hours24h += 12;
-        } else if (period === 'AM' && hours24h === 12) {
-            hours24h = 0;
-        }
-        const hours24hString = hours24h.toString().padStart(2, '0');
-        const minutesString = minutes.padStart(2, '0');
-        return `${hours24hString}:${minutesString}`;
+    const schedulerDetails = {
+        id: reminderId,
+        date: date,
+        note: note,
+        remindTime: convert12HourTo24HourwithSecond(reminder),
+        fromTime: convert12HourTo24HourwithSecond(fromTime),
+        toTime: convert12HourTo24HourwithSecond(toTime)
     }
+
+    const handleAddData = (swalTitle) => (event) => {
+        updateSchedulerTask(1, schedulerDetails).then(res => {
+            console.log(res)
+            if (res.status === 200) {
+                if (res.data.success === true) {
+                    console.log("pass")
+                    Swal.fire("Updated!", swalTitle, "success").then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload(true);
+                        }
+                    });
+                } else {
+                    console.log("error")
+                    Swal.fire("Error!", swalTitle, "error").then((result) => {
+                    });
+                }
+            } else {
+                console.log("error")
+                Swal.fire("Error!", swalTitle, "error").then((result) => {
+                });
+            }
+        })
+
+    };
 
     return (
         <div id="add-new-main-section">
