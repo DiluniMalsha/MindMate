@@ -1,27 +1,30 @@
 import React, {useState} from "react";
 import "./SignInForm.css";
 import {Icon} from "react-icons-kit";
-import {eye} from "react-icons-kit/feather/eye";
-import {check} from "react-icons-kit/feather/check";
-import {file} from "react-icons-kit/feather/file";
-import {eyeOff} from "react-icons-kit/feather/eyeOff";
+import {ic_perm_identity_twotone} from 'react-icons-kit/md/ic_perm_identity_twotone'
+import {ic_visibility_off} from 'react-icons-kit/md/ic_visibility_off'
+import {ic_visibility} from 'react-icons-kit/md/ic_visibility'
 import {MDBInput} from "mdb-react-ui-kit";
 import CustomButton from "../button/CustomButton";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-
-// import {BASE_URL} from "../../utils/constants";
-
+import {BASE_URL} from "../../utils/constants";
 
 function SignInFrom(setToken) {
 
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
+    const [type, setType] = useState("password");
+    const [icon, setIcon] = useState(ic_visibility_off);
+    const [checkIcon] = useState(ic_perm_identity_twotone);
+
+    const handleChangeUserName = (event) => {
+        setUserName(event.target.value);
+    }
 
     const handleSubmit = async e => {
         e.preventDefault();
-        console.log("he")
 
         let data = new FormData();
         data.append('grant_type', 'password');
@@ -31,7 +34,7 @@ function SignInFrom(setToken) {
         const headers = {
             'Authorization': 'Basic cGFyZW50Og=='
         }
-        axios.post("http://localhost:8080/api/oauth/token", data, {headers})
+        axios.post(BASE_URL+"/oauth/token", data, {headers})
             .then((res) => {
                 localStorage.setItem("loggedUserToken", res.data.access_token);
                 window.location.replace("/")
@@ -43,37 +46,21 @@ function SignInFrom(setToken) {
                     "You have entered an invalid username or password!",
                     'error'
                 ).then(r => {
-                    // window.location.reload(false)
                 })
             })
     }
 
 
-    const [type, setType] = useState("password");
-    const [icon, setIcon] = useState(eyeOff);
-    const [checkIcon, setCheckIcon] = useState(file);
-
-
     const handleToggle = () => {
         if (type === "password") {
-            setIcon(eye);
+            setIcon(ic_visibility);
             setType("text");
         } else {
-            setIcon(eyeOff);
+            setIcon(ic_visibility_off);
             setType("password");
         }
     };
 
-    const getUserName = () => {
-        const userName = document.getElementById("userName").value;
-        console.log(userName);
-        setUserName(userName)
-        if (userName === "mihiri") {
-            setCheckIcon(check);
-        } else {
-            setCheckIcon(file);
-        }
-    };
     return (
         <div className="sign-in-main">
             <div className="d-flex flex-column ">
@@ -97,7 +84,8 @@ function SignInFrom(setToken) {
                         type="text"
                         className="text-line"
                         placeholder="mihiripeiris"
-                        onChange={getUserName}
+                        value={username}
+                        onChange={handleChangeUserName}
                     />
                 </div>
 
