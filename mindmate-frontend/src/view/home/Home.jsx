@@ -1,23 +1,59 @@
-import { HomeOutline} from "react-ionicons";
+import {HomeOutline} from "react-ionicons";
 import "./Home.css"
 import Grid from "@mui/material/Grid";
-import mood from '../../assets/faceIcon/fear.svg'
+import fear from '../../assets/faceIcon/fear.svg'
+import sad from '../../assets/faceIcon/sad.svg'
+import angry from '../../assets/faceIcon/angry.svg'
+import happy from '../../assets/faceIcon/happy.svg'
+import disgusted from '../../assets/faceIcon/disgusted.svg'
+import neutral from '../../assets/faceIcon/neutral.svg'
+import surprised from '../../assets/faceIcon/surprised.svg'
 import CustomButton from "../../components/button/CustomButton";
 import LiveChart from "../../components/chart/LiveChart";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import HeadingTitle from "../../components/title/HeadingTitle";
+import {getUpcomingTask} from "../../repository/schedulerRepository";
+import {getLocalTime} from "../../function/function";
 
-const Home = (props) => {
-    let moodDescription = "Mihasa is Now in a fear Mood"
-    let upcomingTask = 'Reading Books';
-    let time = 'at 08:00 AM';
-    let icons =<HomeOutline
-                    color={'#4285f5'}
-                    title={"Home"}
-                    height="20px"
-                    width="20px"
-                    style={{marginBottom: '5px'}}
-                />
+const images = [
+    fear,
+    sad,
+    angry,
+    happy,
+    disgusted,
+    neutral,
+    surprised,
+]
+
+const Home = () => {
+    const [upcomingTask, setUpcomingTask] = useState()
+    const [time, setTime] = useState()
+    let icons = <HomeOutline
+        color={'#4285f5'}
+        title={"Home"}
+        height="20px"
+        width="20px"
+        style={{marginBottom: '5px'}}
+    />
+
+    useEffect(() => {
+        getUpcomingTask(1)
+            .then((res) => {
+                if (res.data.body === null) {
+                    setUpcomingTask("Today No Upcoming Events Available")
+                    setTime(" ")
+                } else {
+                    // console.log(res.data.body)
+                    setUpcomingTask(res.data.body.note);
+                    setTime("at " + getLocalTime(res.data.body.fromTime))
+                }
+            })
+    }, [])
+
+    const mood = ["fear", "sad", "angry", "happy", "disgusted", "neutral", "surprised"];
+    const random = Math.floor(Math.random() * images.length);
+    let moodDescription = "Mihasa is Now in a "+ mood[random] +" Mood"
+
     return (
         <section className="home-margin">
             <HeadingTitle title='Dashboard' icon={icons} ml={'70px'}/>
@@ -25,7 +61,7 @@ const Home = (props) => {
                 <Grid container spacing={2}>
                     <Grid item xs={11} md={3}>
                         <div className='show-mood'>
-                            <img src={mood} alt='mood' className='mood-section'/>
+                            <img src={images[random]} alt='mood' className='mood-section'/>
                             <br/>
                             <span className='mt-3 mood-des'>
                                 {moodDescription}
