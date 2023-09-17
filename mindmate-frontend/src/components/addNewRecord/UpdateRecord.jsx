@@ -12,6 +12,7 @@ import {
     updateOneDailyTimeTable
 } from "../../store/slices/dailyTimeTableSlice";
 import {updateTimeTableRecordForDay} from "../../repository/timeTableRepository";
+import {convert12HourTo24Hour} from "../../function/function";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#ffffff" : "#ffffff",
@@ -34,22 +35,6 @@ const UpdateRecord = ({
                           setPopupVisible,
                           swalTitle,
                       }) => {
-
-
-    function convert12HourTo24Hour(time12h) {
-        const [time, period] = time12h.split(' ');
-        const [hours, minutes] = time.split(':');
-        let hours24h = parseInt(hours, 10);
-        if (period === 'PM' && hours24h !== 12) {
-            hours24h += 12;
-        } else if (period === 'AM' && hours24h === 12) {
-            hours24h = 0;
-        }
-        const hours24hString = hours24h.toString().padStart(2, '0');
-        const minutesString = minutes.padStart(2, '0');
-        return `${hours24hString}:${minutesString}`;
-    }
-
 
     const [day, setDay] = useState(days)
     const [fromTime, setFromTime] = useState(convert12HourTo24Hour(from))
