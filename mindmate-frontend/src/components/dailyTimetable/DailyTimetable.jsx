@@ -54,6 +54,7 @@ const DailyTimetable = (props) => {
             if (day === days) {
                 return (
                     <TimetableRecode
+                        key={items.id}
                         day={day}
                         startTime={fromTime}
                         endTime={toTime}

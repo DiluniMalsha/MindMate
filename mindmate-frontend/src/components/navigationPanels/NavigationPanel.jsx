@@ -55,7 +55,7 @@ const NavigationPanel = (props) => {
                 </div>
                 <div className="navigation-item-list">
                     {NavigationPanelData.map((item) => (
-                        <Accordion className="accordion-div">
+                        <Accordion className="accordion-div" key={item.path}>
                             <AccordionSummary
                                 expandIcon={
                                     item.subItems.length === 0 ? null : <ExpandMoreIcon/>
