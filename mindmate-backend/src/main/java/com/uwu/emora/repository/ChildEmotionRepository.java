@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ChildEmotionRepository extends JpaRepository<ChildEmotion, Long> {
+
+    ChildEmotion findTopByChild_IdOrderByDateTimeDesc(long childId);
+
 }
