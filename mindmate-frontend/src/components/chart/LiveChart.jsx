@@ -2,6 +2,7 @@ import "./LiveChart.css";
 import {LineChart} from '@mui/x-charts/LineChart';
 import CustomButton from "../button/CustomButton";
 import Grid from "@mui/material/Grid";
+import LiveChartNew from "../LiveChart/LiveChart";
 
 const LiveChart = ({title, width, height, display, marginTop}) => {
     return (
@@ -71,16 +72,7 @@ const LiveChart = ({title, width, height, display, marginTop}) => {
                 {/*</div>*/}
                 {/*sx={{border: '1px solid #1E5D88'}}*/}
                 <div className="chart-border" style={{marginTop:marginTop}}>
-                    <LineChart
-                               xAxis={[{data: [1, 2, 3, 5, 8, 10]}]}
-                               series={[
-                                   {
-                                       data: [2, 5.5, 2, 8.5, 1.5, 5],
-                                   },
-                               ]}
-                               width={width}
-                               height={height}
-                    />
+                    <LiveChartNew />
                 </div>
                 <Grid item xs={12} md={4} sx={{textAlign:'right'}} className='history-grid'>
                     <CustomButton

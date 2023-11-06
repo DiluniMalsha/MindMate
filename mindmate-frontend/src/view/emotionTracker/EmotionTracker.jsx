@@ -5,6 +5,7 @@ import happy from '../../assets/faceIcon/fear.svg';
 import {FitnessOutline} from "react-ionicons";
 import HeadingTitle from "../../components/title/HeadingTitle";
 import React from "react";
+import LiveChartNew from "../../components/LiveChart/LiveChart";
 
 const EmotionTracker = (props) => {
     let icon = <FitnessOutline
@@ -23,6 +24,7 @@ const EmotionTracker = (props) => {
                         <EmotionFaceSection face={happy} mood='Happy'/>
                     </div>
                     <div className="col-md-7 graph-border">
+                        {/*<LiveChartNew width='1200' height='600'/>*/}
                         <LiveChart width='700' height='400' title='Her Past Emotion Changing Pattern' marginTop='10px'/>
                     </div>
                     <div className="col-md-4 emotion-display-2" style={{width:'35%'}}>

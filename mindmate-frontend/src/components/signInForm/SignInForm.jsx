@@ -34,7 +34,7 @@ function SignInFrom(setToken) {
         const headers = {
             'Authorization': 'Basic cGFyZW50Og=='
         }
-        axios.post(BASE_URL+"/oauth/token", data, {headers})
+        axios.post("http://18.143.151.234:8080/api/oauth/token", data, {headers})
             .then((res) => {
                 localStorage.setItem("loggedUserToken", res.data.access_token);
                 window.location.replace("/")

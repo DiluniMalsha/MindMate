@@ -1,0 +1,8 @@
+.moodSize{
+    width: 30px;
+}
+.mood-number{
+    /*margin-top: 20px;*/
+    font-size: 20px;
+    margin-left: 20px !important;
+}
