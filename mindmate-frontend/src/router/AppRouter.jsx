@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         ],
     },
     {
-        path: "sign",
+        path: "signIn",
         element: <SignIn />
     },
     {
