@@ -1,12 +1,21 @@
 import CustomButton from "../button/CustomButton";
 import "./EmotionFaceSection.css"
+import LiveChartNew from "../LiveChart/LiveChart";
+import React, {useState} from "react";
+import SendRespond from "../sendRespond/SendRespond";
+
+
 const EmotionFaceSection = ({face, mood}) => {
+    const [popupVisible, setPopupVisible] = useState(false);
+
+    const handleRespondPopUp = (value) => {
+        setPopupVisible(!popupVisible);
+    };
+
     return (
         <div className=''>
-            <img src={face} alt='mood' className='face-img mood-section'/>
+            <LiveChartNew displays="none"/>
             <br/>
-            <br/>
-            <p className='mood-heading'>Mihasa is Now in a {mood} Mood</p>
             <CustomButton
                 type="button"
                 variant="history"
@@ -15,6 +24,7 @@ const EmotionFaceSection = ({face, mood}) => {
                 className="chart-btn-responsive me-0"
                 fontSize="18"
                 width="180"
+                onclick={handleRespondPopUp}
             >
                 Respond to Her
             </CustomButton>
@@ -29,6 +39,11 @@ const EmotionFaceSection = ({face, mood}) => {
 
                 </p>
             </div>
+            {popupVisible && (
+                <SendRespond
+                    setPopupVisible={setPopupVisible}
+                />
+            )}
         </div>
     );
 }

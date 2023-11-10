@@ -117,7 +117,7 @@ const Settings = (props) => {
                                                 : child}
 
                                         </div>
-                                        <div className="col-md child-settings-sections" style={{width: '98%'}}>
+                                        <div className="col-md child-settings-sections mobile-display" style={{width: '98%'}}>
                                             <Preferences/>
                                         </div>
                                     </div>
@@ -148,13 +148,6 @@ const Settings = (props) => {
 
                                         </div>
                                         <div className="col-md child-settings-sections">
-                                            {/*<FormComponent*/}
-                                            {/*    title="Change Password"*/}
-                                            {/*    disabled='block'*/}
-                                            {/*    password='ture'*/}
-                                            {/*    display='none'*/}
-                                            {/*/>*/}
-
                                             <Password title="Change Password"/>
                                         </div>
                                     </div>

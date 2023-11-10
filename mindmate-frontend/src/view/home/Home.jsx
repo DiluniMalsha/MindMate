@@ -1,13 +1,6 @@
 import {HomeOutline} from "react-ionicons";
 import "./Home.css"
 import Grid from "@mui/material/Grid";
-import fear from '../../assets/faceIcon/fear.svg'
-import sad from '../../assets/faceIcon/sad.svg'
-import angry from '../../assets/faceIcon/angry.svg'
-import happy from '../../assets/faceIcon/happy.svg'
-import disgusted from '../../assets/faceIcon/disgusted.svg'
-import neutral from '../../assets/faceIcon/neutral.svg'
-import surprised from '../../assets/faceIcon/surprised.svg'
 import CustomButton from "../../components/button/CustomButton";
 import React, {useEffect, useState} from "react";
 import HeadingTitle from "../../components/title/HeadingTitle";
@@ -15,23 +8,8 @@ import {getUpcomingTask} from "../../repository/schedulerRepository";
 import {getLocalTime} from "../../function/function";
 import LiveChartNew from "../../components/LiveChart/LiveChart";
 import HeadingMood from "../../components/hedingMood/HeadingMood";
-import LiveChart from "../../components/chart/LiveChart";
-import AddNewRecord from "../../components/addNewRecord/AddNewRecord";
 import SendRespond from "../../components/sendRespond/SendRespond";
-import axios from "axios";
 import {getEmotionList} from "../../repository/emotionRepository";
-import dataSet from "../dataSet/DataSet";
-import HomeMood from "../../components/homeMood/HomeMood";
-
-const images = [
-    fear,
-    sad,
-    angry,
-    happy,
-    disgusted,
-    neutral,
-    surprised,
-]
 
 const Home = () => {
     const [upcomingTask, setUpcomingTask] = useState()
@@ -67,17 +45,13 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             getEmotionList()
-                .then((res) =>{
+                .then((res) => {
                     console.log(11)
                 })
 
         }
         fetchData();
     }, [data]);
-
-    const mood = ["fear", "sad", "angry", "happy", "disgusted", "neutral", "surprised"];
-    const random = Math.floor(Math.random() * images.length);
-    let moodDescription = "Mihasa is Now in a " + mood[random] + " Mood"
 
     return (
         <section className="home-margin">
@@ -95,6 +69,7 @@ const Home = () => {
                                 className="mt-4 btn-mrg"
                                 fontSize="18"
                                 width="180"
+                                onclick={handleRespondPopUp}
                             >
                                 Respond to Her
                             </CustomButton>
@@ -131,7 +106,7 @@ const Home = () => {
                             </div>
                         </div>
                     </Grid>
-                    <Grid item xs={11} md={9} className='chart-grid'>
+                    <Grid item xs={11} md={9} className='chart-grid mobile-display'>
                         <div className="widthSet row">
                             <HeadingMood/>
                         </div>
@@ -145,11 +120,6 @@ const Home = () => {
             {popupVisible && (
                 <SendRespond
                     setPopupVisible={setPopupVisible}
-                    // title="Add New Timetable Record"
-                    // swalTitle="Record has been added successfully!"
-                    // id="search-student-div"
-                    // day="MON"
-                    // setPopupVisible={setPopupVisible}
                 />
             )}
         </section>

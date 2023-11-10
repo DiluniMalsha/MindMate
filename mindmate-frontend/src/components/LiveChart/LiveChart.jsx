@@ -28,10 +28,10 @@ ChartJS.register(
     Filler
 )
 const LiveChartNew = ({width, setClassname, displaying, displays}) => {
-    // const [chartData, setChartData] = useState({
     const [chartData, setChartData] = useState({})
     const [loopId, setLoopId] = useState();
     const accessToken: string | null = localStorage.getItem("loggedUserToken");
+    // eslint-disable-next-line
     const headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -40,7 +40,6 @@ const LiveChartNew = ({width, setClassname, displaying, displays}) => {
 
     useEffect(() => {
         const fetchData = async () => {
-
             const {data} = await axios.get("http://18.143.151.234:8080/api/user/emotion", {headers})
             setChartData({
                 labels: data.body.reverse().map((item) => item.time),
@@ -56,8 +55,8 @@ const LiveChartNew = ({width, setClassname, displaying, displays}) => {
             })
             // console.log()
             setLoopId(data.body.reverse()[0].emotionId)
-
         }
+
         fetchData();
     }, [headers]);
 
@@ -67,7 +66,6 @@ const LiveChartNew = ({width, setClassname, displaying, displays}) => {
         <>
             <div style={{display: displays}}>
                 <div style={{width: width, marginLeft: "10px", marginTop: "20px"}}>
-                    {/*style={{width: width,height:height}}*/}
                     <div className={setClassname}>
                         <div className="">
                             {chartData && chartData.datasets && (

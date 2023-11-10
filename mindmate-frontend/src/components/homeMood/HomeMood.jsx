@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import fear from '../../assets/faceIcon/fear.svg'
 import sad from '../../assets/faceIcon/sad.svg'
 import angry from '../../assets/faceIcon/angry.svg'
@@ -17,18 +17,14 @@ const images = [
     surprised,
     happy,
 ]
-const HomeMood = ({moodId, display}) => {
+const HomeMood = ({moodId, display, loading}) => {
     const mood = ["angry", "disgusted", "fear", "sad", "neutral", "surprised", "happy"];
-    const [moodImage, setMoodImage] = useState(images[6])
-    let moodDescription = "Mihasa is Now in a " + mood[moodId-1] + " Mood"
+    let moodDescription = "Mihasa is Now in a " + mood[moodId - 1] + " Mood"
 
-    let im = images[moodId-1];
-    console.log("sanidu", moodId)
-
+    let im = images[moodId - 1];
 
     return (
         <>
-
             <div style={{display: display}}>
                 <img src={im} alt='mood' className='mood-section'/>
                 <br/>

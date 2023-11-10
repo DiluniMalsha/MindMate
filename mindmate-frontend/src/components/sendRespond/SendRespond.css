@@ -1,6 +1,21 @@
-.css-ahj2mt-MuiTypography-root{
- padding: 0.53vw !important;
+.css-ahj2mt-MuiTypography-root {
+    padding: 0.53vw !important;
 }
-.form-controls{
- margin-left: 12px;
+
+.form-controls {
+    margin-left: 12px;
+}
+
+.label-radio {
+    padding: 15px;
+}
+
+.label-padding {
+    margin-left: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .label-radio {
+        padding: 10px;
+    }
 }

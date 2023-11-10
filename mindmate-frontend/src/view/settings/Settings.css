@@ -224,17 +224,17 @@
     .child-settings-sections {
         margin: 0 10px 10px 0 !important
     }
-
-}
-
-@media screen and (max-width: 768px) {
     .setting-heading {
         margin-bottom: 12px !important;
         font-size: 22px;
         color: #1E5D88 !important;
-
     }
+    .child-settings-sections{
+        margin-bottom: 100px;
+    }
+
 }
+
 
 @media screen and (max-width: 560px) {
     .btn-width {

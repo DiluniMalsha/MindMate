@@ -8,12 +8,12 @@ const LiveChart = ({title, width, height, display, marginTop}) => {
     return (
         <>
             <div className="checking-pattern-btn-set">
-                <div className='emotion-chart-background' style={{display:display,}}>
-                    <p className="btn-title">
+                <div className='emotion-chart-background mobile-display' style={{display:display,}}>
+                    <p className="btn-title ">
                         {title}
                     </p>
                     <Grid container spacing={2} sx={{marginBottom:'20px'}}>
-                        <Grid item xs={12} md={8} sx={{textAlign:'left'}} className='grid-btn-set'>
+                        <Grid item xs={12} md={8} sx={{textAlign:'left'}} className='grid-btn-set mobile-display'>
                             <CustomButton
                                 type="button"
                                 variant="active"
@@ -71,8 +71,8 @@ const LiveChart = ({title, width, height, display, marginTop}) => {
 
                 {/*</div>*/}
                 {/*sx={{border: '1px solid #1E5D88'}}*/}
-                <div className="chart-border" style={{marginTop:marginTop}}>
-                    <LiveChartNew />
+                <div className="chart-border margine-bottm-res" style={{marginTop:marginTop}}>
+                    <LiveChartNew displaying="none"/>
                 </div>
                 <Grid item xs={12} md={4} sx={{textAlign:'right'}} className='history-grid'>
                     <CustomButton

@@ -1,11 +1,9 @@
 import "./SendRespond.css"
-import {FormControl, FormControlLabel, FormLabel} from "@mui/material";
-import {Radio, RadioGroup} from "rsuite";
 import close from "../../assets/formImg/close.png";
 import Grid from "@mui/material/Grid";
 import CustomInput from "../inputField/InputField";
 import CustomButton from "../button/CustomButton";
-import React from "react";
+import React, {useState} from "react";
 import {styled} from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
@@ -19,7 +17,27 @@ const Item = styled(Paper)(({theme}) => ({
 const closePopUp = (setPopupVisible) => (event) => {
     setPopupVisible(false);
 };
+
 const SendRespond = ({setPopupVisible}) => {
+
+    const [value, setValue] = React.useState("image");
+    const [message, setMessage] = useState();
+
+    const handleChangeMessage = (event) => {
+        setMessage(event.target.value);
+    }
+
+    const handleChangeType = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(event.target.value);
+    }
+
+    console.log({value})
+    console.log({message})
+
+    function handleSendResponse() {
+
+    }
+
     return (
         <>
             <div id="add-new-main-section">
@@ -37,19 +55,31 @@ const SendRespond = ({setPopupVisible}) => {
                         </Grid>
                         <Grid item xs={12}>
                             <Item>
-                                <FormControl className="form-controls">
-                                    {/*<FormLabel id="demo-radio-buttons-group-label">File Type</FormLabel>*/}
-                                    <RadioGroup
-                                        aria-labelledby="demo-radio-buttons-group-label"
-                                        defaultValue="female"
-                                        name="radio-buttons-group"
-                                    >
-                                        <FormControlLabel label="Picture"  value="Picture" control={<Radio />}  />
-                                        <br/>
-                                        <FormControlLabel value="Audio" control={<Radio />} label="Audio" /><br/>
-                                        <FormControlLabel value="Video" control={<Radio />} label="Video" /><br/>
-                                    </RadioGroup>
-                                </FormControl>
+                                <div>
+                                    <div className="form-check" onChange={handleChangeType}>
+                                        <div className="label-radio">
+                                            <input className="form-check-input" type="radio" name="exampleRadios"
+                                                   id="exampleRadios1" value="image"/>
+                                            <label className="form-check-label label-padding">
+                                                Image
+                                            </label>
+                                        </div>
+                                        <div className="label-radio">
+                                            <input className="form-check-input " type="radio" name="exampleRadios"
+                                                   id="exampleRadios2" value="audio"/>
+                                            <label className="form-check-label label-padding">
+                                                Audio
+                                            </label>
+                                        </div>
+                                        <div className="label-radio">
+                                            <input className="form-check-input " type="radio" name="exampleRadios"
+                                                   id="exampleRadios2" value="video"/>
+                                            <label className="form-check-label label-padding">
+                                                Video
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </Item>
                         </Grid>
                         <Grid item xs={12}>
@@ -63,6 +93,7 @@ const SendRespond = ({setPopupVisible}) => {
                                     width="100%"
                                     fontSize="17"
                                     className="font-set"
+                                    onchange={handleChangeMessage}
                                 />
                             </Item>
                         </Grid>
@@ -77,6 +108,7 @@ const SendRespond = ({setPopupVisible}) => {
                                 className="mt-3 mb-4"
                                 fontSize="17"
                                 width="120"
+                                onclick={handleSendResponse}
                             >
                                 Send
                             </CustomButton>

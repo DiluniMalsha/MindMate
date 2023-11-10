@@ -6,3 +6,13 @@
     font-size: 20px;
     margin-left: 20px !important;
 }
+
+@media screen and (max-width: 778px) {
+    .moodSize{
+        width: 15px;
+    }
+    .mood-number{
+        font-size: 12px;
+        margin-left: 10px !important;
+    }
+}
