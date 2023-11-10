@@ -10,11 +10,13 @@ import LiveChartNew from "../../components/LiveChart/LiveChart";
 import HeadingMood from "../../components/hedingMood/HeadingMood";
 import SendRespond from "../../components/sendRespond/SendRespond";
 import {getEmotionList} from "../../repository/emotionRepository";
+import SendReminder from "../../components/sendReminder/SendReminder";
 
 const Home = () => {
     const [upcomingTask, setUpcomingTask] = useState()
     const [time, setTime] = useState()
     const [popupVisible, setPopupVisible] = useState(false);
+    const [popupVisibles, setPopupVisibles] = useState(false);
 
     let icons = <HomeOutline
         color={'#4285f5'}
@@ -23,9 +25,13 @@ const Home = () => {
         width="20px"
         style={{marginBottom: '5px'}}
     />
-
+    console.log(upcomingTask)
     const handleRespondPopUp = (value) => {
         setPopupVisible(!popupVisible);
+    };
+
+    const handleSendReminder = (value) => {
+        setPopupVisibles(!popupVisibles);
     };
 
     useEffect(() => {
@@ -33,9 +39,8 @@ const Home = () => {
             .then((res) => {
                 if (res.data.body === null) {
                     setUpcomingTask("Today No Upcoming Events Available")
-                    setTime(" ")
+                    setTime()
                 } else {
-                    // console.log("sanidu", res.data.body)
                     setUpcomingTask(res.data.body.note);
                     setTime("at " + getLocalTime(res.data.body.fromTime))
                 }
@@ -99,6 +104,7 @@ const Home = () => {
                                         className="mt-4 btn-mrg"
                                         fontSize="18"
                                         width="200"
+                                        onclick={handleSendReminder}
                                     >
                                         Send a Reminder
                                     </CustomButton>
@@ -120,6 +126,13 @@ const Home = () => {
             {popupVisible && (
                 <SendRespond
                     setPopupVisible={setPopupVisible}
+                />
+            )}
+            {popupVisibles && (
+                <SendReminder
+                    setPopupVisibles={setPopupVisibles}
+                    upcomingEvent={upcomingTask}
+                    time={time}
                 />
             )}
         </section>
