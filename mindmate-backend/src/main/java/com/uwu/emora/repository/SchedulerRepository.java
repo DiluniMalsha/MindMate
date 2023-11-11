@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface SchedulerRepository extends JpaRepository<Scheduler, String> {
-
     @Query(value = "select id from scheduler",nativeQuery = true)
     List<String> getAllIDs();
 
