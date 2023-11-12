@@ -19,4 +19,6 @@ public interface SchedulerService {
     void deleteScheduledTask(String reminderId, long childId);
 
     List<ScheduledEventDetailsDto> getScheduledTasksForWeb(long childId);
+
+    OneTimeSchedulerDto getUpcomingScheduledTask(long childId);
 }

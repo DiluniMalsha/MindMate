@@ -1,11 +1,14 @@
 package com.uwu.emora.service;
 
 import com.uwu.emora.dto.emotion.ChildEmotionDto;
+import com.uwu.emora.dto.emotion.EmotionResponseDto;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface EmotionService {
-    void saveChildEmotion(long childId, long emotionId);
+    List<ChildEmotionDto> getLatestEmotions();
 
-    ChildEmotionDto getLatestEmotion();
+    void saveEmotionResponse(EmotionResponseDto emotionResponseDto);
 }

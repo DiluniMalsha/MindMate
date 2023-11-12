@@ -2,10 +2,13 @@ package com.uwu.emora.controller;
 
 import com.uwu.emora.dto.CommonResponse;
 import com.uwu.emora.dto.emotion.ChildEmotionDto;
+import com.uwu.emora.dto.emotion.EmotionResponseDto;
 import com.uwu.emora.service.EmotionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,15 +18,15 @@ public class EmotionController {
 
     private final EmotionService emotionService;
 
-    @PostMapping(value = "/emotion")
-    public ResponseEntity saveChildEmotion(@RequestBody ChildEmotionDto data) {
-        emotionService.saveChildEmotion(1, data.getEmotionId());
-        return ResponseEntity.ok(new CommonResponse<>(true, "Child Emotion Details Saved Successfully"));
+    @GetMapping(value = "/user/emotion")
+    public ResponseEntity getLatestEmotions() {
+        List<ChildEmotionDto> latestEmotions = emotionService.getLatestEmotions();
+        return ResponseEntity.ok(new CommonResponse<>(true, latestEmotions));
     }
 
-    @GetMapping(value = "/user/emotion")
-    public ResponseEntity updateChild() {
-        ChildEmotionDto latestEmotion = emotionService.getLatestEmotion();
-        return ResponseEntity.ok(new CommonResponse<>(true, latestEmotion));
+    @PostMapping(value = "/user/respond")
+    public ResponseEntity responseToEmotion(@RequestBody EmotionResponseDto emotionResponseDto) {
+        emotionService.saveEmotionResponse(emotionResponseDto);
+        return ResponseEntity.ok(new CommonResponse<>(true, "Child Emotion Response Details Saved Successfully"));
     }
 }

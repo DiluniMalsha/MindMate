@@ -52,4 +52,10 @@ public class SchedulerController {
         schedulerService.deleteScheduledTask(reminderId, childId);
         return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Deleted Successfully"));
     }
+
+    @GetMapping(value = "/upcoming/{childId}")
+    public ResponseEntity getUpcomingScheduledTask(@PathVariable long childId) {
+        OneTimeSchedulerDto upcomingScheduledTask = schedulerService.getUpcomingScheduledTask(childId);
+        return ResponseEntity.ok(new CommonResponse<>(true, upcomingScheduledTask));
+    }
 }

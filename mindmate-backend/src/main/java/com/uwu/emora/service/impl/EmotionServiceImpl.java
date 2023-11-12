@@ -1,44 +1,75 @@
 package com.uwu.emora.service.impl;
 
 import com.uwu.emora.dto.emotion.ChildEmotionDto;
-import com.uwu.emora.entity.Child;
+import com.uwu.emora.dto.emotion.EmotionResponseDto;
 import com.uwu.emora.entity.ChildEmotion;
-import com.uwu.emora.entity.Emotion;
+import com.uwu.emora.entity.Resource;
+import com.uwu.emora.entity.Response;
+import com.uwu.emora.entity.RobotOutput;
+import com.uwu.emora.enums.ResponseType;
+import com.uwu.emora.enums.RobotOutputType;
 import com.uwu.emora.repository.ChildEmotionRepository;
+import com.uwu.emora.repository.ResourceRepository;
+import com.uwu.emora.repository.ResponseRepository;
+import com.uwu.emora.repository.RobotOutputRepository;
 import com.uwu.emora.service.EmotionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class EmotionServiceImpl implements EmotionService {
 
     private final ChildEmotionRepository childEmotionRepository;
+    private final ResponseRepository responseRepository;
+    private final ResourceRepository resourceRepository;
+    private final RobotOutputRepository robotOutputRepository;
 
     @Override
-    public void saveChildEmotion(long childId, long emotionId) {
+    public List<ChildEmotionDto> getLatestEmotions() {
 
-        Emotion emotion = new Emotion();
-        emotion.setId(emotionId);
-
-        Child child = new Child();
-        child.setId(childId);
-
-        ChildEmotion childEmotion = new ChildEmotion();
-        childEmotion.setEmotion(emotion);
-        childEmotion.setChild(child);
-
-        childEmotionRepository.save(childEmotion);
+        List<ChildEmotion> topEmotions = childEmotionRepository.findTopEmotions(1);
+        return topEmotions.stream()
+                .map(ce -> new ChildEmotionDto(
+                        ce.getEmotion().getId(),
+                        getDateTimeByZone(ce.getDateTime()),
+                        getDateTimeByZone(ce.getDateTime()).toLocalTime()))
+                .sorted(Collections.reverseOrder())
+                .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
-    public ChildEmotionDto getLatestEmotion() {
+    public void saveEmotionResponse(EmotionResponseDto emotionResponseDto) {
 
         ChildEmotion emotion = childEmotionRepository.findTopByChild_IdOrderByDateTimeDesc(1);
-        return new ChildEmotionDto(emotion.getEmotion().getId(), getDateTimeByZone(emotion.getDateTime()));
+
+        ResponseType type = emotionResponseDto.getType();
+
+        Response response = new Response();
+        response.setResponse(emotionResponseDto.getContent());
+        response.setResponseType(type);
+        response.setChildEmotion(emotion);
+        if (!type.equals(ResponseType.TEXT) && !type.equals(ResponseType.AUDIO)) {
+            Optional<Resource> optionalResource = resourceRepository.findById(emotionResponseDto.getId());
+            optionalResource.ifPresent(response::setResource);
+        }
+        responseRepository.save(response);
+
+        RobotOutput robotOutput = new RobotOutput();
+        robotOutput.setResponseType(type);
+        robotOutput.setOutputType(RobotOutputType.RESPONSE);
+        robotOutput.setContent(emotionResponseDto.getContent());
+
+        robotOutputRepository.save(robotOutput);
     }
 
     public static LocalDateTime getDateTimeByZone(LocalDateTime dateTime) {
