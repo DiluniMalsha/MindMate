@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/parent")
+@RequestMapping(value = "/user/parent")
 @CrossOrigin
 public class ParentController {
 
@@ -24,6 +24,7 @@ public class ParentController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity getParentDetails(@PathVariable("id") long id) {
+        System.out.println("Get Parent Details");
         ParentDto parentDetails = parentService.getParentDetails(id);
         return ResponseEntity.ok(new CommonResponse<>(true, parentDetails));
     }

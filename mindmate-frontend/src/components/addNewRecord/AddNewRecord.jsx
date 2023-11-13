@@ -1,5 +1,5 @@
 import "./AddNewRecord.css";
-import React from "react";
+import React, {useState} from "react";
 import Grid from "@mui/material/Grid";
 import CustomInput from "../inputField/InputField";
 import CustomButton from "../button/CustomButton";
@@ -7,6 +7,9 @@ import {styled} from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import close from "../../assets/formImg/close.png";
 import Swal from "sweetalert2";
+import {addTimeTableRecordForDay} from "../../repository/timeTableRepository";
+import {useDispatch} from "react-redux";
+import {addOneDailyTimeTable} from "../../store/slices/dailyTimeTableSlice";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#ffffff" : "#ffffff",
@@ -19,31 +22,87 @@ const closePopUp = (setPopupVisible) => (event) => {
     setPopupVisible(false);
 };
 
-const handleAddData = (swalTitle) => (event) => {
-    Swal.fire("Saved!", swalTitle, "success").then((result) => {
-        if (result.isConfirmed) {
-            window.location.reload(true);
-        }
-        //     }
-    });
-};
 const AddNewRecord = ({
                           title,
-                          from,
-                          to,
-                          task,
-                          note,
-                          reminder,
                           setPopupVisible,
                           swalTitle,
                       }) => {
+
+    const [day, setDay] = useState("MON")
+    const [fromTime, setFromTime] = useState("")
+    const [toTime, setToTime] = useState("")
+    const [tasks, setTasks] = useState("")
+    const dispatcher = useDispatch()
+
+    const handleChangeDay = (event) => {
+        setDay(event.target.value);
+    }
+    const handleChangeFromTime = (event) => {
+        setFromTime(event.target.value);
+    }
+    const handleChangeToTime = (event) => {
+        setToTime(event.target.value);
+    }
+    const handleChangTasks = (event) => {
+        setTasks(event.target.value);
+    }
+
+    function timeConvertor(time) {
+        const digitalTime = time; // Replace with your digital time
+        const parts = digitalTime.split(":");
+        const hour = parseInt(parts[0]);
+        const minute = parseInt(parts[1]);
+
+        const date = new Date();
+        date.setHours(hour, minute, 0);
+
+        const localTime = date.toLocaleTimeString(undefined, {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+
+        return localTime;
+    }
+
+    const taskDetails = {
+        childId: 1,
+        day: day,
+        fromTime: timeConvertor(fromTime),
+        toTime: timeConvertor(toTime),
+        task: tasks,
+    }
+
+    const handleAddData = (swalTitle) => (event) => {
+        console.log(taskDetails)
+        addTimeTableRecordForDay(taskDetails).then(res => {
+            console.log("error")
+            console.log(res)
+            if (res.status === 200) {
+                console.log("pass")
+                dispatcher(addOneDailyTimeTable({...res.data}));
+                Swal.fire("Saved!", swalTitle, "success").then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload(true);
+                    }
+                });
+            } else {
+                Swal.fire(
+                    'Failed',
+                    'error'
+                )
+            }
+        });
+
+    };
+
+
     return (
         <div id="add-new-main-section">
             <div id="add-record-background"></div>
             <div className="set-background record-form">
                 <img
                     src={close}
-                    alt="cloase"
+                    alt="close"
                     className="close-btn"
                     onClick={closePopUp(setPopupVisible)}
                 />
@@ -54,30 +113,32 @@ const AddNewRecord = ({
                             <label className="label-align-add">Day</label>
                             <br/>
                             <select
-                                id=""
+                                id="day"
                                 name="gender"
                                 className="selection-gender"
                                 style={{fontSize: "17px", textAlign: "left"}}
+                                value={day}
+                                onChange={handleChangeDay}
                             >
-                                <option value="Sunday" className="g-gender">
+                                <option value="SUN" className="g-gender">
                                     Sunday
                                 </option>
-                                <option value="Monday" className="g-gender">
+                                <option value="MON" className="g-gender">
                                     Monday
                                 </option>
-                                <option value="Tuesday" className="g-gender">
+                                <option value="TUE" className="g-gender">
                                     Tuesday
                                 </option>
-                                <option value="Wednesday" className="g-gender">
+                                <option value="WED" className="g-gender">
                                     Wednesday
                                 </option>
-                                <option value="Thursday" className="g-gender">
+                                <option value="THU" className="g-gender">
                                     Thursday
                                 </option>
-                                <option value="Friday" className="g-gender">
+                                <option value="FRI" className="g-gender">
                                     Friday
                                 </option>
-                                <option value="Saturday" className="g-gender">
+                                <option value="SAT" className="g-gender">
                                     Saturday
                                 </option>
                             </select>
@@ -94,6 +155,8 @@ const AddNewRecord = ({
                                 width="100%"
                                 fontSize="17"
                                 className='font-set'
+                                value={fromTime}
+                                onchange={handleChangeFromTime}
                             />
                         </Item>
                     </Grid>
@@ -108,6 +171,8 @@ const AddNewRecord = ({
                                 width="100%"
                                 fontSize="17"
                                 className="font-set"
+                                value={toTime}
+                                onchange={handleChangeToTime}
                             />
                         </Item>
                     </Grid>
@@ -122,6 +187,8 @@ const AddNewRecord = ({
                                 width="100%"
                                 fontSize="17"
                                 className="font-set"
+                                value={tasks}
+                                onchange={handleChangTasks}
                             />
                         </Item>
                     </Grid>

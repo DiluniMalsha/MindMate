@@ -9,7 +9,7 @@ const HeadingBar = (props) => {
     return (
         <div>
             <Grid container spacing={0}>
-                <Grid item xs={9} md={10} xl={11}>
+                <Grid item xs={9} md={11} xl={11}>
                     <div className = 'heading-bar'>
                         <div className = 'row'>
                             <div className="col">
@@ -34,7 +34,7 @@ const HeadingBar = (props) => {
                         </div>
                     </div>
                 </Grid>
-                <Grid item xs={3} md={2} xl={1}>
+                <Grid item xs={3} md={1} xl={1}>
                     <img src={pic} alt="ProfilePic" className='profile-pic-img'/>
                 </Grid>
             </Grid>

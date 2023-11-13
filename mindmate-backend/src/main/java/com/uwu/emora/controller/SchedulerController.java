@@ -2,6 +2,7 @@ package com.uwu.emora.controller;
 
 import com.uwu.emora.dto.CommonResponse;
 import com.uwu.emora.dto.scheduler.OneTimeSchedulerDto;
+import com.uwu.emora.dto.scheduler.ScheduledEventDetailsDto;
 import com.uwu.emora.service.SchedulerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,8 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/scheduler")
+@RequestMapping(value = "/user/scheduler")
+@CrossOrigin
 public class SchedulerController {
 
     private final SchedulerService schedulerService;
@@ -21,6 +23,13 @@ public class SchedulerController {
     public ResponseEntity scheduleOnetime(@PathVariable("childId") long childId, @RequestBody OneTimeSchedulerDto dto) {
         schedulerService.scheduleOnetime(dto, childId);
         return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Added Successfully"));
+    }
+
+    //   View calendar with scheduled tasks (web)
+    @GetMapping(value = "/tasks/web/{childId}")
+    public ResponseEntity getScheduledTasksForWeb(@PathVariable("childId") long childId) {
+        List<ScheduledEventDetailsDto> tasks = schedulerService.getScheduledTasksForWeb(childId);
+        return ResponseEntity.ok(new CommonResponse<>(true, tasks));
     }
 
     //   View calendar with scheduled tasks
@@ -42,5 +51,11 @@ public class SchedulerController {
     public ResponseEntity deleteScheduledTask(@PathVariable("childId") long childId, @PathVariable("reminderId") String reminderId) {
         schedulerService.deleteScheduledTask(reminderId, childId);
         return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Deleted Successfully"));
+    }
+
+    @GetMapping(value = "/upcoming/{childId}")
+    public ResponseEntity getUpcomingScheduledTask(@PathVariable long childId) {
+        OneTimeSchedulerDto upcomingScheduledTask = schedulerService.getUpcomingScheduledTask(childId);
+        return ResponseEntity.ok(new CommonResponse<>(true, upcomingScheduledTask));
     }
 }

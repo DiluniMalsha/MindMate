@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/child")
+@RequestMapping(value = "/user/child")
+@CrossOrigin
 public class ChildController {
 
     private final ChildService childService;
@@ -29,6 +30,7 @@ public class ChildController {
     @GetMapping(value = "/{id}")
     public ResponseEntity getChildDetails(@PathVariable("id") long id) {
         ChildDto childDetails = childService.getChildDetails(id);
+        System.out.println(childDetails);
         return ResponseEntity.ok(new CommonResponse<>(true, childDetails));
     }
 }

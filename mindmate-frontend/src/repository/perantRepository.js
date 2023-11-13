@@ -4,16 +4,16 @@ const getParentDetails = (id) => {
     return Repository.get('/parent/'+id)
 }
 
-const updateParentDetails = () => {
-    return Repository.post("/")
+const updateParentDetails = (Details) => {
+    return Repository.put("/parent",Details)
 }
 
-const updatePassword = (id) => {
-    return Repository.post("/"+id)
+const updateParentPassword = (password) => {
+    return Repository.put("/parent/password/change",password)
 }
 
 export {
     getParentDetails,
     updateParentDetails,
-    updatePassword,
+    updateParentPassword,
 }

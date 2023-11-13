@@ -59,6 +59,11 @@
     background-color: transparent !important;
 }
 
+@media screen and (max-width: 1600px){
+    .add-new-button-container-2 {
+        width: 150px !important;
+    }
+}
 @media screen and (max-width: 1440px) {
     .button-mobile-response-add-btn {
         display: inline-flex !important;

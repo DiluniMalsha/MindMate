@@ -9,7 +9,7 @@
     width:100%;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 8px;
-    margin-left: 20px;
+    margin-left: 28px;
 }
 .Emora-name{
     padding-top:10px;
@@ -17,6 +17,19 @@
     font-size:35px;
     font-weight:bold;
     margin-left: 60px;
+}
+@media screen  and (max-width:1600px) {
+    .profile-pic-img{
+        margin-top:15px;
+        height:40px;
+        width:40px;
+    }
+    .heading-bar{
+        height:60px;
+    }
+    .display-set{
+        display:none;
+    }
 }
 
 @media screen  and (max-width:900px) {

@@ -1,23 +1,63 @@
-import { HomeOutline} from "react-ionicons";
+import {HomeOutline} from "react-ionicons";
 import "./Home.css"
 import Grid from "@mui/material/Grid";
-import mood from '../../assets/faceIcon/fear.svg'
 import CustomButton from "../../components/button/CustomButton";
-import LiveChart from "../../components/chart/LiveChart";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import HeadingTitle from "../../components/title/HeadingTitle";
+import {getUpcomingTask} from "../../repository/schedulerRepository";
+import {getLocalTime} from "../../function/function";
+import LiveChartNew from "../../components/LiveChart/LiveChart";
+import HeadingMood from "../../components/hedingMood/HeadingMood";
+import SendRespond from "../../components/sendRespond/SendRespond";
+import {getEmotionList} from "../../repository/emotionRepository";
+import SendReminder from "../../components/sendReminder/SendReminder";
 
-const Home = (props) => {
-    let moodDescription = "Mihasa is Now in a fear Mood"
-    let upcomingTask = 'Reading Books';
-    let time = 'at 08:00 AM';
-    let icons =<HomeOutline
-                    color={'#4285f5'}
-                    title={"Home"}
-                    height="20px"
-                    width="20px"
-                    style={{marginBottom: '5px'}}
-                />
+const Home = () => {
+    const [upcomingTask, setUpcomingTask] = useState()
+    const [time, setTime] = useState()
+    const [popupVisible, setPopupVisible] = useState(false);
+    const [popupVisibles, setPopupVisibles] = useState(false);
+
+    let icons = <HomeOutline
+        color={'#4285f5'}
+        title={"Home"}
+        height="20px"
+        width="20px"
+        style={{marginBottom: '5px'}}
+    />
+    console.log(upcomingTask)
+    const handleRespondPopUp = (value) => {
+        setPopupVisible(!popupVisible);
+    };
+
+    const handleSendReminder = (value) => {
+        setPopupVisibles(!popupVisibles);
+    };
+
+    useEffect(() => {
+        getUpcomingTask(1)
+            .then((res) => {
+                if (res.data.body === null) {
+                    setUpcomingTask("Today No Upcoming Events Available")
+                    setTime()
+                } else {
+                    setUpcomingTask(res.data.body.note);
+                    setTime("at " + getLocalTime(res.data.body.fromTime))
+                }
+            })
+    }, [])
+    const data = 1;
+    useEffect(() => {
+        const fetchData = async () => {
+            getEmotionList()
+                .then((res) => {
+                    console.log(11)
+                })
+
+        }
+        fetchData();
+    }, [data]);
+
     return (
         <section className="home-margin">
             <HeadingTitle title='Dashboard' icon={icons} ml={'70px'}/>
@@ -25,12 +65,7 @@ const Home = (props) => {
                 <Grid container spacing={2}>
                     <Grid item xs={11} md={3}>
                         <div className='show-mood'>
-                            <img src={mood} alt='mood' className='mood-section'/>
-                            <br/>
-                            <span className='mt-3 mood-des'>
-                                {moodDescription}
-                            </span>
-                            <br/>
+                            <LiveChartNew displays="none"/>
                             <CustomButton
                                 type="button"
                                 variant="history"
@@ -39,6 +74,7 @@ const Home = (props) => {
                                 className="mt-4 btn-mrg"
                                 fontSize="18"
                                 width="180"
+                                onclick={handleRespondPopUp}
                             >
                                 Respond to Her
                             </CustomButton>
@@ -68,6 +104,7 @@ const Home = (props) => {
                                         className="mt-4 btn-mrg"
                                         fontSize="18"
                                         width="200"
+                                        onclick={handleSendReminder}
                                     >
                                         Send a Reminder
                                     </CustomButton>
@@ -75,13 +112,29 @@ const Home = (props) => {
                             </div>
                         </div>
                     </Grid>
-                    <Grid item xs={11} md={9} className='chart-grid'>
-                        <div className='chart-section'>
-                            <LiveChart width='1200' height='600' display='none'/>
+                    <Grid item xs={11} md={9} className='chart-grid mobile-display'>
+                        <div className="widthSet row">
+                            <HeadingMood/>
+                        </div>
+                        <div className="widthSet row">
+                            {/*<LiveChart width="91%" display="none"/>*/}
+                            <LiveChartNew width="91%" setClassname="emotion-chart-background" displaying="none"/>
                         </div>
                     </Grid>
                 </Grid>
             </div>
+            {popupVisible && (
+                <SendRespond
+                    setPopupVisible={setPopupVisible}
+                />
+            )}
+            {popupVisibles && (
+                <SendReminder
+                    setPopupVisibles={setPopupVisibles}
+                    upcomingEvent={upcomingTask}
+                    time={time}
+                />
+            )}
         </section>
     )
         ;

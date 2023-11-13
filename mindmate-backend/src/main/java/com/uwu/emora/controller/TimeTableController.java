@@ -12,7 +12,8 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/timetable")
+@RequestMapping(value = "/user/timetable")
+@CrossOrigin
 public class TimeTableController {
 
     private final TimetableService timetableService;

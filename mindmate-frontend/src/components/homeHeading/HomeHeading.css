@@ -31,6 +31,21 @@
     font-weight: 500;
     padding-top: 8px;
 }
+@media screen  and (max-width:1600px) {
+    .geet{
+        font-size:10px !important;
+        padding-top: 8px;
+    }
+    .date-time{
+        padding-left: 3px;
+        font-size:10px !important;
+        font-weight: 500;
+        padding-top: 8px;
+    }
+    .name-subtitle{
+        font-size:12px;
+    }
+}
 
 @media screen  and (max-width:900px) {
     .geet{

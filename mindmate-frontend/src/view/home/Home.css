@@ -23,10 +23,14 @@
 .upcoming {
     line-height: 0.2rem;
     font-weight:450;
-    font-size: 1.4rem;
+    /*font-size: 1.4rem;*/
 }
 .chart-size{
     width:100%;
+}
+.widthSet{
+    width: 100%;
+    /*height: 100%;*/
 }
 @media screen and (max-width:900px){
     .chart-section{
@@ -61,5 +65,8 @@
         width:40% !important;
         height: 20px !important;
         font-size:12px !important;
+    }
+    .mobile-display{
+        display: none;
     }
 }

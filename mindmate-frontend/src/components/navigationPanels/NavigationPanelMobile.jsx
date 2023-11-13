@@ -31,7 +31,7 @@ const NavigationPanelMobile = (props) => {
         <Box sx={{flexGrow: 1}} className="mobile-nav-main">
             <div className="row mobile-row">
                 {MNavigationPanelData.map((item) => (
-                    <div className="col  m-navigation-item-link">
+                    <div className="col  m-navigation-item-link" key={item.path}>
                         <AccordionSummary
                             expandIcon={
                                 item.subItems.length === 0 ? null : <ExpandMoreIcon/>

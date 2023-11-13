@@ -15,6 +15,7 @@ import sad from '../../assets/faceIcon/sad.svg'
 import disgusted from '../../assets/faceIcon/disgusted.svg'
 import neutral from '../../assets/faceIcon/neutral.svg'
 import surprised from '../../assets/faceIcon/surprised.svg'
+import GoogleDriverPickerComponent from "../googleDriver/GoogleDriverPickerComponent";
 
 const Preferences = (props) => {
     const [justifyActive, setJustifyActive] = useState("tab1");
@@ -147,6 +148,7 @@ const Preferences = (props) => {
                 </MDBTabs>
                 <MDBTabsContent>
                     <MDBTabsPane show={justifyActive === "tab1"} className="center-title">
+                        <GoogleDriverPickerComponent/>
                         {/*<div>*/}
                         {/*    <Button*/}
                         {/*        variant="primary"*/}

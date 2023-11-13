@@ -26,10 +26,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/physical-device/**","/child/test")
+                .antMatchers("/emotion","/child/test")
                 .permitAll()
 
-                .antMatchers("/parent/**")
+                .antMatchers("/user/**")
                 .access("hasRole('ROLE_PARENT')")
 
                 .and().csrf().disable()

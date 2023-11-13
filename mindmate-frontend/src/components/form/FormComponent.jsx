@@ -7,6 +7,11 @@ import Paper from '@mui/material/Paper';
 import CustomButton from "../button/CustomButton";
 import Password from "./Password";
 import Swal from "sweetalert2"
+import {updateParentDetails} from "../../repository/perantRepository";
+import {updateParent} from "../../store/slices/parentSlice"
+import {selectByIdChild, updateChild} from "../../store/slices/childSlice"
+import {useDispatch, useSelector} from "react-redux";
+import {updateChildDetails} from "../../repository/childRepository";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
@@ -23,27 +28,6 @@ const FormComponent = (props) => {
     const handleEdit = (event) => {
         setFormEditable(true);
     }
-    const handleUpdate = (event) => {
-        Swal.fire({
-            title: 'Do you want to save the changes?',
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: 'Save',
-            denyButtonText: `Don't save`,
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                Swal.fire('Update Successful!', 'Updated data', 'success').then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.reload(true);
-                    }
-                })
-            } else if (result.isDenied) {
-                Swal.fire('Changes are not Update', '', 'info')
-            }
-        })
-    };
-
 
     const handleCancel = (event) => {
         setFormEditable(false);
@@ -56,6 +40,9 @@ const FormComponent = (props) => {
     const [gender, setGender] = React.useState(props.genders);
     const [age, setAge] = useState(props.age);
     const [relationship, setRelationship] = useState(props.relationship);
+    const dispatcher = useDispatch()
+    const child = useSelector((state) => selectByIdChild(state, 1))
+
 
     const handleChange = (event) => {
         setGender(event.target.value);
@@ -66,10 +53,10 @@ const FormComponent = (props) => {
     const handleLastNameChange = event => {
         setLastName(event.target.value);
     }
-    const handleChangeAddress = event =>{
+    const handleChangeAddress = event => {
         setAddress(event.target.value);
     }
-    const handleChangeContactNo = event =>{
+    const handleChangeContactNo = event => {
         setContactNo(event.target.value);
     }
     const handleChangeAge = event => {
@@ -78,7 +65,81 @@ const FormComponent = (props) => {
     const handleChangeRelationship = event => {
         setRelationship(event.target.value);
     }
+    const parentDetails = {
+        id: 1,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        emergencyContactNumber: contactNo,
+        gender: gender,
+        age: age,
+        relationship: relationship
+    }
+    const childDetails = {
+        id: 1,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        emergencyContactNumber: contactNo,
+        gender: gender,
+        age: age
+    }
+    const handleUpdate = (event) => {
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            denyButtonText: `Don't save`,
+        }).then((result) => {
+            /* Read more about
+             isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                if (props.type === 'child') {
+                    updateChildDetails(childDetails).then((res) => {
+                        if (res.status === 200) {
+                            console.log("pass");
+                            dispatcher(updateChild(childDetails));
 
+                            // window.location.reload(true);
+                            console.log(child.firstName)
+                        } else {
+                            Swal.fire(
+                                'Failed',
+                                'error'
+                            )
+                        }
+                    })
+                    Swal.fire('Update Successful!', 'Updated data', 'success').then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload(true);
+                        }
+                    })
+                } else {
+                    updateParentDetails(parentDetails).then(res => {
+                        console.log("error")
+                        if (res.status === 200) {
+                            console.log("pass")
+                            dispatcher(updateParent({...res.data}));
+                            // window.location.reload(true);
+                        } else {
+                            Swal.fire(
+                                'Failed',
+                                'error'
+                            )
+                        }
+                    })
+                    Swal.fire('Update Successful!', 'Updated data', 'success').then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload(true);
+                        }
+                    })
+                }
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not Update', '', 'info')
+            }
+        })
+    };
 
     return (
 
@@ -92,7 +153,6 @@ const FormComponent = (props) => {
                         <br/>
                         <CustomInput
                             type="text"
-                            // placeholder={}
                             value={firstName}
                             size="20"
                             radius="8"

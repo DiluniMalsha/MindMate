@@ -29,7 +29,7 @@ public class Response {
     private ChildEmotion childEmotion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     private Resource resource;
 
 }
