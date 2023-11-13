@@ -50,7 +50,8 @@ const SendRespond = ({setPopupVisible}) => {
         const array = value.match(/[a-zA-Z]+|[0-9]+/g)
         id = array[1]
     }
-    console.log(value)
+    console.log(id)
+    console.log("valuev",value)
 
 
     if (value === "msg0") {
@@ -68,6 +69,7 @@ const SendRespond = ({setPopupVisible}) => {
         "id": id
     }
 
+    console.log(response)
     function handleSendResponse() {
         Swal.fire({
             title: 'Do you want send response?',
@@ -294,6 +296,7 @@ const SendRespond = ({setPopupVisible}) => {
                                                             Text
                                                         </label>
                                                     </div>
+                                                </div>
                                                     <Grid item xs={12}>
                                                         <Item>
                                                             <label className="label-align-add">Massage</label>
@@ -309,7 +312,6 @@ const SendRespond = ({setPopupVisible}) => {
                                                             />
                                                         </Item>
                                                     </Grid>
-                                                </div>
                                             </Item>
                                         </div>
                                     </MDBTabsPane>

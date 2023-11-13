@@ -40,7 +40,7 @@ const LiveChartNew = ({width, setClassname, displaying, displays}) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const {data} = await axios.get("http://18.143.151.234:8080/api/user/emotion", {headers})
+            const {data} = await axios.get("http://18.143.151.234:8080/api/user/emotion", {headers}) //18.143.151.234
             setChartData({
                 labels: data.body.reverse().map((item) => item.time),
                 datasets: [

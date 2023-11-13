@@ -96,7 +96,5 @@
 				<version>${project.parent.version}</version>
 			</plugin>
 		</plugins>
-		<finalName>Emora</finalName>
 	</build>
-
 </project>

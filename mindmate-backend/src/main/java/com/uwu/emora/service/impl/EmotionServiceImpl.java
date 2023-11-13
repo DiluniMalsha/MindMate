@@ -52,24 +52,27 @@ public class EmotionServiceImpl implements EmotionService {
 
         ChildEmotion emotion = childEmotionRepository.findTopByChild_IdOrderByDateTimeDesc(1);
 
-        ResponseType type = emotionResponseDto.getType();
+        Optional<Response> optionalResponse = responseRepository.findByChildEmotion(emotion);
+        if (!optionalResponse.isPresent()) {
+            ResponseType type = emotionResponseDto.getType();
 
-        Response response = new Response();
-        response.setResponse(emotionResponseDto.getContent());
-        response.setResponseType(type);
-        response.setChildEmotion(emotion);
-        if (!type.equals(ResponseType.TEXT) && !type.equals(ResponseType.AUDIO)) {
-            Optional<Resource> optionalResource = resourceRepository.findById(emotionResponseDto.getId());
-            optionalResource.ifPresent(response::setResource);
+            Response response = new Response();
+            response.setResponse(emotionResponseDto.getContent());
+            response.setResponseType(type);
+            response.setChildEmotion(emotion);
+            if (!type.equals(ResponseType.TEXT) && !type.equals(ResponseType.AUDIO)) {
+                Optional<Resource> optionalResource = resourceRepository.findById(emotionResponseDto.getId());
+                optionalResource.ifPresent(response::setResource);
+            }
+            responseRepository.save(response);
+
+            RobotOutput robotOutput = new RobotOutput();
+            robotOutput.setResponseType(type);
+            robotOutput.setOutputType(RobotOutputType.RESPONSE);
+            robotOutput.setContent(emotionResponseDto.getContent());
+
+            robotOutputRepository.save(robotOutput);
         }
-        responseRepository.save(response);
-
-        RobotOutput robotOutput = new RobotOutput();
-        robotOutput.setResponseType(type);
-        robotOutput.setOutputType(RobotOutputType.RESPONSE);
-        robotOutput.setContent(emotionResponseDto.getContent());
-
-        robotOutputRepository.save(robotOutput);
     }
 
     public static LocalDateTime getDateTimeByZone(LocalDateTime dateTime) {

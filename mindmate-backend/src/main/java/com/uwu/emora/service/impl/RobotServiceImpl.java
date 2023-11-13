@@ -43,26 +43,29 @@ public class RobotServiceImpl implements RobotService {
     @Override
     public RobotResponseDto getLatestEmotionResponse() {
         RobotOutput output;
+        RobotResponseDto response;
         Optional<RobotOutput> optionalOutput = robotOutputRepository.findTopByOutputTypeOrderByDateTimeDesc(RobotOutputType.REMINDER);
         if (optionalOutput.isPresent()) {
             output = optionalOutput.get();
-            return new RobotResponseDto(RobotOutputType.REMINDER, ResponseType.TEXT, output.getContent());
+            response = new RobotResponseDto(RobotOutputType.REMINDER, ResponseType.TEXT, output.getContent());
         } else {
             optionalOutput = robotOutputRepository.findTopByOutputTypeOrderByDateTimeDesc(RobotOutputType.TIMETABLE);
             if (optionalOutput.isPresent()) {
                 output = optionalOutput.get();
                 long mins = ChronoUnit.MINUTES.between(LocalDateTime.now(), output.getDateTime());
                 String note = output.getContent() + " in " + mins + " minutes";
-                return new RobotResponseDto(RobotOutputType.TIMETABLE, ResponseType.TEXT, note);
+                response = new RobotResponseDto(RobotOutputType.TIMETABLE, ResponseType.TEXT, note);
             } else {
                 optionalOutput = robotOutputRepository.findTopByOutputTypeOrderByDateTimeDesc(RobotOutputType.RESPONSE);
                 if (optionalOutput.isPresent()) {
                     output = optionalOutput.get();
-                    return new RobotResponseDto(RobotOutputType.RESPONSE, output.getResponseType(), output.getContent());
+                    response = new RobotResponseDto(RobotOutputType.RESPONSE, output.getResponseType(), output.getContent());
                 } else {
                     return null;
                 }
             }
         }
+        robotOutputRepository.delete(output);
+        return response;
     }
 }
