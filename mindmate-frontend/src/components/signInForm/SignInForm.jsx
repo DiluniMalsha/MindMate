@@ -9,7 +9,6 @@ import CustomButton from "../button/CustomButton";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import {BASE_URL} from "../../utils/constants";
 
 function SignInFrom(setToken) {
 
@@ -34,8 +33,7 @@ function SignInFrom(setToken) {
         const headers = {
             'Authorization': 'Basic cGFyZW50Og=='
         }
-        // axios.post("http://18.143.151.234:8080/api/oauth/token", data, {headers})
-        axios.post("http://localhost:8080/api/oauth/token", data, {headers})
+        axios.post("http://18.143.151.234:8080/api/oauth/token", data, {headers})
             .then((res) => {
                 localStorage.setItem("loggedUserToken", res.data.access_token);
                 window.location.replace("/")
