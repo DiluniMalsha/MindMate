@@ -1,9 +1,9 @@
 import useDrivePicker from "react-google-drive-picker";
 import CustomButton from "../button/CustomButton";
-import {useEffect} from "react";
 
 
 const GoogleDriverPickerComponent = () => {
+    //eslint-disable-next-line
     const [openPicker, data, authResponce] = useDrivePicker();
 
     const handleOpenPicker = () => {
@@ -14,13 +14,12 @@ const GoogleDriverPickerComponent = () => {
                 viewId: "DOCS",
                 token: "ya29.a0AfB_byBTs9F5DHqHtr9K1SbvZn8Se1Xj5RFfn10PRM651mMPGFpbpeyUUv8Ky7Nsl9szaRtmPSuI2smaDYA07D1OAKz-nyUscqfHHUW4ypgwE3986-HitIUgIxrunnqExLiqCmSx7RmucLSWNod7hPyMFQTWaGm-dyuWaCgYKAZ4SARASFQGOcNnClZPhZ1N-W6tzNbbxQxokJw0171",
                 showUploadView: true,
-                showUploadFolders:true,
+                showUploadFolders: true,
                 supportDrives: true,
                 multiselect: true,
-                callbackFunction:pickerCallback
+                callbackFunction: pickerCallback
             })
-        }
-        catch (e) {
+        } catch (e) {
             console.log("ss", e)
         }
 

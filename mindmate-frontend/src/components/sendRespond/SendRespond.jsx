@@ -6,6 +6,9 @@ import CustomButton from "../button/CustomButton";
 import React, {useState} from "react";
 import {styled} from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import {MDBContainer, MDBTabs, MDBTabsContent, MDBTabsItem, MDBTabsLink, MDBTabsPane} from "mdb-react-ui-kit";
+import {postResponse} from "../../repository/emotionRepository";
+import Swal from "sweetalert2";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#ffffff" : "#ffffff",
@@ -19,24 +22,81 @@ const closePopUp = (setPopupVisible) => (event) => {
 };
 
 const SendRespond = ({setPopupVisible}) => {
+    const [justifyActive, setJustifyActive] = useState("PHOTO");
+    // const [content, setContent] = useState("")
+    const [value, setValue] = React.useState();
+    const [message, setMessage] = useState("");
 
-    const [value, setValue] = React.useState("image");
-    const [message, setMessage] = useState();
+    let id;
+    let content;
+    const handleJustifyClick = (value) => {
+        if (value === justifyActive) {
+            return;
+        }
+        setJustifyActive(value);
+    }
 
     const handleChangeMessage = (event) => {
         setMessage(event.target.value);
     }
-
     const handleChangeType = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
     }
 
-    console.log({value})
-    console.log({message})
+
+    if (value === undefined) {
+        id = 0
+    } else {
+        const array = value.match(/[a-zA-Z]+|[0-9]+/g)
+        id = array[1]
+    }
+    console.log(value)
+
+
+    if (value === "msg0") {
+        content = message;
+    } else {
+        content = value;
+    }
+    if (id === undefined) {
+        id = 0;
+    }
+
+    const response = {
+        "type": justifyActive,
+        "content": content,
+        "id": id
+    }
 
     function handleSendResponse() {
+        Swal.fire({
+            title: 'Do you want send response?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Send',
+            denyButtonText: `Don't send`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                postResponse(response).then((res) => {
+                    if (res.status===200){
+                        console.log("send")
+                    } else {
+                        Swal.fire(
+                            'Failed',
+                            'error'
+                        )
+                    }
+                })
+                Swal.fire('Response send Successful!', 'Updated data', 'success').then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload(true);
+                    }
+                })
+            }
+        })
 
     }
+
 
     return (
         <>
@@ -54,49 +114,210 @@ const SendRespond = ({setPopupVisible}) => {
                         <Grid item xs={12}>
                         </Grid>
                         <Grid item xs={12}>
-                            <Item>
-                                <div>
-                                    <div className="form-check" onChange={handleChangeType}>
-                                        <div className="label-radio">
-                                            <input className="form-check-input" type="radio" name="exampleRadios"
-                                                   id="exampleRadios1" value="image"/>
-                                            <label className="form-check-label label-padding">
+                            <MDBContainer className="main-secti on">
+                                {/*<h1 className="setting-heading">Settings</h1>*/}
+                                <MDBTabs
+                                    pills
+                                    justify
+                                    className="mb-3 d-flex flex-row justify-content-between typeSelector-width"
+                                >
+                                    <MDBTabsItem>
+                                        <div className="">
+                                            <MDBTabsLink
+                                                onClick={() => handleJustifyClick("PHOTO")}
+                                                active={justifyActive === "PHOTO"}
+                                                className="selector-btn selection-btn typeSelector"
+                                            >
                                                 Image
-                                            </label>
+                                            </MDBTabsLink>
                                         </div>
-                                        <div className="label-radio">
-                                            <input className="form-check-input " type="radio" name="exampleRadios"
-                                                   id="exampleRadios2" value="audio"/>
-                                            <label className="form-check-label label-padding">
+                                    </MDBTabsItem>
+                                    <MDBTabsItem>
+                                        <div>
+                                            <MDBTabsLink
+                                                onClick={() => handleJustifyClick("VOICE")}
+                                                active={justifyActive === "VOICE"}
+                                                className="selector-btn selection-btn typeSelector"
+                                            >
                                                 Audio
-                                            </label>
+                                            </MDBTabsLink>
                                         </div>
-                                        <div className="label-radio">
-                                            <input className="form-check-input " type="radio" name="exampleRadios"
-                                                   id="exampleRadios2" value="video"/>
-                                            <label className="form-check-label label-padding">
+                                    </MDBTabsItem>
+                                    <MDBTabsItem>
+                                        <div>
+                                            <MDBTabsLink
+                                                onClick={() => handleJustifyClick("VIDEO")}
+                                                active={justifyActive === "VIDEO"}
+                                                className="selector-btn selection-btn typeSelector"
+                                            >
                                                 Video
-                                            </label>
+                                            </MDBTabsLink>
                                         </div>
-                                    </div>
-                                </div>
-                            </Item>
+                                    </MDBTabsItem>
+                                    <MDBTabsItem>
+                                        <div>
+                                            <MDBTabsLink
+                                                onClick={() => handleJustifyClick("TEXT")}
+                                                active={justifyActive === "TEXT"}
+                                                className="selector-btn selection-btn typeSelector"
+                                            >
+                                                Text
+                                            </MDBTabsLink>
+                                        </div>
+                                    </MDBTabsItem>
+                                </MDBTabs>
+                                <MDBTabsContent>
+                                    <MDBTabsPane
+                                        show={justifyActive === "PHOTO"}
+                                        className="center-title"
+                                    >
+                                        <div className="row ">
+                                            <Item>
+                                                <div>
+                                                    <div className="form-check" onChange={handleChangeType}>
+                                                        <div className="label-radio">
+                                                            <input className="form-check-input" type="radio"
+                                                                   name="exampleRadios"
+                                                                   id="exampleRadios1" value="image1"/>
+                                                            <label className="form-check-label label-padding">
+                                                                Image 1
+                                                            </label>
+                                                        </div>
+                                                        <div className="label-radio">
+                                                            <input className="form-check-input " type="radio"
+                                                                   name="exampleRadios"
+                                                                   id="exampleRadios2" value="image2"/>
+                                                            <label className="form-check-label label-padding">
+                                                                Image 2
+                                                            </label>
+                                                        </div>
+                                                        <div className="label-radio">
+                                                            <input className="form-check-input " type="radio"
+                                                                   name="exampleRadios"
+                                                                   id="exampleRadios2" value="image3"/>
+                                                            <label className="form-check-label label-padding">
+                                                                Image 3
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Item>
+                                        </div>
+                                    </MDBTabsPane>
+
+                                    <MDBTabsPane
+                                        show={justifyActive === "VOICE"}
+                                        className="center-title"
+                                    >
+                                        <div className="row w-100">
+                                            <Item>
+                                                <div>
+                                                    <div className="form-check" onChange={handleChangeType}>
+                                                        <div className="label-radio">
+                                                            <input className="form-check-input" type="radio"
+                                                                   name="exampleRadios"
+                                                                   id="exampleRadios1" value="audio1"/>
+                                                            <label className="form-check-label label-padding">
+                                                                Audio 1
+                                                            </label>
+                                                        </div>
+                                                        <div className="label-radio">
+                                                            <input className="form-check-input " type="radio"
+                                                                   name="exampleRadios"
+                                                                   id="exampleRadios2" value="audio2"/>
+                                                            <label className="form-check-label label-padding">
+                                                                Audio 2
+                                                            </label>
+                                                        </div>
+                                                        <div className="label-radio">
+                                                            <input className="form-check-input " type="radio"
+                                                                   name="exampleRadios"
+                                                                   id="exampleRadios2" value="audio3"/>
+                                                            <label className="form-check-label label-padding">
+                                                                Audio 3
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Item>
+                                        </div>
+                                    </MDBTabsPane>
+                                    <MDBTabsPane
+                                        show={justifyActive === "VIDEO"}
+                                        className="center-title"
+                                    >
+                                        <div className="row w-100">
+                                            <Item>
+                                                <div>
+                                                    <div className="form-check" onChange={handleChangeType}>
+                                                        <div className="label-radio">
+                                                            <input className="form-check-input" type="radio"
+                                                                   name="exampleRadios"
+                                                                   id="exampleRadios1" value="video1"/>
+                                                            <label className="form-check-label label-padding">
+                                                                Video 1
+                                                            </label>
+                                                        </div>
+                                                        <div className="label-radio">
+                                                            <input className="form-check-input " type="radio"
+                                                                   name="exampleRadios"
+                                                                   id="exampleRadios2" value="video2"/>
+                                                            <label className="form-check-label label-padding">
+                                                                Video 2
+                                                            </label>
+                                                        </div>
+                                                        <div className="label-radio">
+                                                            <input className="form-check-input " type="radio"
+                                                                   name="exampleRadios"
+                                                                   id="exampleRadios2" value="video3"/>
+                                                            <label className="form-check-label label-padding">
+                                                                Video 3
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Item>
+                                        </div>
+                                    </MDBTabsPane>
+                                    <MDBTabsPane
+                                        show={justifyActive === "TEXT"}
+                                        className="center-title"
+                                    >
+                                        <div className="row w-100">
+                                            <Item>
+                                                <div className="form-check" onChange={handleChangeType}>
+                                                    <div className="label-radio">
+                                                        <input className="form-check-input " type="radio"
+                                                               name="exampleRadios"
+                                                               id="exampleRadios2" value="msg0"/>
+                                                        <label className="form-check-label label-padding">
+                                                            Text
+                                                        </label>
+                                                    </div>
+                                                    <Grid item xs={12}>
+                                                        <Item>
+                                                            <label className="label-align-add">Massage</label>
+                                                            <br/>
+                                                            <CustomInput
+                                                                type="text"
+                                                                size="20"
+                                                                radius="10"
+                                                                width="100%"
+                                                                fontSize="17"
+                                                                className="font-set"
+                                                                onchange={handleChangeMessage}
+                                                            />
+                                                        </Item>
+                                                    </Grid>
+                                                </div>
+                                            </Item>
+                                        </div>
+                                    </MDBTabsPane>
+                                </MDBTabsContent>
+                            </MDBContainer>
+
                         </Grid>
-                        <Grid item xs={12}>
-                            <Item>
-                                <label className="label-align-add">Massage</label>
-                                <br/>
-                                <CustomInput
-                                    type="text"
-                                    size="20"
-                                    radius="10"
-                                    width="100%"
-                                    fontSize="17"
-                                    className="font-set"
-                                    onchange={handleChangeMessage}
-                                />
-                            </Item>
-                        </Grid>
+
                     </Grid>
                     <div className="row" style={{width: "100%"}}>
                         <div className="col">
