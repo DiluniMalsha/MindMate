@@ -4,10 +4,14 @@ import com.uwu.emora.dto.scheduler.OneTimeSchedulerDto;
 import com.uwu.emora.dto.scheduler.ScheduledEventDetailsDto;
 import com.uwu.emora.dto.scheduler.SingleScheduledEventDto;
 import com.uwu.emora.entity.Child;
+import com.uwu.emora.entity.RobotOutput;
 import com.uwu.emora.entity.Scheduler;
+import com.uwu.emora.enums.ResponseType;
+import com.uwu.emora.enums.RobotOutputType;
 import com.uwu.emora.exception.CustomServiceException;
 import com.uwu.emora.quartz.ReminderScheduler;
 import com.uwu.emora.repository.ChildRepository;
+import com.uwu.emora.repository.RobotOutputRepository;
 import com.uwu.emora.repository.SchedulerRepository;
 import com.uwu.emora.service.SchedulerService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +32,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     private final SchedulerRepository schedulerRepository;
     private final ChildRepository childRepository;
     private final ReminderScheduler reminderScheduler;
+    private final RobotOutputRepository robotOutputRepository;
 
     @Override
     public void scheduleOnetime(OneTimeSchedulerDto dto, long childId) {
@@ -75,19 +80,12 @@ public class SchedulerServiceImpl implements SchedulerService {
 
         if (optionalScheduler.isPresent()) {
             Scheduler scheduler = optionalScheduler.get();
-            String note = scheduler.getNote();
-            LocalDate date = scheduler.getDate();
-            LocalDateTime remindTime = scheduler.getRemindTime();
-            String id = scheduler.getId();
-
-            System.out.println("**********************************************************");
-            System.out.println("* ID: " + id);
-            System.out.println("* Date: " + date);
-            System.out.println("* Remind Time: " + remindTime);
-            System.out.println("* Note: " + note);
-            System.out.println("**********************************************************");
-            //TODO
-            //send reminder
+            RobotOutput robotOutput = new RobotOutput();
+            robotOutput.setResponseType(ResponseType.TEXT);
+            robotOutput.setOutputType(RobotOutputType.REMINDER);
+            robotOutput.setContent(scheduler.getNote() + " from " + scheduler.getFromTime() + " to " + scheduler.getToTime());
+            robotOutput.setDateTime(scheduler.getFromTime());
+            robotOutputRepository.save(robotOutput);
         }
     }
 
@@ -189,15 +187,17 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     @Override
-    public OneTimeSchedulerDto getUpcomingScheduledEvent(long childId) {
-        Scheduler schedulerById = schedulerRepository.getSchedulerById();
-        if (schedulerById == null) {
-            return null;
-        }
-        OneTimeSchedulerDto oneTimeSchedulerDto = new OneTimeSchedulerDto();
-        oneTimeSchedulerDto.setNote(schedulerById.getNote());
-        oneTimeSchedulerDto.setFromTime(schedulerById.getFromTime().toString());
-        return oneTimeSchedulerDto;
+    public OneTimeSchedulerDto getUpcomingScheduledTask(long childId) {
+        Scheduler task = schedulerRepository.getUpcomingScheduledTask(childId);
+        if (task == null) return null;
+        return new OneTimeSchedulerDto(
+                task.getId(),
+                task.getDate().toString(),
+                task.getNote(),
+                task.getRemindTime().toString(),
+                task.getFromTime().toString(),
+                task.getToTime().toString()
+        );
     }
 
     private long getMillisecondsFromLocalDateTime(LocalDateTime dateTime) {

@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/scheduler")
+@RequestMapping(value = "/user/scheduler")
 @CrossOrigin
 public class SchedulerController {
 
@@ -53,10 +53,9 @@ public class SchedulerController {
         return ResponseEntity.ok(new CommonResponse<>(true, "Onetime Reminder Deleted Successfully"));
     }
 
-    // View upcoming scheduler
     @GetMapping(value = "/upcoming/{childId}")
-    public ResponseEntity getUpcomingScheduler(@PathVariable("childId") long childId) {
-        OneTimeSchedulerDto upcomingScheduledEvent = schedulerService.getUpcomingScheduledEvent(childId);
-        return ResponseEntity.ok(new CommonResponse<>(true, upcomingScheduledEvent));
+    public ResponseEntity getUpcomingScheduledTask(@PathVariable long childId) {
+        OneTimeSchedulerDto upcomingScheduledTask = schedulerService.getUpcomingScheduledTask(childId);
+        return ResponseEntity.ok(new CommonResponse<>(true, upcomingScheduledTask));
     }
 }

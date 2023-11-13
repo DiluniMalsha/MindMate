@@ -2,17 +2,24 @@ package com.uwu.emora.service.impl;
 
 import com.uwu.emora.dto.timetable.TimetableRecordDto;
 import com.uwu.emora.entity.Child;
+import com.uwu.emora.entity.RobotOutput;
 import com.uwu.emora.entity.Timetable;
 import com.uwu.emora.enums.Day;
+import com.uwu.emora.enums.ResponseType;
+import com.uwu.emora.enums.RobotOutputType;
 import com.uwu.emora.exception.CustomServiceException;
 import com.uwu.emora.quartz.ReminderScheduler;
 import com.uwu.emora.repository.ChildRepository;
+import com.uwu.emora.repository.RobotOutputRepository;
 import com.uwu.emora.repository.TimetableRepository;
 import com.uwu.emora.service.TimetableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +33,7 @@ public class TimetableServiceImpl implements TimetableService {
     private final TimetableRepository timetableRepository;
     private final ChildRepository childRepository;
     private final ReminderScheduler reminderScheduler;
+    private final RobotOutputRepository robotOutputRepository;
 
     @Override
     public void addTimetableRecord(TimetableRecordDto timeTableRecordDto) {
@@ -49,7 +57,7 @@ public class TimetableServiceImpl implements TimetableService {
 
             DateTimeFormatter parser = DateTimeFormatter.ofPattern("h:mm a");
             LocalTime localTime = LocalTime.parse(timeTableRecordDto.getFromTime(), parser);
-            localTime = localTime.minusMinutes(5);
+            localTime = localTime.minusMinutes(10);
             int hour = localTime.getHour();
             int min = localTime.getMinute();
 
@@ -117,22 +125,24 @@ public class TimetableServiceImpl implements TimetableService {
 
         if (optionalTimetable.isPresent()) {
             Timetable timetable = optionalTimetable.get();
-            String task = timetable.getTask();
-            String fromTime = timetable.getFromTime();
-            String toTime = timetable.getToTime();
-            String id = timetable.getId();
-            String note = task + " in 30 minutes";
+            RobotOutput robotOutput = new RobotOutput();
+            robotOutput.setResponseType(ResponseType.TEXT);
+            robotOutput.setOutputType(RobotOutputType.TIMETABLE);
+            robotOutput.setContent(timetable.getTask());
 
-            System.out.println("**********************************************************");
-            System.out.println("* ID: " + id);
-            System.out.println("* From Time: " + fromTime);
-            System.out.println("* To Time: " + toTime);
-            System.out.println("* Task: " + task);
-            System.out.println("* Note: " + note);
-            System.out.println("**********************************************************");
-            //TODO
-            //send reminder
+
+            DateTimeFormatter parser = DateTimeFormatter.ofPattern("h:mm a");
+            LocalTime localTime = LocalTime.parse(timetable.getFromTime(), parser);
+
+            robotOutput.setDateTime(getDateTimeByZone(localTime.atDate(LocalDate.now())));
+            robotOutputRepository.save(robotOutput);
         }
+    }
+
+    public static LocalDateTime getDateTimeByZone(LocalDateTime dateTime) {
+        ZoneId oldZone = ZoneId.of("Asia/Colombo");
+        ZoneId newZone = ZoneId.of("GMT");
+        return dateTime.atZone(oldZone).withZoneSameInstant(newZone).toLocalDateTime();
     }
 
 }

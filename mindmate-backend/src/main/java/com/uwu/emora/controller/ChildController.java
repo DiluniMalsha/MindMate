@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/child")
+@RequestMapping(value = "/user/child")
 @CrossOrigin
 public class ChildController {
 

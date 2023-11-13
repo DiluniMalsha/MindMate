@@ -11,7 +11,7 @@
 	<groupId>com.uwu.emora</groupId>
 	<artifactId>emora-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>emora_backend</name>
 	<description>emora-personal-assistant-backend</description>
 	<properties>
@@ -88,6 +88,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>emora</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
