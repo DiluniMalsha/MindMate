@@ -2,8 +2,19 @@ import "./LiveChart.css";
 import CustomButton from "../button/CustomButton";
 import Grid from "@mui/material/Grid";
 import LiveChartNew from "../LiveChart/LiveChart";
+import {useState} from "react";
 
 const LiveChart = ({title, width, height, display, marginTop}) => {
+    const [day, setDay] = useState();
+    const getLiveEmotion = () => {
+        setDay(0)
+    }
+    const getThreeDayEmotion = () => {
+        setDay(3)
+    }
+    const getWeekEmotion = () => {
+        setDay(7)
+    }
     return (
         <>
             <div className="checking-pattern-btn-set">
@@ -23,6 +34,7 @@ const LiveChart = ({title, width, height, display, marginTop}) => {
                                 fontSize="18"
                                 width="130"
                                 display={display}
+                                onclick={getLiveEmotion}
                             >
                                 Day
                             </CustomButton>
@@ -35,6 +47,7 @@ const LiveChart = ({title, width, height, display, marginTop}) => {
                                 fontSize="18"
                                 width="150"
                                 display={display}
+                                onclick={getThreeDayEmotion}
                             >
                                 3 Days
                             </CustomButton>
@@ -47,6 +60,7 @@ const LiveChart = ({title, width, height, display, marginTop}) => {
                                 fontSize="18"
                                 width="150"
                                 display={display}
+                                onclick={getWeekEmotion}
                             >
                                 Week
                             </CustomButton>
@@ -71,7 +85,7 @@ const LiveChart = ({title, width, height, display, marginTop}) => {
                 {/*</div>*/}
                 {/*sx={{border: '1px solid #1E5D88'}}*/}
                 <div className="chart-border margine-bottm-res" style={{marginTop: marginTop}}>
-                    <LiveChartNew displaying="none"/>
+                    <LiveChartNew displaying="none" days={day}/>
                 </div>
                 <Grid item xs={12} md={4} sx={{textAlign: 'right'}} className='history-grid'>
                     <CustomButton

@@ -45,6 +45,7 @@ const AddNewReminder = ({setPopupVisibles, dates}) => {
     const handleChangeToTime = (event) => {
         setToTime(event.target.value)
     }
+    console.log(toTime)
 
     const schedulerDetails = {
         id: 1,

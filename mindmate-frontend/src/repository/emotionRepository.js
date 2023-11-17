@@ -1,7 +1,7 @@
 import Repository from '../utils/repository'
 
-const getEmotionList = () => {
-    return Repository.get('/emotion/')
+const getEmotionList = (days) => {
+    return Repository.get('/emotion/'+days)
 }
 
 const postResponse = (response) => {

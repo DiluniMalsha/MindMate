@@ -49,7 +49,7 @@ const Home = () => {
     const data = 1;
     useEffect(() => {
         const fetchData = async () => {
-            getEmotionList()
+            getEmotionList(0)
                 .then((res) => {
                     console.log(11)
                 })

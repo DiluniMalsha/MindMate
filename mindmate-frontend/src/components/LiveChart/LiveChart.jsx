@@ -13,8 +13,10 @@ import {
     Title,
     Tooltip
 } from "chart.js";
-import axios from "axios";
 import HomeMood from "../homeMood/HomeMood";
+// import {getEmotionList} from "../../repository/emotionRepository";
+import axios from "axios";
+import {getEmotionList} from "../../repository/emotionRepository";
 
 ChartJS.register(
     ArcElement,
@@ -27,9 +29,10 @@ ChartJS.register(
     Legend,
     Filler
 )
-const LiveChartNew = ({width, setClassname, displaying, displays}) => {
+const LiveChartNew = ({width, setClassname, displaying, displays,days}) => {
     const [chartData, setChartData] = useState({})
     const [loopId, setLoopId] = useState();
+    // const [day, setDay] = useState({days})
     const accessToken: string | null = localStorage.getItem("loggedUserToken");
     // eslint-disable-next-line
     const headers = {
@@ -37,10 +40,15 @@ const LiveChartNew = ({width, setClassname, displaying, displays}) => {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + accessToken
     }
-
+    // eslint-disable-next-line
+    if (days === undefined){
+        days=0
+    }
+    console.log("day")
+    console.log("days",days)
     useEffect(() => {
         const fetchData = async () => {
-            const {data} = await axios.get("http://18.143.151.234:8080/api/user/emotion", {headers}) //18.143.151.234
+            const {data} = await getEmotionList(days) //18.143.151.234  get("http://18.143.151.234:8080/api/user/emotion/0", {headers})
             setChartData({
                 labels: data.body.reverse().map((item) => item.time),
                 datasets: [
