@@ -34,10 +34,18 @@ public class EmotionServiceImpl implements EmotionService {
     private final RobotOutputRepository robotOutputRepository;
 
     @Override
-    public List<ChildEmotionDto> getLatestEmotions() {
+    public List<ChildEmotionDto> getLatestEmotions(long days) {
 
-        List<ChildEmotion> topEmotions = childEmotionRepository.findTopEmotions(1);
-        return topEmotions.stream()
+        List<ChildEmotion> emotions;
+        if (days <= 0) {
+            emotions = childEmotionRepository.findTopEmotions(1);
+        } else {
+            emotions = childEmotionRepository.findAllByChild_IdAndDateTimeBetweenOrderByDateTimeAsc(
+                    1,
+                    LocalDateTime.now().minusDays(days),
+                    LocalDateTime.now());
+        }
+        return emotions.stream()
                 .map(ce -> new ChildEmotionDto(
                         ce.getEmotion().getId(),
                         getDateTimeByZone(ce.getDateTime()),

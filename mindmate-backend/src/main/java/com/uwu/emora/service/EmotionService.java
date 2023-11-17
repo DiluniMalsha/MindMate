@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface EmotionService {
-    List<ChildEmotionDto> getLatestEmotions();
+    List<ChildEmotionDto> getLatestEmotions(long days);
 
     void saveEmotionResponse(EmotionResponseDto emotionResponseDto);
 }

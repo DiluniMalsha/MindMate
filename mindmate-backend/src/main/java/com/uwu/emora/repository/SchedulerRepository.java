@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface SchedulerRepository extends JpaRepository<Scheduler, String> {
 
-    @Query(value = "SELECT id FROM SCHEDULER", nativeQuery = true)
+    @Query(value = "SELECT id FROM scheduler", nativeQuery = true)
     List<String> getAllIDs();
 
     List<Scheduler> findAllByChildOrderByDateAsc(Child child);

@@ -18,9 +18,9 @@ public class EmotionController {
 
     private final EmotionService emotionService;
 
-    @GetMapping(value = "/user/emotion")
-    public ResponseEntity getLatestEmotions() {
-        List<ChildEmotionDto> latestEmotions = emotionService.getLatestEmotions();
+    @GetMapping(value = "/user/emotion/{days}")
+    public ResponseEntity getLatestEmotions(@PathVariable long days) {
+        List<ChildEmotionDto> latestEmotions = emotionService.getLatestEmotions(days);
         return ResponseEntity.ok(new CommonResponse<>(true, latestEmotions));
     }
 

@@ -1,11 +1,11 @@
 package com.uwu.emora.repository;
 
-import com.uwu.emora.entity.Child;
 import com.uwu.emora.entity.ChildEmotion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -15,5 +15,7 @@ public interface ChildEmotionRepository extends JpaRepository<ChildEmotion, Long
     List<ChildEmotion> findTopEmotions(long childId);
 
     ChildEmotion findTopByChild_IdOrderByDateTimeDesc(long childId);
+
+    List<ChildEmotion> findAllByChild_IdAndDateTimeBetweenOrderByDateTimeAsc(long childId, LocalDateTime startDate, LocalDateTime endDate);
 
 }
