@@ -117,24 +117,28 @@ const Home = () => {
                             <HeadingMood/>
                         </div>
                         <div className="widthSet row">
-                            {/*<LiveChart width="91%" display="none"/>*/}
-                            <LiveChartNew width="91%" setClassname="emotion-chart-background" displaying="none"/>
+                            <LiveChartNew width="91%" setClassname="emotion-chart-background"
+                                          displaying="none"/>
                         </div>
                     </Grid>
                 </Grid>
             </div>
-            {popupVisible && (
-                <SendRespond
-                    setPopupVisible={setPopupVisible}
-                />
-            )}
-            {popupVisibles && (
-                <SendReminder
-                    setPopupVisibles={setPopupVisibles}
-                    upcomingEvent={upcomingTask}
-                    time={time}
-                />
-            )}
+            {
+                popupVisible && (
+                    <SendRespond
+                        setPopupVisible={setPopupVisible}
+                    />
+                )
+            }
+            {
+                popupVisibles && (
+                    <SendReminder
+                        setPopupVisibles={setPopupVisibles}
+                        upcomingEvent={upcomingTask}
+                        time={time}
+                    />
+                )
+            }
         </section>
     )
         ;
