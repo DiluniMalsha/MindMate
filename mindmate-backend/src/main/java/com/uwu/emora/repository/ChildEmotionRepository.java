@@ -20,4 +20,5 @@ public interface ChildEmotionRepository extends JpaRepository<ChildEmotion, Long
 
     ChildEmotion findTopByDateTimeAfterOrderByDateTimeAsc(LocalDateTime dateTime);
 
+    List<ChildEmotion> findAllByChild_IdAndDateTimeBetweenOrderByDateTimeAsc(long childId, LocalDateTime startDatetime, LocalDateTime endDatetime);
 }
