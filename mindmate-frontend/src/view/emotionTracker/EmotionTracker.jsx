@@ -1,7 +1,6 @@
 import LiveChart from "../../components/chart/LiveChart";
 import "./EmotionTracker.css"
 import EmotionFaceSection from "../../components/emotionFaces/EmotionFaceSection";
-import happy from '../../assets/faceIcon/fear.svg';
 import {FitnessOutline} from "react-ionicons";
 import HeadingTitle from "../../components/title/HeadingTitle";
 import HeadingMood from "../../components/hedingMood/HeadingMood";
@@ -20,7 +19,7 @@ const EmotionTracker = (props) => {
             <div className="container-fluid h-custom">
                 <div className="row d-flex   m-0">
                     <div className="col-md-4 emotion-display">
-                        <EmotionFaceSection face={happy} mood='Happy'/>
+                        <EmotionFaceSection/>
                     </div>
                     <div className="col-md-7 graph-border">
                         <div className="moodheding-display">
@@ -30,7 +29,7 @@ const EmotionTracker = (props) => {
                         <LiveChart width='700' height='400' title='Her Past Emotion Changing Pattern' marginTop='10px'/>
                     </div>
                     <div className="col-md-4 emotion-display-2" style={{width: '35%'}}>
-                        <EmotionFaceSection face={happy} mood='Happy'/>
+                        <EmotionFaceSection/>
                     </div>
                 </div>
             </div>

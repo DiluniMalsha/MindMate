@@ -1,0 +1,26 @@
+.date-picker{
+    width: 30% !important;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+@media screen and (max-width: 1350px) {
+    .date-picker{
+        width: 40% !important;
+    }
+}
+@media screen and (max-width: 898px) {
+    .date-picker{
+     width: 50% !important;
+    }
+}
+@media screen and (max-width: 600px) {
+    .date-picker{
+     width: 70% !important;
+    }
+}
+@media screen and (max-width: 490px) {
+    .date-picker{
+     width: 90% !important;
+    }
+}
