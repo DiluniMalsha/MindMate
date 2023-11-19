@@ -58,4 +58,11 @@ public class SchedulerController {
         OneTimeSchedulerDto upcomingScheduledTask = schedulerService.getUpcomingScheduledTask(childId);
         return ResponseEntity.ok(new CommonResponse<>(true, upcomingScheduledTask));
     }
+
+    //  Send instant reminder for scheduled task
+    @PatchMapping(value = "/onetime/{reminderId}")
+    public ResponseEntity sendOneTimeReminder(@PathVariable("reminderId") String reminderId) {
+        schedulerService.sendOneTimeReminder(reminderId);
+        return ResponseEntity.ok(new CommonResponse<>(true, "Reminder Sent Successfully"));
+    }
 }

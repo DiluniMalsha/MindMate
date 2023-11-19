@@ -3,7 +3,6 @@ package com.uwu.emora.controller;
 import com.uwu.emora.dto.CommonResponse;
 import com.uwu.emora.dto.emotion.ChildEmotionDto;
 import com.uwu.emora.dto.robot.RobotResponseDto;
-import com.uwu.emora.service.EmotionService;
 import com.uwu.emora.service.RobotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,7 @@ public class RobotController {
     @GetMapping(value = "/response")
     public ResponseEntity getEmotionResponses() {
         RobotResponseDto dto = robotService.getLatestEmotionResponse();
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(dto == null ? 0 : dto);
     }
 
 }

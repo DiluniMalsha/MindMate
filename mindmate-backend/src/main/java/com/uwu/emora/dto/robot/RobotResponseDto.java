@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class RobotResponseDto {
+    private boolean responseExists = false;
     private RobotOutputType output;
     private ResponseType type;
     private String content;

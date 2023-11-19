@@ -83,7 +83,12 @@ public class SchedulerServiceImpl implements SchedulerService {
             RobotOutput robotOutput = new RobotOutput();
             robotOutput.setResponseType(ResponseType.TEXT);
             robotOutput.setOutputType(RobotOutputType.REMINDER);
-            robotOutput.setContent(scheduler.getNote() + " from " + scheduler.getFromTime() + " to " + scheduler.getToTime());
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+            String content = scheduler.getNote()
+                    + " from " + scheduler.getFromTime().toLocalTime().format(timeFormatter)
+                    + " to " + scheduler.getToTime().toLocalTime().format(timeFormatter)
+                    + " on " + scheduler.getFromTime().toLocalDate();
+            robotOutput.setContent(content);
             robotOutput.setDateTime(scheduler.getFromTime());
             robotOutputRepository.save(robotOutput);
         }
