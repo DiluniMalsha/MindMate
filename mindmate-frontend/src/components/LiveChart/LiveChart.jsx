@@ -13,8 +13,10 @@ import {
     Title,
     Tooltip
 } from "chart.js";
-import axios from "axios";
 import HomeMood from "../homeMood/HomeMood";
+import {getEmotionList} from "../../repository/emotionRepository";
+import {useStateContext} from '../../context/Context'
+import {FadeLoader} from "react-spinners";
 
 ChartJS.register(
     ArcElement,
@@ -27,20 +29,31 @@ ChartJS.register(
     Legend,
     Filler
 )
-const LiveChartNew = ({width, setClassname, displaying, displays}) => {
+
+
+const LiveChartNew = ({width, setClassname, displaying, displays, days}) => {
     const [chartData, setChartData] = useState({})
     const [loopId, setLoopId] = useState();
     const accessToken: string | null = localStorage.getItem("loggedUserToken");
+    const [loading, setLoading] = useState(false);
+
+    const {setMoodId} = useStateContext()
+    setMoodId(loopId);
+
+
     // eslint-disable-next-line
     const headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + accessToken
     }
-
+    // eslint-disable-next-line
+    if (days === undefined) {
+        days = 0
+    }
     useEffect(() => {
         const fetchData = async () => {
-            const {data} = await axios.get("http://18.143.151.234:8080/api/user/emotion", {headers}) //18.143.151.234
+            const {data} = await getEmotionList(days) //18.143.151.234  get("http://18.143.151.234:8080/api/user/emotion/0", {headers})
             setChartData({
                 labels: data.body.reverse().map((item) => item.time),
                 datasets: [
@@ -53,37 +66,56 @@ const LiveChartNew = ({width, setClassname, displaying, displays}) => {
                     }
                 ]
             })
-            // console.log()
             setLoopId(data.body.reverse()[0].emotionId)
         }
 
         fetchData();
+        // eslint-disable-next-line
     }, [headers]);
 
-
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+    }, []);
     // console.log(chartData)
     return (
         <>
+
             <div style={{display: displays}}>
                 <div style={{width: width, marginLeft: "10px", marginTop: "20px"}}>
-                    <div className={setClassname}>
-                        <div className="">
-                            {chartData && chartData.datasets && (
-                                <Line
-                                    data={chartData}
+                    {
+                        loading ?
+                            <div>
+                                <FadeLoader
+                                    color={"#1e5d88"}
+                                    loading={loading}
+                                    size={30}
+                                    className={'loading-style'}
                                 />
-                            )}
-                        </div>
-                    </div>
+                                Loading
+                            </div>
+
+                            :
+                            <div className={setClassname}>
+                                <div className="">
+                                    {chartData && chartData.datasets && (
+                                        <Line
+                                            data={chartData}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                    }
                 </div>
             </div>
+
             <div style={{display: displaying}}>
                 <HomeMood moodId={loopId}/>
             </div>
-
         </>
-
-    );
+    )
 };
 
 export default LiveChartNew;
