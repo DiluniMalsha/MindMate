@@ -116,45 +116,6 @@ const Preferences = (props) => {
                 <MDBTabsContent>
                     <MDBTabsPane show={justifyActive === "tab1"} className="center-title">
                         <GoogleDriverPickerComponent/>
-                        {/*<div>*/}
-                        {/*    <Button*/}
-                        {/*        variant="primary"*/}
-                        {/*        component="label"*/}
-                        {/*        className="upload-btn"*/}
-                        {/*        sx={{*/}
-                        {/*            fontSize: "20px",*/}
-                        {/*            textDecoration: "none",*/}
-                        {/*            textTransform: "none",*/}
-                        {/*            backgroundColor: "#171742",*/}
-                        {/*            color: "#ffffff",*/}
-                        {/*            borderRadius: "20px",*/}
-                        {/*        }}*/}
-                        {/*    >*/}
-                        {/*        Upload New Resource*/}
-                        {/*        <input*/}
-                        {/*            hidden*/}
-                        {/*            accept="image/jpeg"*/}
-                        {/*            multiple*/}
-                        {/*            type="file"*/}
-                        {/*            onChange={handleImageChange}*/}
-                        {/*        />*/}
-                        {/*    </Button>*/}
-                        {/*    <ImageList*/}
-                        {/*        sx={{m: "2%", width: "96%", height: 450}}*/}
-                        {/*        cols={3}*/}
-                        {/*        rowHeight={3}*/}
-                        {/*    >*/}
-                        {/*        {pictures.map((item) => (*/}
-                        {/*            <ImageListItem>*/}
-                        {/*                <img*/}
-                        {/*                    src={item}*/}
-                        {/*                    alt="location attraction picture"*/}
-                        {/*                    loading="lazy"*/}
-                        {/*                />*/}
-                        {/*            </ImageListItem>*/}
-                        {/*        ))}*/}
-                        {/*    </ImageList>*/}
-                        {/*</div>*/}
                     </MDBTabsPane>
                     <MDBTabsPane show={justifyActive === "tab2"} className="center-title">
                         <GoogleDriverPickerComponent/>

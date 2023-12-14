@@ -6,7 +6,6 @@ import {ic_visibility_off} from 'react-icons-kit/md/ic_visibility_off'
 import {ic_visibility} from 'react-icons-kit/md/ic_visibility'
 import {MDBInput} from "mdb-react-ui-kit";
 import CustomButton from "../button/CustomButton";
-import {Link} from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -103,9 +102,6 @@ function SignInFrom(setToken) {
                         onChange={e => setPassword(e.target.value)}
                     />
                 </div>
-                <Link className="forget-aline" to="/">
-                    Forgot password?
-                </Link>
 
                 <div className="text-center pt-1 mb-5 pb-1">
                     <CustomButton
