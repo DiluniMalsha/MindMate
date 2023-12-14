@@ -12,7 +12,7 @@ const GoogleDriverPickerComponent = () => {
                 clientId: "785266234444-kv67hrloekodrgfs7kib0kqkrajfojeq.apps.googleusercontent.com",
                 developerKey: "AIzaSyAT_Cc0UIr6cJyk1zHsknziqhabAQl1N6o",
                 viewId: "DOCS",
-                token: "ya29.a0AfB_byBTs9F5DHqHtr9K1SbvZn8Se1Xj5RFfn10PRM651mMPGFpbpeyUUv8Ky7Nsl9szaRtmPSuI2smaDYA07D1OAKz-nyUscqfHHUW4ypgwE3986-HitIUgIxrunnqExLiqCmSx7RmucLSWNod7hPyMFQTWaGm-dyuWaCgYKAZ4SARASFQGOcNnClZPhZ1N-W6tzNbbxQxokJw0171",
+                token: "ya29.a0AfB_byBluWfEw7G4dzxEpHceG1x7RTNNe2IzOscQh4IZfR-drUvswInt1buS7Qj-FmqvF7Rztifr5BEyaDXUHTyHcs3DDreNYquIFrLTSK64FnLixzRK7cA6K7XQE21nin4VUdT94pqs-5_AlKkmBYfKpQrNIT1MQ1LzaCgYKAQoSARASFQHGX2MiACL_3Jq0jEith_0JQbkDOA0171",
                 showUploadView: true,
                 showUploadFolders: true,
                 supportDrives: true,
@@ -20,7 +20,7 @@ const GoogleDriverPickerComponent = () => {
                 callbackFunction: pickerCallback
             })
         } catch (e) {
-            console.log("ss", e)
+            console.log(e)
         }
 
     }

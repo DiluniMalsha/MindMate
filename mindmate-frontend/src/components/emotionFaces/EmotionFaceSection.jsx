@@ -59,7 +59,7 @@ const EmotionFaceSection = () => {
                 width="180"
                 onclick={handleRespondPopUp}
             >
-                Respond to Her
+                Respond to Him
             </CustomButton>
             <div className="response-div">
                 <p style={{textAlign: 'justify'}}>

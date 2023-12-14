@@ -110,9 +110,10 @@ const SchedulerTimetable = (props) => {
             .catch(err => console.log(err))
     }, [setSchedulerLists,])
 
+    console.log(schedulerList)
     const handleDayChange = (value) => {
         setSelectedDate(value);
-        if (schedulerList.some(item => value.valueOf() === item.timestamp)) {
+        if (schedulerList.some(item => value.valueOf() === (item.timestamp))) {
             setSelectDate((schedulerList.find(item => value.valueOf() === item.timestamp)).date)
             setEventsAvailable(true);
             setEvents(schedulerList.find(item => value.valueOf() === item.timestamp).events);
@@ -121,11 +122,12 @@ const SchedulerTimetable = (props) => {
             setEvents([]);
         }
     }
-
     function getTimeString(t) {
         const time = new Date(t);
         return time.toLocaleTimeString();
     }
+
+    console.log(events)
 
     return (
         <div className="row w-100 ">
