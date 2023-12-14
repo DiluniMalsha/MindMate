@@ -5,7 +5,7 @@ import NavigationPanelMobile from "../components/navigationPanels/NavigationPane
 import Grid from "@mui/material/Grid";
 import HeadingBar from "../components/headingBar/HeadingBar";
 
-const MainLayout = (props) => {
+const   MainLayout = (props) => {
     // const {sideNavVisibility, setSideNavVisibility, matchesMedia768} = useContext(controlActivity)
 
     return (

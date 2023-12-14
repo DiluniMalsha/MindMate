@@ -17,6 +17,7 @@ const Home = () => {
     const [time, setTime] = useState()
     const [popupVisible, setPopupVisible] = useState(false);
     const [popupVisibles, setPopupVisibles] = useState(false);
+    const [taskId, setTaskId] = useState()
 
     let icons = <HomeOutline
         color={'#4285f5'}
@@ -25,7 +26,6 @@ const Home = () => {
         width="20px"
         style={{marginBottom: '5px'}}
     />
-    console.log(upcomingTask)
     const handleRespondPopUp = (value) => {
         setPopupVisible(!popupVisible);
     };
@@ -43,6 +43,7 @@ const Home = () => {
                 } else {
                     setUpcomingTask(res.data.body.note);
                     setTime("at " + getLocalTime(res.data.body.fromTime))
+                    setTaskId(res.data.body.id)
                 }
             })
     }, [])
@@ -76,7 +77,7 @@ const Home = () => {
                                 width="180"
                                 onclick={handleRespondPopUp}
                             >
-                                Respond to Her
+                                Respond to Him
                             </CustomButton>
                         </div>
                         <div className='second-div mt-5 '>
@@ -85,7 +86,7 @@ const Home = () => {
                                     {/*<br/>*/}
                                     <span className='mt-3 mood-des mb-3'
                                           style={{fontSize: '1.5rem', marginTop: '50px'}}>
-                                Upcoming Task For Mihasa
+                                Upcoming Task For Isuru
                             </span>
                                     <br/>
                                     <div className='mt-4 upcoming'>
@@ -136,6 +137,7 @@ const Home = () => {
                         setPopupVisibles={setPopupVisibles}
                         upcomingEvent={upcomingTask}
                         time={time}
+                        taskId={taskId}
                     />
                 )
             }

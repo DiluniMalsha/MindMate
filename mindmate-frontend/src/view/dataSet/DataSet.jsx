@@ -17,9 +17,7 @@ const Item = styled(Paper)(({theme}) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
 }));
-// const closePopUp = (setPopupVisibles) => (event) => {
-//     setPopupVisibles(false);
-// };
+
 const DataSet = (props) => {
     let icon = <AlbumsOutline
         color={'#4285f5'}
@@ -29,8 +27,11 @@ const DataSet = (props) => {
         style={{marginBottom: '5px'}}
     />
 
-    const [date1, setDate1] = useState();
-    const [date2, setDate2] = useState();
+    const [date1, setDate1] = useState("");
+    const [date2, setDate2] = useState("");
+
+    const day1 =  "2023-10-01 00:00:00"
+    const day2 =  "2024-10-01 00:00:00"
 
     const handleChangeDate1 = (event) => {
         setDate1(event.target.value);
@@ -49,7 +50,7 @@ const DataSet = (props) => {
                             <br/>
                             <CustomInput
                                 value={date1}
-                                type="date"
+                                type="datetime-local"
                                 size="20"
                                 radius="10"
                                 width="100%"
@@ -65,7 +66,7 @@ const DataSet = (props) => {
                             <br/>
                             <CustomInput
                                 value={date2}
-                                type="date"
+                                type="datetime-local"
                                 size="20"
                                 radius="10"
                                 width="100%"
@@ -77,7 +78,9 @@ const DataSet = (props) => {
                     </Grid>
                 </Grid>
             </div>
-            <DownloadData/>
+            <DownloadData
+            fromDate={day1}
+            toDate={day2}/>
         </div>
     );
 }

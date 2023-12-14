@@ -26,7 +26,7 @@ const EmotionTracker = (props) => {
                             <HeadingMood/>
                         </div>
 
-                        <LiveChart width='700' height='400' title='Her Past Emotion Changing Pattern' marginTop='10px'/>
+                        <LiveChart width='700' height='400' title='His Past Emotion Changing Pattern' marginTop='10px'/>
                     </div>
                     <div className="col-md-4 emotion-display-2" style={{width: '35%'}}>
                         <EmotionFaceSection/>

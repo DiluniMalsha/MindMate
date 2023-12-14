@@ -103,7 +103,7 @@ const Settings = (props) => {
                                         <div className="col child-settings-sections">
                                             {child != null ?
                                                 <FormComponent
-                                                    title="Mihasa's Profile"
+                                                    title="Isuru's Profile"
                                                     firstname={child?.firstName}
                                                     lastname={child?.lastName}
                                                     address={child?.address}

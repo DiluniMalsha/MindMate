@@ -245,7 +245,7 @@ const FormComponent = (props) => {
                 </Grid>
                 <Grid item xs={12} sx={{display: props.relDis}}>
                     <Item>
-                        <label className="label-align">Relationship to Mihasa</label>
+                        <label className="label-align">Relationship to Isuru</label>
                         <br/>
                         <CustomInput
                             type="text"

@@ -20,10 +20,14 @@ const getUpcomingTask = (childId) => {
     return Repository.get('/scheduler/upcoming/'+ childId)
 }
 
+const patchReminderSend = (reminderId) =>{
+    return Repository.patch('scheduler/onetime/'+reminderId)
+}
 export {
     getScheduledTasks,
     deleteScheduledTasks,
     updateSchedulerTask,
     addSchedulerTask,
-    getUpcomingTask
+    getUpcomingTask,
+    patchReminderSend
 }

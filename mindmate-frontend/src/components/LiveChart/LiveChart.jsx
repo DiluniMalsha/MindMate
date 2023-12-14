@@ -30,7 +30,6 @@ ChartJS.register(
     Filler
 )
 
-
 const LiveChartNew = ({width, setClassname, displaying, displays, days}) => {
     const [chartData, setChartData] = useState({})
     const [loopId, setLoopId] = useState();
@@ -55,11 +54,11 @@ const LiveChartNew = ({width, setClassname, displaying, displays, days}) => {
         const fetchData = async () => {
             const {data} = await getEmotionList(days) //18.143.151.234  get("http://18.143.151.234:8080/api/user/emotion/0", {headers})
             setChartData({
-                labels: data.body.reverse().map((item) => item.time),
+                labels: data.body.map((item) => item.time),
                 datasets: [
                     {
                         label: "Emotion",
-                        data: data.body.reverse().map((item) => item.emotionId),
+                        data: data.body.map((item) => item.emotionId),
                         // fill: true,
                         borderColor: "rgb(99,177,255)",
                         backgroundColor: "rgba(79,81,185,0)"
@@ -79,10 +78,22 @@ const LiveChartNew = ({width, setClassname, displaying, displays, days}) => {
             setLoading(false)
         }, 3000)
     }, []);
-    // console.log(chartData)
+
+    const options = {
+        scales: {
+            y:
+                {
+                    min: 0,
+                    max: 8,
+                    stepSize: 1,
+                },
+            x:
+                {},
+        },
+    };
+
     return (
         <>
-
             <div style={{display: displays}}>
                 <div style={{width: width, marginLeft: "10px", marginTop: "20px"}}>
                     {
@@ -103,6 +114,7 @@ const LiveChartNew = ({width, setClassname, displaying, displays, days}) => {
                                     {chartData && chartData.datasets && (
                                         <Line
                                             data={chartData}
+                                            options={options}
                                         />
                                     )}
                                 </div>

@@ -20,7 +20,7 @@ const images = [
 ]
 const HomeMood = ({moodId, display}) => {
     const mood = ["angry", "disgusted", "fear", "sad", "neutral", "surprised", "happy"];
-    let moodDescription = "Mihasa is Now in a " + mood[moodId - 1] + " Mood"
+    let moodDescription = "Isuru is Now in a " + mood[moodId - 1] + " Mood"
     const [loading, setLoading] = useState(false)
 
     let im = images[moodId - 1];
