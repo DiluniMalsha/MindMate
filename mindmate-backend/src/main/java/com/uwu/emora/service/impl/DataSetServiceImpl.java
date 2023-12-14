@@ -30,7 +30,7 @@ public class DataSetServiceImpl implements DataSetService {
                     .dateTime(c.getDateTime())
                     .emotion(emotion.getName())
                     .response(String.valueOf(response.getResponseType()))
-                    .afterEmotion(afterEmotion.getEmotion().getName())
+                    .afterEmotion(afterEmotion.getEmotion().getName() == null ? "" : afterEmotion.getEmotion().getName())
                     .build();
         }).collect(Collectors.toList());
     }

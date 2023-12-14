@@ -206,7 +206,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     private long getMillisecondsFromLocalDateTime(LocalDateTime dateTime) {
-        ZonedDateTime zdt = ZonedDateTime.of(dateTime, ZoneId.systemDefault());
+        ZonedDateTime zdt = ZonedDateTime.of(dateTime, ZoneId.of("Asia/Kolkata"));
         return zdt.toInstant().toEpochMilli();
     }
 }

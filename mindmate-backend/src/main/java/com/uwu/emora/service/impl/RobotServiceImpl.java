@@ -47,19 +47,19 @@ public class RobotServiceImpl implements RobotService {
         Optional<RobotOutput> optionalOutput = robotOutputRepository.findTopByOutputTypeOrderByDateTimeDesc(RobotOutputType.REMINDER);
         if (optionalOutput.isPresent()) {
             output = optionalOutput.get();
-            response = new RobotResponseDto(true, RobotOutputType.REMINDER, ResponseType.TEXT, output.getContent());
+            response = new RobotResponseDto(1, ResponseType.REMINDER, output.getContent());
         } else {
             optionalOutput = robotOutputRepository.findTopByOutputTypeOrderByDateTimeDesc(RobotOutputType.TIMETABLE);
             if (optionalOutput.isPresent()) {
                 output = optionalOutput.get();
                 long mins = ChronoUnit.MINUTES.between(LocalDateTime.now(), output.getDateTime());
                 String note = output.getContent() + " in " + mins + " minutes";
-                response = new RobotResponseDto(true, RobotOutputType.TIMETABLE, ResponseType.TEXT, note);
+                response = new RobotResponseDto(1, ResponseType.REMINDER, note);
             } else {
                 optionalOutput = robotOutputRepository.findTopByOutputTypeOrderByDateTimeDesc(RobotOutputType.RESPONSE);
                 if (optionalOutput.isPresent()) {
                     output = optionalOutput.get();
-                    response = new RobotResponseDto(true, RobotOutputType.RESPONSE, output.getResponseType(), output.getContent());
+                    response = new RobotResponseDto(1, output.getResponseType(), output.getContent());
                 } else {
                     return new RobotResponseDto();
                 }

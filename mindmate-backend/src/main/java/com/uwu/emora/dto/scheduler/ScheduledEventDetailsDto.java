@@ -22,7 +22,7 @@ public class ScheduledEventDetailsDto {
 
     public void setDate(LocalDate date) {
         this.date = date;
-        ZonedDateTime zdt = ZonedDateTime.of(date.atStartOfDay(), ZoneId.systemDefault());
+        ZonedDateTime zdt = ZonedDateTime.of(date.atStartOfDay(), ZoneId.of("Asia/Kolkata"));
         setTimestamp(zdt.toInstant().toEpochMilli());
     }
 
