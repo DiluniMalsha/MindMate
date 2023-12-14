@@ -200,7 +200,7 @@ function UserProfileComponent() {
             </View>
 
             <View style={styles.formFieldFull}>
-              <Text style={styles.label}>Relationship to Mihasa</Text>
+              <Text style={styles.label}>Relationship to Isuru</Text>
               <TextInput
                 style={styles.formInput}
                 placeholder={"Enter Relationship"}

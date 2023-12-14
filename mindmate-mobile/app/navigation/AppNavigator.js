@@ -34,9 +34,9 @@ function AppNavigator(props) {
           let iconName;
           let rn = route.name;
           if (rn === homeName) {
-            iconName = focused ? "home" : "home-outline";
-          } else if (rn === emotionTrackerName) {
             iconName = focused ? "fitness" : "fitness-outline";
+            // } else if (rn === emotionTrackerName) {
+            //   iconName = focused ? "fitness" : "fitness-outline";
           } else if (rn === schedulerName) {
             iconName = focused ? "calendar" : "calendar-outline";
           } else if (rn === settingsName) {
@@ -53,8 +53,8 @@ function AppNavigator(props) {
         },
       })}
     >
-      <Tab.Screen name={homeName} component={HomeScreen} />
-      <Tab.Screen name={emotionTrackerName} component={EmotionTrackerScreen} />
+      <Tab.Screen name={homeName} component={EmotionTrackerScreen} />
+      {/* <Tab.Screen name={emotionTrackerName} component={EmotionTrackerScreen} /> */}
       <Tab.Screen name={schedulerName} component={SchedulerScreen} />
       <Tab.Screen name={settingsName} component={SettingsScreen} />
     </Tab.Navigator>

@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     top: "30%",
-    width: 180,
-    height: 50,
+    width: 100,
+    height: 100,
   },
   signInButton: {
     width: "50%",

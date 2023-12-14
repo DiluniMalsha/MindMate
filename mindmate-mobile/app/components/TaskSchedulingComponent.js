@@ -43,7 +43,7 @@ function TaskSchedulingComponent(props) {
   const [selectedDate, setSelectedDate] = useState("");
   const [markedDates, setMarkedDates] = useState();
   const [datesWithEvents, setDatesWithEvents] = useState({
-    "2023-07-01": {
+    "2023-12-01": {
       selected: true,
       selectedColor: colors.yellow,
       events: [
@@ -63,7 +63,7 @@ function TaskSchedulingComponent(props) {
         },
       ],
     },
-    "2023-07-03": {
+    "2023-11-27": {
       selected: true,
       selectedColor: colors.yellow,
       events: [

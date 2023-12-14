@@ -27,7 +27,7 @@ function WelcomeScreen(props) {
   if (!timePassed) {
     return (
       <View style={styles.container}>
-        <Image style={styles.logo} source={require("../assets/logo.png")} />
+        {/* <Image style={styles.logo} source={require("../assets/logo.png")} /> */}
         <Text style={styles.welcomeMessage}>Welcome Back</Text>
         <Image style={styles.robot} source={require("../assets/robot.png")} />
         {/* <TouchableHighlight

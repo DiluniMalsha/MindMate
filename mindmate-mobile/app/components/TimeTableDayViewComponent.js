@@ -16,6 +16,7 @@ import {
   getTimetableRecordForDay,
 } from "../repository/TimetableRepository";
 import { useFocusEffect } from "@react-navigation/native";
+import axios from "axios";
 function TimeTableDayViewComponent({
   day,
   setModalVisible,
@@ -26,60 +27,149 @@ function TimeTableDayViewComponent({
   setIsUpdate,
   setId,
 }) {
+  console.log(day);
   const [tasks, setTasks] = useState([]);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      let isActive = true;
-      getTasks();
-      console.log("Get Tasks");
-      return () => {
-        isActive = false;
-      };
-    }, [day])
-  );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     let isActive = true;
+  //     getTasks();
+  //     console.log("Get Tasks");
+  //     return () => {
+  //       isActive = false;
+  //     };
+  //   }, [day])
+  // );
 
-  const getTasks = () => {
-    getTimetableRecordForDay(day, 1)
-      .then((res) => {
-        setTasks(res.data.body);
-      })
-      .catch((err) => console.log(err));
-  };
-  // useEffect(() => {
-  //   setTasks([
-  //     {
-  //       id: 1,
-  //       from: "08:00 AM",
-  //       to: "10:00 AM",
-  //       task: "Reading Books",
-  //     },
-  //     {
-  //       id: 2,
-  //       from: "08:00 AM",
-  //       to: "10:00 AM",
-  //       task: "Reading Books",
-  //     },
-  //     {
-  //       id: 3,
-  //       from: "08:00 AM",
-  //       to: "10:00 AM",
-  //       task: "Reading Books",
-  //     },
-  //     {
-  //       id: 4,
-  //       from: "08:00 AM",
-  //       to: "10:00 AM",
-  //       task: "Reading Books",
-  //     },
-  //     {
-  //       id: 5,
-  //       from: "08:00 AM",
-  //       to: "10:00 AM",
-  //       task: "Reading Books",
-  //     },
-  //   ]);
-  // }, []);
+  // const getTasks = () => {
+  //   getTimetableRecordForDay(day, 1)
+  //     .then((res) => {
+  //       setTasks(res.data.body);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+  useEffect(() => {
+    // const options = {
+    //   headers: {
+    //     Authorization:
+    //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJtaWhpcmkiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdLCJleHAiOjE3MDA0OTAxMjUsInVzZXIiOnsicGFzc3dvcmQiOm51bGwsInVzZXJuYW1lIjoibWloaXJpIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfUEFSRU5UIn1dLCJhY2NvdW50Tm9uRXhwaXJlZCI6dHJ1ZSwiYWNjb3VudE5vbkxvY2tlZCI6dHJ1ZSwiY3JlZGVudGlhbHNOb25FeHBpcmVkIjp0cnVlLCJlbmFibGVkIjp0cnVlLCJ1c2VySWQiOjEsInN0YXR1cyI6bnVsbCwidXNlckRldGFpbHMiOnsidXNlcm5hbWUiOm51bGwsImZpcnN0TmFtZSI6IkRpbGhhbmkiLCJsYXN0TmFtZSI6IlBlaXJpcyIsIm1vYmlsZSI6IjA3MDIzMTIyMzkiLCJhZGRyZXNzIjoiR2FsbGUiLCJnZW5kZXIiOiJGRU1BTEUifX0sImF1dGhvcml0aWVzIjpbIlJPTEVfUEFSRU5UIl0sImp0aSI6Ijg1MTZiM2I1LTJlNzAtNGJkZC04NDU4LWFhZGJhMmY2ZDllNyIsImNsaWVudF9pZCI6InBhcmVudCJ9.0hP9RnO4Ag5mByTz4NTrUF-FgzeydosM-5J7OHEpK48",
+    //   },
+    // };
+
+    // axios
+    //   .get("http://18.143.151.234:8080/api/user/timetable/MON/2", options)
+    //   .then((response) => {
+    //     console.log(response.data.body);
+    //     setTasks(response.data.body);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    if (day === "SAT") {
+      setTasks([
+        {
+          id: 1,
+          fromTime: "09:00 AM",
+          toTime: "09:30 AM",
+          task: "Wake Up and Morning Routine",
+        },
+        { id: 2, fromTime: "09:30 AM", toTime: "11:00 AM", task: "Brunch" },
+        {
+          id: 3,
+          fromTime: "11:00 AM",
+          toTime: "02:00 PM",
+          task: "Leisure Activities",
+        },
+        {
+          id: 4,
+          fromTime: "02:00 PM",
+          toTime: "05:00 PM",
+          task: "Family and Friends Time",
+        },
+        { id: 5, fromTime: "05:00 PM", toTime: "07:00 PM", task: "Study Time" },
+        { id: 6, fromTime: "08:00 PM", toTime: "10:00 PM", task: "Movie" },
+        {
+          id: 7,
+          fromTime: "10:00 PM",
+          toTime: " 10:30 PM",
+          task: "Relaxation and Bed Time",
+        },
+      ]);
+    } else if (day === "SUN") {
+      setTasks([
+        {
+          id: 1,
+          fromTime: "09:00 AM",
+          toTime: "09:30 AM",
+          task: "Wake Up and Morning Routine",
+        },
+        { id: 2, fromTime: "10:00 AM", toTime: "11:00 AM", task: "Breakfast" },
+        {
+          id: 3,
+          fromTime: "11:00 AM",
+          toTime: "02:00 PM",
+          task: "Family Time and Lunch",
+        },
+        {
+          id: 4,
+          fromTime: "04:00 PM",
+          toTime: "06:00 PM",
+          task: "Meal Prep for the Week",
+        },
+        {
+          id: 5,
+          fromTime: "09:00 PM",
+          toTime: "09:30 PM",
+          task: "Relaxing and Bed Time",
+        },
+        {
+          id: 6,
+          fromTime: "08:00 PM",
+          toTime: "09:00 PM",
+          task: "Week Planning",
+        },
+        {
+          id: 7,
+          fromTime: "06:00 PM",
+          toTime: "08:00 PM",
+          task: "Family Time and Dinner",
+        },
+        { id: 8, fromTime: "02:00 PM", toTime: "04:00 PM", task: "Relaxation" },
+      ]);
+    } else {
+      setTasks([
+        {
+          id: 1,
+          fromTime: "06:30 AM",
+          toTime: " 07:30 AM",
+          task: "Wake Up and Morning Routine",
+        },
+        { id: 2, fromTime: "07:30 AM", toTime: " 08:00 AM", task: "Breakfast" },
+        { id: 3, fromTime: "08:30 AM", toTime: " 03:00 PM", task: "School" },
+        {
+          id: 4,
+          fromTime: "03:00 PM",
+          toTime: " 04:00 PM",
+          task: "Afternoon Snack and Break",
+        },
+        {
+          id: 5,
+          fromTime: "04:00 PM",
+          toTime: " 06:00 PM",
+          task: "Study Time",
+        },
+        { id: 6, fromTime: "06:00 PM", toTime: " 07:00 PM", task: "Exercises" },
+        { id: 7, fromTime: "08:00 PM", toTime: " 09:00 PM", task: "Homework" },
+        {
+          id: 8,
+          fromTime: "09:00 PM",
+          toTime: " 09:30 PM",
+          task: "Relaxing and Go to Bed",
+        },
+      ]);
+    }
+  }, []);
 
   const getGMTTime = (timeString) => {
     const [time, ampm] = timeString.split(" ");

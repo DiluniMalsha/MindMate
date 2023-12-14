@@ -102,18 +102,18 @@ function EmotionTrackerScreen(props) {
     <View style={styles.container}>
       <View style={styles.emotionsContainer}>
         <Image source={image} style={styles.emotionImage} />
-        <Text style={styles.emotionText}>Mihasa is Now in a {mood} Mood</Text>
+        <Text style={styles.emotionText}>Isuru is Now in a {mood} Mood</Text>
         <TouchableOpacity
           style={styles.emotionRespondButton}
           onPress={() => console.log("Respond Button Pressed")}
         >
-          <Text style={styles.emotionRespondButtonText}>Respond to Her</Text>
+          <Text style={styles.emotionRespondButtonText}>Respond to Him</Text>
         </TouchableOpacity>
       </View>
       <ScrollView>
         <View style={styles.graphContainer}>
           <Text style={styles.graphTitle}>
-            Her Past Emotion Changing Pattern
+            His Past Emotion Changing Pattern
           </Text>
           <View style={styles.graphButtonBar}>
             <TouchableOpacity

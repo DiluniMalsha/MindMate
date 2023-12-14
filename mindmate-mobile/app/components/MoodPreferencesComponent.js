@@ -9,7 +9,7 @@ function MoodPreferencesComponent({ mood }) {
       <Text style={styles.moodComponentTitle}>{mood} Mood</Text>
 
       <Text style={styles.moodComponentDescription}>
-        Please upload resources that will help Mihasa when she is in {mood} mood
+        Please upload resources that will help Isuru when he is in {mood} mood
       </Text>
 
       <TouchableHighlight

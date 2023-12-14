@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     axios
-      .post(BASE_URL + "/oauth/token", data, { headers })
+      .post("http://18.143.151.234:8080/api/oauth/token", data, { headers })
       .then((res) => {
         setUserToken(res.data.access_token);
         AsyncStorage.setItem("userToken", res.data.access_token);

@@ -1,6 +1,8 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
-const childState = createEntityAdapter({ selectId: (child) => child.id });
+const childState = createEntityAdapter({
+  selectId: (child) => child.id,
+});
 
 const initialState = childState.getInitialState();
 
